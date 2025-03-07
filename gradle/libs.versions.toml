@@ -29,6 +29,9 @@ androidxFragment = "1.8.6"
 androidxAnnotation = "1.9.1"
 androidxStartup = "1.2.0"
 androidxBrowser = "1.8.0"
+androidxRoom = "2.7.0-rc01"
+androidxSqlite = "2.5"
+androidxCompose = "2025.02.00"
 
 # KMP
 kmpCompose = "1.7.3"
@@ -63,6 +66,7 @@ kmp = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
 kmpCompose = { id = "org.jetbrains.compose", version.ref = "kmpCompose" }
 
 # Others
+room = { id = "androidx.room", version.ref = "androidxRoom"}
 detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "detekt" }
 
 [libraries]
@@ -70,7 +74,7 @@ detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "detekt" }
 ## Dependency of the include build-logic
 android-gradlePlugin = { group = "com.android.tools.build", name = "gradle", version.ref = "gradle" }
 kotlin-gradlePlugin = { group = "org.jetbrains.kotlin", name = "kotlin-gradle-plugin", version.ref = "kotlin" }
-secret-gradlePlugin = { group = "com.google.android.libraries.mapsplatform.secrets-gradle-plugin", name = "secrets-gradle-plugin", version = "2.0.1" }
+room-gradlePlugin = { group = "androidx.room", name = "room-gradle-plugin", version.ref = "androidxRoom" }
 detekt-gradlePlugin = { group = "io.gitlab.arturbosch.detekt", name = "detekt-gradle-plugin", version.ref = "detekt" }
 detekt-formatting = { group = "io.gitlab.arturbosch.detekt", name = "detekt-formatting", version.ref = "detekt" }
 
@@ -95,10 +99,25 @@ androidx-fragment = { module = "androidx.fragment:fragment-ktx", version.ref = "
 androidx-startup = { module = "androidx.startup:startup-runtime", version.ref = "androidxStartup" }
 androidx-browser = { module = "androidx.browser:browser", version.ref = "androidxBrowser" }
 
+# Compose
+androidx-compose-bom = { module = "androidx.compose:compose-bom", version.ref = "androidxCompose" }
+androidx-compose-runtime = { module = "androidx.compose.runtime:runtime" }
+androidx-compose-foundation = { module = "androidx.compose.foundation:foundation" }
+androidx-compose-foundation-layout = { module = "androidx.compose.foundation:foundation-layout" }
+androidx-compose-material = { module = "androidx.compose.material:material" }
+androidx-compose-material3 = { module = "androidx.compose.material3:material3" }
+androidx-compose-material-icons = { module = "androidx.compose.material:material-icons-extended" }
+androidx-compose-ui = { module = "androidx.compose.ui:ui" }
+androidx-compose-ui-tooling = { module = "androidx.compose.ui:ui-tooling" }
+androidx-compose-ui-tooling-preview = { module = "androidx.compose.ui:ui-tooling-preview" }
+
 # KMP
 kmp-lifecycle-runtime-compose = { module = "org.jetbrains.androidx.lifecycle:lifecycle-runtime-compose", version.ref = "kmpLifecycle" }
 kmp-lifecycle-viewmodel-compose = { module = "org.jetbrains.androidx.lifecycle:lifecycle-viewmodel-compose", version.ref = "kmpLifecycle" }
 kmp-navigation-compose = { module = "org.jetbrains.androidx.navigation:navigation-compose", version.ref = "kmpNavigation" }
+kmp-room = { module = "androidx.room:room-runtime", version.ref = "androidxRoom" }
+kmp-room-compiler = { module = "androidx.room:room-compiler", version.ref = "androidxRoom" }
+kmp-sqlite = { module = "androidx.sqlite:sqlite-bundled", version.ref = "androidxSqlite" }
 
 # Koin
 koin-bom = { module = "io.insert-koin:koin-bom", version.ref = "koin" }
@@ -141,10 +160,24 @@ ui-android = [
     "androidx-fragment",
     "androidx-startup",
     "androidx-browser",
+    "androidx-compose-runtime",
+    "androidx-compose-foundation",
+    "androidx-compose-foundation-layout",
+    "androidx-compose-material",
+    "androidx-compose-material3",
+    "androidx-compose-material-icons",
+    "androidx-compose-ui",
+    "androidx-compose-ui-tooling",
+    "androidx-compose-ui-tooling-preview",
 ]
 
 koin = [
     "koin-core",
     "koin-compose",
     "koin-compose-viewmodel",
+]
+
+database = [
+    "kmp-room",
+    "kmp-sqlite",
 ]
