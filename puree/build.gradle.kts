@@ -16,6 +16,13 @@ kotlin {
     sourceSets {
         commonMain.dependencies {
             implementation(libs.bundles.infra)
+            implementation(libs.bundles.ui.common)
+            implementation(libs.bundles.koin)
+            implementation(libs.bundles.database)
+        }
+
+        androidMain.dependencies {
+            implementation(libs.androidx.startup)
         }
     }
 }
