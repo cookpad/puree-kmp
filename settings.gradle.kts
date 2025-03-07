@@ -16,3 +16,4 @@ dependencyResolutionManagement {
 
 rootProject.name = "puree-kmp"
 include(":puree")
+include(":demo")
