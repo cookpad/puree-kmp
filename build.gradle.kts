@@ -6,6 +6,7 @@ plugins {
     // Kotlin Multiplatform (KMP)
     alias(libs.plugins.kmp) apply false
     alias(libs.plugins.kmpCompose) apply false
+    alias(libs.plugins.room) apply false
 
     // Kotlin
     alias(libs.plugins.kotlin.serialization) apply false

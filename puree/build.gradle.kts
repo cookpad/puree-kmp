@@ -1,11 +1,11 @@
 plugins {
-    id("matsumo.primitive.kmp.common")
-    id("matsumo.primitive.android.library")
-    id("matsumo.primitive.android.common")
-    id("matsumo.primitive.kmp.android")
-    id("matsumo.primitive.kmp.ios")
-    id("matsumo.primitive.room")
-    id("matsumo.primitive.detekt")
+    id("cookpad.primitive.kmp.common")
+    id("cookpad.primitive.android.library")
+    id("cookpad.primitive.android.common")
+    id("cookpad.primitive.kmp.android")
+    id("cookpad.primitive.kmp.ios")
+    id("cookpad.primitive.room")
+    id("cookpad.primitive.detekt")
 }
 
 android {

@@ -33,9 +33,6 @@ class AndroidApplicationPlugin : Plugin<Project> {
                             "LICENSE",
                             "LICENSE.txt",
                             "NOTICE",
-                            "asm-license.txt",
-                            "cglib-license.txt",
-                            "mozilla/public-suffix-list.txt",
                         )
                     )
                 }

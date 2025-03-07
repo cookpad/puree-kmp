@@ -13,7 +13,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import com.cookpad.puree.Greeting
 
-class MainActivity: ComponentActivity() {
+class MainActivity : ComponentActivity() {
 
     private val greeting = Greeting()
 

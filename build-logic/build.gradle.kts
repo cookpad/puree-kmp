@@ -28,47 +28,47 @@ gradlePlugin {
     plugins {
         // KMP
         register("KmpPlugin") {
-            id = "matsumo.primitive.kmp.common"
+            id = "cookpad.primitive.kmp.common"
             implementationClass = "primitive.kmp.KmpCommonPlugin"
         }
         register("KmpAndroidPlugin") {
-            id = "matsumo.primitive.kmp.android"
+            id = "cookpad.primitive.kmp.android"
             implementationClass = "primitive.kmp.KmpAndroidPlugin"
         }
         register("KmpIosPlugin") {
-            id = "matsumo.primitive.kmp.ios"
+            id = "cookpad.primitive.kmp.ios"
             implementationClass = "primitive.kmp.KmpIosPlugin"
         }
         register("KmpAndroidCompose") {
-            id = "matsumo.primitive.kmp.compose"
+            id = "cookpad.primitive.kmp.compose"
             implementationClass = "primitive.kmp.KmpComposePlugin"
         }
 
         // Android
         register("AndroidCommonPlugin") {
-            id = "matsumo.primitive.android.common"
+            id = "cookpad.primitive.android.common"
             implementationClass = "primitive.android.AndroidCommonPlugin"
         }
         register("KmpAndroidApplication") {
-            id = "matsumo.primitive.android.application"
+            id = "cookpad.primitive.android.application"
             implementationClass = "primitive.android.AndroidApplicationPlugin"
         }
         register("KmpAndroidLibrary") {
-            id = "matsumo.primitive.android.library"
+            id = "cookpad.primitive.android.library"
             implementationClass = "primitive.android.AndroidLibraryPlugin"
         }
         register("AndroidComposePlugin") {
-            id = "matsumo.primitive.android.compose"
+            id = "cookpad.primitive.android.compose"
             implementationClass = "primitive.android.AndroidComposePlugin"
         }
 
         // Libraries
         register("DetektPlugin") {
-            id = "matsumo.primitive.detekt"
+            id = "cookpad.primitive.detekt"
             implementationClass = "primitive.DetektPlugin"
         }
         register("RoomPlugin") {
-            id = "matsumo.primitive.room"
+            id = "cookpad.primitive.room"
             implementationClass = "primitive.RoomPlugin"
         }
     }

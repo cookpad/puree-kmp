@@ -1,8 +1,8 @@
 plugins {
-    id("matsumo.primitive.android.application")
-    id("matsumo.primitive.android.common")
-    id("matsumo.primitive.android.compose")
-    id("matsumo.primitive.detekt")
+    id("cookpad.primitive.android.application")
+    id("cookpad.primitive.android.common")
+    id("cookpad.primitive.android.compose")
+    id("cookpad.primitive.detekt")
 }
 
 android {
@@ -11,9 +11,8 @@ android {
 
 dependencies {
     implementation(project(":puree"))
+
     implementation(libs.bundles.ui.common)
     implementation(libs.bundles.ui.android)
     implementation(libs.bundles.infra)
-
-    implementation(libs.androidx.core.splashscreen)
 }
