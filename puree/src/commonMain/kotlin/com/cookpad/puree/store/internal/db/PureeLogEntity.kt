@@ -14,5 +14,5 @@ internal data class PureeLogEntity(
     @ColumnInfo(name = "created_at")
     val createdAt: String = "",
     @ColumnInfo(name = "log")
-    val log: String = ""
+    val log: String = "",
 )
