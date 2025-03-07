@@ -4,7 +4,7 @@ versionName = "0.0.1"
 versionCode = "1"
 
 # SDK
-minSdk = "26"
+minSdk = "21"
 targetSdk = "35"
 compileSdk = "35"
 
