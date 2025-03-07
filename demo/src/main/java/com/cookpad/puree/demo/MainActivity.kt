@@ -11,11 +11,8 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import com.cookpad.puree.Greeting
 
 class MainActivity : ComponentActivity() {
-
-    private val greeting = Greeting()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,7 +26,7 @@ class MainActivity : ComponentActivity() {
                     contentAlignment = Alignment.Center,
                 ) {
                     Text(
-                        text = greeting.greet(),
+                        text = "puree-kmp",
                         style = MaterialTheme.typography.titleLarge,
                     )
                 }
