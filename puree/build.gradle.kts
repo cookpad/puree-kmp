@@ -1,50 +1,21 @@
-import org.jetbrains.kotlin.gradle.dsl.JvmTarget
-
 plugins {
-    alias(libs.plugins.kotlinMultiplatform)
-    alias(libs.plugins.androidLibrary)
-}
-
-kotlin {
-    androidTarget {
-        compilations.all {
-            compileTaskProvider.configure {
-                compilerOptions {
-                    jvmTarget.set(JvmTarget.JVM_1_8)
-                }
-            }
-        }
-    }
-    
-    listOf(
-        iosX64(),
-        iosArm64(),
-        iosSimulatorArm64()
-    ).forEach {
-        it.binaries.framework {
-            baseName = "puree"
-            isStatic = true
-        }
-    }
-
-    sourceSets {
-        commonMain.dependencies {
-            //put your multiplatform dependencies here
-        }
-        commonTest.dependencies {
-            implementation(libs.kotlin.test)
-        }
-    }
+    id("cookpad.primitive.kmp.common")
+    id("cookpad.primitive.android.library")
+    id("cookpad.primitive.android.common")
+    id("cookpad.primitive.kmp.android")
+    id("cookpad.primitive.kmp.ios")
+    id("cookpad.primitive.room")
+    id("cookpad.primitive.detekt")
 }
 
 android {
     namespace = "com.cookpad.puree"
-    compileSdk = 35
-    defaultConfig {
-        minSdk = 26
-    }
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+}
+
+kotlin {
+    sourceSets {
+        commonMain.dependencies {
+            implementation(libs.bundles.infra)
+        }
     }
 }
