@@ -6,7 +6,7 @@ import kotlinx.serialization.json.JsonObject
 import kotlinx.serialization.json.encodeToJsonElement
 import kotlinx.serialization.json.jsonObject
 
-class DefaultPureeLogSerializer: PureeLogSerializer {
+class DefaultPureeLogSerializer : PureeLogSerializer {
     override fun serialize(log: PureeLog): JsonObject {
         return formatter.encodeToJsonElement(log).jsonObject
     }

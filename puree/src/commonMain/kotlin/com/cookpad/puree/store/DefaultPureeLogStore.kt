@@ -22,8 +22,8 @@ class DefaultPureeLogStore(dbName: String) : PureeLogStore {
             PureeLogEntity(
                 outputId = outputId,
                 createdAt = bufferedLog.createdAt.toString(),
-                log = bufferedLog.log.toString()
-            )
+                log = bufferedLog.log.toString(),
+            ),
         )
     }
 
@@ -32,7 +32,7 @@ class DefaultPureeLogStore(dbName: String) : PureeLogStore {
             PureeBufferedLog(
                 id = it.id,
                 createdAt = Instant.parse(it.createdAt),
-                log = formatter.decodeFromString(it.log)
+                log = formatter.decodeFromString(it.log),
             )
         }
     }

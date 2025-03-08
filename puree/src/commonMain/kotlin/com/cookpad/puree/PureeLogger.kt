@@ -1,5 +1,6 @@
 package com.cookpad.puree
 
+import androidx.annotation.VisibleForTesting
 import androidx.lifecycle.DefaultLifecycleObserver
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleOwner
@@ -26,7 +27,7 @@ class PureeLogger private constructor(
     private val dispatcher: CoroutineDispatcher,
     private val clock: Clock,
     private val registeredLogs: Map<KClass<out PureeLog>, Configuration>,
-    private val bufferedOutputs: List<PureeBufferedOutput>
+    private val bufferedOutputs: List<PureeBufferedOutput>,
 ) {
     private val scope = CoroutineScope(dispatcher + SupervisorJob())
     private var isResumed = false
@@ -43,7 +44,7 @@ class PureeLogger private constructor(
                 override fun onStop(owner: LifecycleOwner) {
                     suspend()
                 }
-            }
+            },
         )
     }
 
@@ -92,9 +93,13 @@ class PureeLogger private constructor(
         private val logStore: PureeLogStore = DefaultPureeLogStore(""),
         private val lifecycle: Lifecycle = defaultLifecycleOwner.lifecycle,
     ) {
+        @VisibleForTesting
         @OptIn(ExperimentalCoroutinesApi::class, DelicateCoroutinesApi::class)
-        private val dispatcher = newSingleThreadContext("PureeLogger")
-        private var clock: Clock = Clock.System
+        internal val dispatcher = newSingleThreadContext("PureeLogger")
+
+        @VisibleForTesting
+        internal var clock: Clock = Clock.System
+
         private val configuredLogs: MutableMap<KClass<out PureeLog>, Configuration> = mutableMapOf()
         private val outputIds: MutableSet<String> = mutableSetOf()
         private val bufferedOutputs: MutableList<PureeBufferedOutput> = mutableListOf()
@@ -109,12 +114,10 @@ class PureeLogger private constructor(
 
         fun output(output: PureeOutput, vararg logTypes: KClass<out PureeLog>): Builder {
             if (output is PureeBufferedOutput) {
-                if (output.uniqueId in outputIds) {
-                    throw IllegalArgumentException("Cannot register another PureeBufferedOutput with uniqueId: ${output.uniqueId}.")
-                } else {
-                    outputIds.add(output.uniqueId)
-                    bufferedOutputs.add(output)
-                }
+                require(output.uniqueId !in outputIds) { "Cannot register another PureeBufferedOutput with uniqueId: ${output.uniqueId}." }
+
+                outputIds.add(output.uniqueId)
+                bufferedOutputs.add(output)
             }
 
             logTypes.forEach {
@@ -133,7 +136,7 @@ class PureeLogger private constructor(
                 dispatcher = dispatcher,
                 clock = clock,
                 registeredLogs = configuredLogs,
-                bufferedOutputs = bufferedOutputs
+                bufferedOutputs = bufferedOutputs,
             )
         }
     }
