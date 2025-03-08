@@ -8,13 +8,13 @@ import kotlin.time.Duration
  * Stores the buffered logs for batched emissions.
  * Implementations of this interface are guaranteed to be thread-safe (called from a single thread).
  *
- * @see DbPureeLogStore
+ * @see DefaultPureeLogStore
  */
 interface PureeLogStore {
     /**
      * Adds a new [PureeBufferedLog] to the store.
      *
-     * @param outputId The id of the [com.cookpad.puree.kotlin.output.PureeBufferedOutput] that owns this log.
+     * @param outputId The id of the [com.cookpad.puree.output.PureeBufferedOutput] that owns this log.
      * @param bufferedLog The log to be stored
      */
     fun add(outputId: String, bufferedLog: PureeBufferedLog)
@@ -22,7 +22,7 @@ interface PureeLogStore {
     /**
      * Retrieves the logs from the store.
      *
-     * @param outputId The id of the [com.cookpad.puree.kotlin.output.PureeBufferedOutput] that owns the logs.
+     * @param outputId The id of the [com.cookpad.puree.output.PureeBufferedOutput] that owns the logs.
      * @param maxCount The maximum number of logs to retrieve.
      *
      * @return List of buffered logs.
@@ -32,7 +32,7 @@ interface PureeLogStore {
     /**
      * Deletes the logs from the store.
      *
-     * @param outputId The id of the [com.cookpad.puree.kotlin.output.PureeBufferedOutput] that owns the logs.
+     * @param outputId The id of the [com.cookpad.puree.output.PureeBufferedOutput] that owns the logs.
      * @param bufferedLogs The logs to be deleted.
      */
     fun remove(outputId: String, bufferedLogs: List<PureeBufferedLog>)
@@ -40,7 +40,7 @@ interface PureeLogStore {
     /**
      * Deletes all the logs according the age of the log.
      *
-     * @param outputId The id of the [com.cookpad.puree.kotlin.output.PureeBufferedOutput] that owns the logs.
+     * @param outputId The id of the [com.cookpad.puree.output.PureeBufferedOutput] that owns the logs.
      * @param now The current date-time.
      * @param age The age of the of the logs to be deleted.
      */

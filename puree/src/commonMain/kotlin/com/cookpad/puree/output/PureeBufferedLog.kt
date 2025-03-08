@@ -4,8 +4,8 @@ import kotlinx.datetime.Instant
 import kotlinx.serialization.json.JsonObject
 
 /**
- * Log object that is buffered to a [com.cookpad.puree.kotlin.store.PureeLogStore].
- * Used by [com.cookpad.puree.kotlin.output.PureeBufferedOutput]
+ * Log object that is buffered to a [com.cookpad.puree.store.PureeLogStore].
+ * Used by [com.cookpad.puree.output.PureeBufferedOutput]
  *
  */
 data class PureeBufferedLog(
