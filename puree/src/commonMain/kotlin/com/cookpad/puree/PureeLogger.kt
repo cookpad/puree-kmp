@@ -8,7 +8,6 @@ import com.cookpad.puree.output.PureeBufferedOutput
 import com.cookpad.puree.output.PureeOutput
 import com.cookpad.puree.serializer.DefaultPureeLogSerializer
 import com.cookpad.puree.serializer.PureeLogSerializer
-import com.cookpad.puree.store.DefaultPureeLogStore
 import com.cookpad.puree.store.PureeLogStore
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.CoroutineScope
@@ -89,8 +88,8 @@ class PureeLogger private constructor(
     }
 
     class Builder(
+        private val logStore: PureeLogStore,
         private val logSerializer: PureeLogSerializer = DefaultPureeLogSerializer(),
-        private val logStore: PureeLogStore = DefaultPureeLogStore(""),
         private val lifecycle: Lifecycle = defaultLifecycleOwner.lifecycle,
     ) {
         @VisibleForTesting
