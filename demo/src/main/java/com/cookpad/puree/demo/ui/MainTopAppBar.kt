@@ -28,9 +28,9 @@ internal fun MainTopAppBar(
             ) {
                 Icon(
                     imageVector = Icons.Default.Add,
-                    contentDescription = "Add"
+                    contentDescription = "Add",
                 )
             }
-        }
+        },
     )
 }

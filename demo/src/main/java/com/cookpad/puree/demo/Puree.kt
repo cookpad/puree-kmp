@@ -17,19 +17,24 @@ object Puree {
     )
         .filter(
             AddTimeFilter(),
-            ClickLog::class, MenuLog::class, PeriodicLog::class
+            ClickLog::class,
+            MenuLog::class,
+            PeriodicLog::class,
         )
         .output(
             LogcatOutput(),
-            ClickLog::class, MenuLog::class, PeriodicLog::class
+            ClickLog::class,
+            MenuLog::class,
+            PeriodicLog::class,
         )
         .output(
             LogcatDebugBufferedOutput("logcat_debug"),
-            ClickLog::class, MenuLog::class
+            ClickLog::class,
+            MenuLog::class,
         )
         .output(
             PurgeableLogcatWarningBufferedOutput("logcat_warning"),
-            PeriodicLog::class
+            PeriodicLog::class,
         )
         .build()
 
