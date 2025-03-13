@@ -9,6 +9,7 @@ import com.cookpad.puree.output.PureeOutput
 import com.cookpad.puree.serializer.DefaultPureeLogSerializer
 import com.cookpad.puree.serializer.PureeLogSerializer
 import com.cookpad.puree.store.PureeLogStore
+import io.github.aakira.napier.Napier
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.DelicateCoroutinesApi
@@ -17,6 +18,9 @@ import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.newSingleThreadContext
 import kotlinx.datetime.Clock
+import kotlinx.serialization.InternalSerializationApi
+import kotlinx.serialization.KSerializer
+import kotlinx.serialization.serializer
 import kotlin.reflect.KClass
 
 class PureeLogger private constructor(
@@ -47,18 +51,28 @@ class PureeLogger private constructor(
         )
     }
 
-    fun postLog(log: PureeLog) {
+    @OptIn(InternalSerializationApi::class)
+    inline fun <reified T : PureeLog> postLog(log: T) {
+        postLog(
+            log = log,
+            serializer = T::class.serializer(),
+        )
+    }
+
+    fun <T : PureeLog> postLog(log: T, serializer: KSerializer<T>) {
         val config = registeredLogs[log::class] ?: throw LogNotRegisteredException()
 
         scope.launch {
             runCatching {
-                config.filters.fold(logSerializer.serialize(log)) { logJson, filter ->
+                config.filters.fold(logSerializer.serialize(log, serializer)) { logJson, filter ->
                     filter.applyFilter(logJson) ?: throw SkippedLogException()
                 }
             }.onSuccess {
                 config.outputs.forEach { output ->
                     output.emit(it)
                 }
+            }.onFailure {
+                Napier.w { "Failed to post log: $it" }
             }
         }
     }
