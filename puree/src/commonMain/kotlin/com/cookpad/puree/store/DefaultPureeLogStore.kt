@@ -17,7 +17,7 @@ class DefaultPureeLogStore(dbName: String) : PureeLogStore {
     private val database = getPureeDatabase(dbName)
     private val dao = database.pureeLogDao()
 
-    override fun add(outputId: String, bufferedLog: PureeBufferedLog) {
+    override suspend fun add(outputId: String, bufferedLog: PureeBufferedLog) {
         dao.insert(
             PureeLogEntity(
                 outputId = outputId,
@@ -27,7 +27,7 @@ class DefaultPureeLogStore(dbName: String) : PureeLogStore {
         )
     }
 
-    override fun get(outputId: String, maxCount: Int): List<PureeBufferedLog> {
+    override suspend fun get(outputId: String, maxCount: Int): List<PureeBufferedLog> {
         return dao.select(outputId, maxCount).map {
             PureeBufferedLog(
                 id = it.id,
@@ -37,11 +37,11 @@ class DefaultPureeLogStore(dbName: String) : PureeLogStore {
         }
     }
 
-    override fun remove(outputId: String, bufferedLogs: List<PureeBufferedLog>) {
+    override suspend fun remove(outputId: String, bufferedLogs: List<PureeBufferedLog>) {
         dao.delete(bufferedLogs.map { PureeLogEntity(id = it.id) })
     }
 
-    override fun purgeLogsWithAge(outputId: String, now: Instant, age: Duration) {
+    override suspend fun purgeLogsWithAge(outputId: String, now: Instant, age: Duration) {
         dao.deleteCreatedUpTo(now.minus(age).toString())
     }
 }

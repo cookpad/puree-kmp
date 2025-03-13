@@ -8,14 +8,14 @@ import androidx.room.Query
 @Dao
 internal interface PureeLogDao {
     @Query("SELECT * FROM logs WHERE output_id = :outputId LIMIT :count")
-    fun select(outputId: String, count: Int): List<PureeLogEntity>
+    suspend fun select(outputId: String, count: Int): List<PureeLogEntity>
 
     @Insert
-    fun insert(log: PureeLogEntity)
+    suspend fun insert(log: PureeLogEntity)
 
     @Delete
-    fun delete(logs: List<PureeLogEntity>)
+    suspend fun delete(logs: List<PureeLogEntity>)
 
     @Query("DELETE FROM logs WHERE datetime(created_at) <= datetime(:createdUpTo)")
-    fun deleteCreatedUpTo(createdUpTo: String)
+    suspend fun deleteCreatedUpTo(createdUpTo: String)
 }
