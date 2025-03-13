@@ -12,8 +12,9 @@ import com.cookpad.puree.demo.log.output.PurgeableLogcatWarningBufferedOutput
 import com.cookpad.puree.store.DefaultPureeLogStore
 
 object Puree {
-    private val logStore = DefaultPureeLogStore("log.db")
-    private val logger: PureeLogger = PureeLogger.Builder(logStore)
+    val logger: PureeLogger = PureeLogger.Builder(
+        logStore = DefaultPureeLogStore("log.db"),
+    )
         .filter(
             AddTimeFilter(),
             ClickLog::class, MenuLog::class, PeriodicLog::class
@@ -32,11 +33,7 @@ object Puree {
         )
         .build()
 
-    init {
-        logger
-    }
-
-    fun send(log: PureeLog) {
+    inline fun <reified T : PureeLog> send(log: T) {
         logger.postLog(log)
     }
 }

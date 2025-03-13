@@ -11,7 +11,9 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
@@ -20,12 +22,26 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.cookpad.puree.demo.Puree
 import com.cookpad.puree.demo.log.model.ClickLog
+import com.cookpad.puree.demo.log.model.PeriodicLog
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.isActive
 
 @Composable
 internal fun MainScreen(
     modifier: Modifier = Modifier,
 ) {
+    var periodicLogSequence by remember { mutableIntStateOf(0) }
     var isSendLogPerSecond by remember { mutableStateOf(false) }
+
+    if (isSendLogPerSecond) {
+        LaunchedEffect(true) {
+            while (isActive) {
+                periodicLogSequence++
+                Puree.send(PeriodicLog(periodicLogSequence))
+                delay(1000)
+            }
+        }
+    }
 
     Scaffold(
         modifier = modifier,
