@@ -16,7 +16,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             DemoTheme {
                 MainScreen(
-                    modifier = Modifier.fillMaxSize()
+                    modifier = Modifier.fillMaxSize(),
                 )
             }
         }

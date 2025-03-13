@@ -47,9 +47,9 @@ internal fun MainScreen(
         modifier = modifier,
         topBar = {
             MainTopAppBar(
-                modifier = Modifier.fillMaxWidth()
+                modifier = Modifier.fillMaxWidth(),
             )
-        }
+        },
     ) { padding ->
         Column(
             modifier = Modifier
@@ -59,7 +59,7 @@ internal fun MainScreen(
             verticalArrangement = Arrangement.spacedBy(
                 space = 16.dp,
                 alignment = Alignment.CenterVertically,
-            )
+            ),
         ) {
             Button(
                 onClick = { Puree.send(ClickLog("button")) },
