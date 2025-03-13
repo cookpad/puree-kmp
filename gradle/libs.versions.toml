@@ -38,6 +38,7 @@ androidxCompose = "2025.02.00"
 kmpCompose = "1.7.3"
 kmpLifecycle = "2.9.0-alpha03"
 kmpNavigation = "2.8.0-alpha12"
+skie = "0.10.1"
 
 # Google
 ksp = "2.1.10-1.0.29"
@@ -65,6 +66,7 @@ ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 # KMP
 kmp = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
 kmpCompose = { id = "org.jetbrains.compose", version.ref = "kmpCompose" }
+skie = { id = "co.touchlab.skie", version.ref = "skie" }
 
 # Others
 room = { id = "androidx.room", version.ref = "androidxRoom"}

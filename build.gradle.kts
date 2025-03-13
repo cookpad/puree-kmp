@@ -7,6 +7,7 @@ plugins {
     alias(libs.plugins.kmp) apply false
     alias(libs.plugins.kmpCompose) apply false
     alias(libs.plugins.room) apply false
+    alias(libs.plugins.skie) apply false
 
     // Kotlin
     alias(libs.plugins.kotlin.serialization) apply false
