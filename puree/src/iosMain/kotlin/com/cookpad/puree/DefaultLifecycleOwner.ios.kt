@@ -11,23 +11,7 @@ actual val defaultLifecycleOwner: LifecycleOwner
     get() = DefaultLifecycleOwner()
 
 internal class DefaultLifecycleOwner : LifecycleOwner {
-    override val lifecycle: Lifecycle = LifecycleRegistry(this)
-
-    init {
-        NSNotificationCenter.defaultCenter().addObserverForName(
-            name = UIApplicationDidBecomeActiveNotification,
-            `object` = null,
-            queue = null,
-        ) {
-            lifecycle.currentState = Lifecycle.State.RESUMED
-        }
-
-        NSNotificationCenter.defaultCenter().addObserverForName(
-            name = UIApplicationWillResignActiveNotification,
-            `object` = null,
-            queue = null,
-        ) {
-            lifecycle.currentState = Lifecycle.State.STARTED
-        }
+    override val lifecycle: Lifecycle = LifecycleRegistry(this).apply {
+        currentState = Lifecycle.State.STARTED
     }
 }

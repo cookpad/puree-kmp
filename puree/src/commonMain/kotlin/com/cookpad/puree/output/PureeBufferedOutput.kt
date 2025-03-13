@@ -97,13 +97,15 @@ abstract class PureeBufferedOutput(
      */
     final override fun emit(log: JsonObject) {
         // Guaranteed to be executed in the appropriate thread
-        logStore.add(
-            outputId = uniqueId,
-            bufferedLog = PureeBufferedLog(
-                createdAt = clock.now(),
-                log = log,
-            ),
-        )
+        coroutineScope.launch {
+            logStore.add(
+                outputId = uniqueId,
+                bufferedLog = PureeBufferedLog(
+                    createdAt = clock.now(),
+                    log = log,
+                ),
+            )
+        }
     }
 
     /**
