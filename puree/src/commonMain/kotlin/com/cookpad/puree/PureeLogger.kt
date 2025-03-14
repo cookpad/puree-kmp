@@ -18,9 +18,6 @@ import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.newSingleThreadContext
 import kotlinx.datetime.Clock
-import kotlinx.serialization.InternalSerializationApi
-import kotlinx.serialization.KSerializer
-import kotlinx.serialization.serializer
 import kotlin.reflect.KClass
 
 class PureeLogger private constructor(
@@ -51,20 +48,19 @@ class PureeLogger private constructor(
         )
     }
 
-    @OptIn(InternalSerializationApi::class)
     inline fun <reified T : PureeLog> postLog(log: T) {
         postLog(
             log = log,
-            serializer = T::class.serializer(),
+            clazz = T::class,
         )
     }
 
-    fun <T : PureeLog> postLog(log: T, serializer: KSerializer<T>) {
+    fun <T : PureeLog> postLog(log: T, clazz: KClass<T>) {
         val config = registeredLogs[log::class] ?: throw LogNotRegisteredException()
 
         scope.launch {
             runCatching {
-                config.filters.fold(logSerializer.serialize(log, serializer)) { logJson, filter ->
+                config.filters.fold(logSerializer.serialize(log, clazz)) { logJson, filter ->
                     filter.applyFilter(logJson) ?: throw SkippedLogException()
                 }
             }.onSuccess {
