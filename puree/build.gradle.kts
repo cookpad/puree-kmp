@@ -23,6 +23,7 @@ kotlin {
 
         androidMain.dependencies {
             implementation(libs.androidx.startup)
+            implementation(libs.androidx.lifecycle.process)
         }
     }
 }

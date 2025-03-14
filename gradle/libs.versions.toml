@@ -29,6 +29,7 @@ androidxFragment = "1.8.6"
 androidxAnnotation = "1.9.1"
 androidxStartup = "1.2.0"
 androidxBrowser = "1.8.0"
+androidxLifecycle = "2.8.7"
 androidxRoom = "2.7.0-rc01"
 androidxSqlite = "2.5"
 androidxCompose = "2025.02.00"
@@ -97,6 +98,7 @@ androidx-activity-compose = { module = "androidx.activity:activity-compose", ver
 androidx-fragment = { module = "androidx.fragment:fragment-ktx", version.ref = "androidxFragment" }
 androidx-startup = { module = "androidx.startup:startup-runtime", version.ref = "androidxStartup" }
 androidx-browser = { module = "androidx.browser:browser", version.ref = "androidxBrowser" }
+androidx-lifecycle-process = { module = "androidx.lifecycle:lifecycle-process", version.ref = "androidxLifecycle" }
 
 # Compose
 androidx-compose-bom = { module = "androidx.compose:compose-bom", version.ref = "androidxCompose" }
@@ -111,6 +113,7 @@ androidx-compose-ui-tooling = { module = "androidx.compose.ui:ui-tooling" }
 androidx-compose-ui-tooling-preview = { module = "androidx.compose.ui:ui-tooling-preview" }
 
 # KMP
+kmp-lifecycle-runtime = { module = "androidx.lifecycle:lifecycle-runtime", version.ref = "kmpLifecycle" }
 kmp-lifecycle-runtime-compose = { module = "org.jetbrains.androidx.lifecycle:lifecycle-runtime-compose", version.ref = "kmpLifecycle" }
 kmp-lifecycle-viewmodel-compose = { module = "org.jetbrains.androidx.lifecycle:lifecycle-viewmodel-compose", version.ref = "kmpLifecycle" }
 kmp-navigation-compose = { module = "org.jetbrains.androidx.navigation:navigation-compose", version.ref = "kmpNavigation" }
@@ -144,6 +147,7 @@ infra = [
 ]
 
 ui-common = [
+    "kmp-lifecycle-runtime",
     "kmp-lifecycle-runtime-compose",
     "kmp-lifecycle-viewmodel-compose",
     "kmp-navigation-compose",

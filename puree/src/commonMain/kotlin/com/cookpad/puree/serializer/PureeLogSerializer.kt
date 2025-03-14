@@ -2,6 +2,7 @@ package com.cookpad.puree.serializer
 
 import com.cookpad.puree.PureeLog
 import kotlinx.serialization.json.JsonObject
+import kotlin.reflect.KClass
 
 /**
  * Serializes log objects into JSON format.
@@ -16,5 +17,5 @@ interface PureeLogSerializer {
      *
      * @return Serialized log in JSON format.
      */
-    fun serialize(log: PureeLog): JsonObject
+    fun <T : PureeLog> serialize(log: T, clazz: KClass<T>): JsonObject
 }
