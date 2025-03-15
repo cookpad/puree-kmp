@@ -1,5 +1,5 @@
 package com.cookpad.puree.type
 
-import com.cookpad.puree.PureeLog
-
-expect class PlatformClass<T: PureeLog>
+expect class PlatformClass<T: Any> {
+    val simpleName: String
+}

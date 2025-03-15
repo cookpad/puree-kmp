@@ -8,7 +8,6 @@ import com.cookpad.puree.output.PureeOutput
 import com.cookpad.puree.serializer.PureeLogSerializer
 import com.cookpad.puree.store.PureeLogStore
 import com.cookpad.puree.type.PlatformClass
-import io.github.aakira.napier.Napier
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.SupervisorJob
@@ -21,7 +20,7 @@ class PureeLogger internal constructor(
     private val logStore: PureeLogStore,
     private val dispatcher: CoroutineDispatcher,
     private val clock: Clock,
-    private val registeredLogs: Map<PlatformClass<out PureeLog>, Configuration>,
+    private val registeredLogs: Map<String, Configuration>,
     private val bufferedOutputs: List<PureeBufferedOutput>,
 ) {
     private val scope = CoroutineScope(dispatcher + SupervisorJob())
@@ -43,20 +42,18 @@ class PureeLogger internal constructor(
         )
     }
 
-    fun <T : PureeLog> postLog(log: T, clazz: PlatformClass<T>) {
-        val config = registeredLogs[clazz] ?: throw LogNotRegisteredException()
+    fun <T : Any> postLog(log: T, platformClass: PlatformClass<T>) {
+        val config = registeredLogs[platformClass.simpleName] ?: throw LogNotRegisteredException()
 
         scope.launch {
             runCatching {
-                config.filters.fold(logSerializer.serialize(log, clazz)) { logJson, filter ->
+                config.filters.fold(logSerializer.serialize(log, platformClass)) { logJson, filter ->
                     filter.applyFilter(logJson) ?: throw SkippedLogException()
                 }
             }.onSuccess {
                 config.outputs.forEach { output ->
                     output.emit(it)
                 }
-            }.onFailure {
-                Napier.w { "Failed to post log: $it" }
             }
         }
     }

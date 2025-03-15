@@ -1,33 +1,56 @@
 import SwiftUI
+import Combine
 import Puree
 
 struct ContentView: View {
-    @State private var showContent = false
-    var body: some View {
-        VStack {
-            Button("Click me!") {
-                withAnimation {
-                    showContent = !showContent
-                }
-            }
+    @State private var periodicLogSequence = 0
+    @State private var isSendLogPerSecond = false
 
-            if showContent {
-                VStack(spacing: 16) {
-                    Image(systemName: "swift")
-                        .font(.system(size: 200))
-                        .foregroundColor(.accentColor)
-                    Text("Hello SwiftUI!")
+    let puree = Puree()
+    let timer = Timer.publish(every: 1.0, on: .main, in: .common).autoconnect()
+    
+    var body: some View {
+        NavigationView {
+            VStack(spacing: 16) {
+                Button(action: {
+                    puree.send(ClickLog(buttonName: "button"))
+                }) {
+                    Text("Send log")
+                        .font(.headline)
+                        .padding()
+                        .frame(maxWidth: .infinity)
+                        .background(Color.blue)
+                        .foregroundColor(.white)
+                        .cornerRadius(8)
                 }
-                .transition(.move(edge: .top).combined(with: .opacity))
+                
+                HStack(spacing: 16) {
+                    Text("Log every second")
+                        .font(.subheadline)
+                    Toggle("", isOn: $isSendLogPerSecond)
+                        .labelsHidden()
+                }
+                
+                Spacer()
+            }
+            .padding()
+            .navigationBarTitle("puree-kmp", displayMode: .inline)
+            .navigationBarItems(trailing: Button(action: {
+                puree.send(MenuLog(menuName: "add"))
+            }) {
+                Image(systemName: "plus")
+            })
+        }
+        // 1秒ごとにトグルがオンなら PeriodicLog を送信
+        .onReceive(timer) { _ in
+            if isSendLogPerSecond {
+                periodicLogSequence += 1
+                puree.send(PeriodicLog(sequence: periodicLogSequence))
             }
         }
-        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
-        .padding()
     }
 }
 
-struct ContentView_Previews: PreviewProvider {
-    static var previews: some View {
-        ContentView()
-    }
+#Preview {
+    ContentView()
 }

@@ -8,6 +8,8 @@ import com.cookpad.puree.serializer.DefaultPureeLogSerializer
 import com.cookpad.puree.serializer.PureeLogSerializer
 import com.cookpad.puree.store.PureeLogStore
 import com.cookpad.puree.type.PlatformClass
+import io.github.aakira.napier.DebugAntilog
+import io.github.aakira.napier.Napier
 import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.newSingleThreadContext
@@ -26,13 +28,17 @@ actual class Puree(
     @VisibleForTesting
     internal var clock: Clock = Clock.System
 
-    private val configuredLogs: MutableMap<PlatformClass<out PureeLog>, Configuration> = mutableMapOf()
+    private val configuredLogs: MutableMap<String, Configuration> = mutableMapOf()
     private val outputIds: MutableSet<String> = mutableSetOf()
     private val bufferedOutputs: MutableList<PureeBufferedOutput> = mutableListOf()
 
+    init {
+        Napier.base(DebugAntilog())
+    }
+
     fun filter(filter: PureeFilter, vararg logTypes: KClass<out PureeLog>): Puree {
         logTypes.forEach {
-            configuredLogs.getOrPut(PlatformClass(it)) { Configuration() }.filters.add(filter)
+            configuredLogs.getOrPut(it.simpleName.orEmpty()) { Configuration() }.filters.add(filter)
         }
 
         return this
@@ -47,7 +53,7 @@ actual class Puree(
         }
 
         logTypes.forEach {
-            configuredLogs.getOrPut(PlatformClass(it)) { Configuration() }.outputs.add(output)
+            configuredLogs.getOrPut(it.simpleName.orEmpty()) { Configuration() }.outputs.add(output)
         }
 
         return this
@@ -64,4 +70,8 @@ actual class Puree(
             bufferedOutputs = bufferedOutputs,
         )
     }
+}
+
+inline fun <reified T : PureeLog> PureeLogger.send(log: T) {
+    postLog(log, PlatformClass(T::class))
 }
