@@ -1,6 +1,6 @@
 package com.cookpad.puree.output
 
-import kotlinx.serialization.json.JsonObject
+import com.cookpad.puree.type.JsonObject
 
 /**
  * The output that emits posted logs.

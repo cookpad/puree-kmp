@@ -1,7 +1,7 @@
 package com.cookpad.puree.serializer
 
 import com.cookpad.puree.PureeLog
-import kotlinx.serialization.json.JsonObject
+import com.cookpad.puree.type.JsonObject
 import kotlin.reflect.KClass
 
 /**
