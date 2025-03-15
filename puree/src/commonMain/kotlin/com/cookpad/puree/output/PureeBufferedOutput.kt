@@ -122,7 +122,7 @@ abstract class PureeBufferedOutput(
                 val nextFlushTime = nextFlush.toEpochMilliseconds() - clock.now().toEpochMilliseconds()
                 val delayMillis = max(0, nextFlushTime)
 
-                Napier.d { "Next flush in $delayMillis ms, ${flushInterval}" }
+                Napier.d { "Next flush in $delayMillis ms, $flushInterval" }
 
                 delay(delayMillis)
 
