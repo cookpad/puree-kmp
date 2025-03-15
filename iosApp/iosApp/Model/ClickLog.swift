@@ -1,6 +1,7 @@
+import Foundation
 import Puree
 
-class ClickLog: PureeLog {
+class ClickLog: NSObject, PureeLog {
     let buttonName: String
     
     init(buttonName: String) {

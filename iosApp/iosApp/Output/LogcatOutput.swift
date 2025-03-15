@@ -1,7 +1,7 @@
 import Puree
 
 class OSLogOutput: PureeOutput {
-    func emit(log: [String : Kotlinx_serialization_jsonJsonElement]) {
+    func emit(log: String) {
         print("OSLogOutput: \(log)")
     }
 }

@@ -10,6 +10,7 @@ import com.cookpad.puree.demo.log.output.LogcatDebugBufferedOutput
 import com.cookpad.puree.demo.log.output.LogcatOutput
 import com.cookpad.puree.demo.log.output.PurgeableLogcatWarningBufferedOutput
 import com.cookpad.puree.store.DefaultPureeLogStore
+import com.cookpad.puree.type.PlatformClass
 
 object Puree {
     val logger: PureeLogger = PureeLogger.Builder(
@@ -39,6 +40,6 @@ object Puree {
         .build()
 
     inline fun <reified T : PureeLog> send(log: T) {
-        logger.postLog(log)
+        logger.postLog(log, PlatformClass(T::class))
     }
 }

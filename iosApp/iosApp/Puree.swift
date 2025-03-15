@@ -5,15 +5,16 @@ final class Puree {
         let logStore = DefaultPureeLogStore(dbName: "puree.db")
         let logSerializer = DefaultPureeLogSerializer()
         
-        return PureeLogger.Builder(
+        return Puree_(
             logStore: logStore,
-            logSerializer: DefaultPureeLogSerializer(),
+            logSerializer: logSerializer,
             lifecycle: DefaultLifecycleOwner_iosKt.defaultLifecycleOwner.lifecycle
         )
+        .output(output: OSLogOutput(), logType: ClickLog.self)
         .build()
     }()
     
     static func send<T: PureeLog>(_ log: T) {
-        logger.postLog(log: log)
+        logger.postLog(log: log, clazz: PlatformClass(clazz: T.self))
     }
 }
