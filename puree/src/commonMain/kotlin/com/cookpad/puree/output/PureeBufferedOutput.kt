@@ -2,7 +2,6 @@ package com.cookpad.puree.output
 
 import com.cookpad.puree.store.PureeLogStore
 import com.cookpad.puree.type.JsonObject
-import io.github.aakira.napier.Napier
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.cancelChildren
@@ -17,7 +16,7 @@ import kotlin.coroutines.resume
 import kotlin.coroutines.resumeWithException
 import kotlin.math.max
 import kotlin.math.pow
-import kotlin.time.Duration.Companion.milliseconds
+import kotlin.time.Duration
 import kotlin.time.Duration.Companion.minutes
 import kotlin.time.Duration.Companion.seconds
 
@@ -37,7 +36,7 @@ abstract class PureeBufferedOutput(
      * The frequency interval when the buffer is flushed to be emitted in batches. Behavior is
      * undefined if set to a negative value.
      */
-    open val flushInterval: Long = 2.minutes.inWholeMilliseconds
+    open val flushInterval: Duration = 2.minutes
 
     /**
      * The maximum number of logs in a batch.
@@ -52,13 +51,13 @@ abstract class PureeBufferedOutput(
     /**
      * The base duration to wait when retrying a failed batch. Negative duration is automatically converted to absolute value.
      */
-    open val exponentialBackoffBase: Long = 2.seconds.inWholeMilliseconds
+    open val exponentialBackoffBase: Duration = 2.seconds
 
     /**
      * If set to a non-null value, logs of this age will be not be processed and deleted. Behavior
      * is undefined if set to a negative value.
      */
-    open val purgeableAge: Long? = null
+    open val purgeableAge: Duration? = null
 
     /**
      * If set, maximum number of bytes to include in a single flush
@@ -88,7 +87,7 @@ abstract class PureeBufferedOutput(
     ) {
         this.logStore = logStore
         this.clock = clock
-        nextFlush = clock.now() + flushInterval.milliseconds
+        nextFlush = clock.now() + flushInterval
         retryCount = 0
         coroutineScope = CoroutineScope(coroutineContext + SupervisorJob())
     }
@@ -122,23 +121,21 @@ abstract class PureeBufferedOutput(
                 val nextFlushTime = nextFlush.toEpochMilliseconds() - clock.now().toEpochMilliseconds()
                 val delayMillis = max(0, nextFlushTime)
 
-                Napier.d { "Next flush in $delayMillis ms, $flushInterval" }
-
                 delay(delayMillis)
 
                 runCatching { flush() }
                     .onSuccess {
                         retryCount = 0
-                        nextFlush = clock.now() + flushInterval.milliseconds
+                        nextFlush = clock.now() + flushInterval
                     }
                     .onFailure {
                         retryCount++
 
                         if (retryCount > maxRetryCount) {
                             retryCount = 0
-                            nextFlush = clock.now() + flushInterval.milliseconds
+                            nextFlush = clock.now() + flushInterval
                         } else {
-                            nextFlush = clock.now() + exponentialBackoffBase.milliseconds.absoluteValue.times(
+                            nextFlush = clock.now() + exponentialBackoffBase.absoluteValue.times(
                                 2.0.pow((retryCount - 1).toDouble()),
                             )
                         }
@@ -166,7 +163,7 @@ abstract class PureeBufferedOutput(
      */
     internal suspend fun flush() {
         purgeableAge?.let {
-            logStore.purgeLogsWithAge(uniqueId, clock.now(), it.milliseconds)
+            logStore.purgeLogsWithAge(uniqueId, clock.now(), it)
         }
 
         val bufferedLogs = logStore.get(uniqueId, logsPerFlush).let { bufferedLogs ->

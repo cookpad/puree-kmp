@@ -17,6 +17,7 @@
 		ADD825DA2D85A23900D56EF7 /* PeriodicLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADD825D82D859E2400D56EF7 /* PeriodicLog.swift */; };
 		ADD825DC2D85DF6600D56EF7 /* OSLogBufferedOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADD825DB2D85DF5D00D56EF7 /* OSLogBufferedOutput.swift */; };
 		ADD825E12D85E07400D56EF7 /* AddTimeFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADD825E02D85E07400D56EF7 /* AddTimeFilter.swift */; };
+		ADD825E32D86C47300D56EF7 /* PurgeableOSLogWarningBufferedOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADD825E22D86C46500D56EF7 /* PurgeableOSLogWarningBufferedOutput.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -33,6 +34,7 @@
 		ADD825D82D859E2400D56EF7 /* PeriodicLog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeriodicLog.swift; sourceTree = "<group>"; };
 		ADD825DB2D85DF5D00D56EF7 /* OSLogBufferedOutput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OSLogBufferedOutput.swift; sourceTree = "<group>"; };
 		ADD825E02D85E07400D56EF7 /* AddTimeFilter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTimeFilter.swift; sourceTree = "<group>"; };
+		ADD825E22D86C46500D56EF7 /* PurgeableOSLogWarningBufferedOutput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurgeableOSLogWarningBufferedOutput.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -107,6 +109,7 @@
 		ADD825D32D83347300D56EF7 /* Output */ = {
 			isa = PBXGroup;
 			children = (
+				ADD825E22D86C46500D56EF7 /* PurgeableOSLogWarningBufferedOutput.swift */,
 				ADD825DB2D85DF5D00D56EF7 /* OSLogBufferedOutput.swift */,
 				ADD825D42D83347E00D56EF7 /* OSLogOutput.swift */,
 			);
@@ -224,6 +227,7 @@
 				ADD825DC2D85DF6600D56EF7 /* OSLogBufferedOutput.swift in Sources */,
 				7555FF83242A565900829871 /* ContentView.swift in Sources */,
 				ADD825D22D8332BE00D56EF7 /* Puree.swift in Sources */,
+				ADD825E32D86C47300D56EF7 /* PurgeableOSLogWarningBufferedOutput.swift in Sources */,
 				ADD825DA2D85A23900D56EF7 /* PeriodicLog.swift in Sources */,
 				ADD825E12D85E07400D56EF7 /* AddTimeFilter.swift in Sources */,
 			);

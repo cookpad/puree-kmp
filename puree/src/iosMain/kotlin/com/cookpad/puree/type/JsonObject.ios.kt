@@ -1,5 +1,5 @@
 package com.cookpad.puree.type
 
-import platform.Foundation.NSString
+actual typealias JsonObject = String
 
-actual typealias JsonObject = NSString
+internal actual fun String.toJsonObject() = this

@@ -1,4 +1,4 @@
-package com.cookpad.puree
+package com.cookpad.puree.type
 
 import kotlinx.serialization.json.Json
 

@@ -1,7 +1,7 @@
 package com.cookpad.puree.serializer
 
-import com.cookpad.puree.formatter
 import com.cookpad.puree.type.PlatformClass
+import com.cookpad.puree.type.formatter
 import kotlinx.serialization.InternalSerializationApi
 import kotlinx.serialization.json.jsonObject
 import kotlinx.serialization.serializer
