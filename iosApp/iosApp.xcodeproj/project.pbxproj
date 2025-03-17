@@ -12,7 +12,12 @@
 		7555FF83242A565900829871 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7555FF82242A565900829871 /* ContentView.swift */; };
 		ADD825D02D832D0C00D56EF7 /* ClickLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADD825CF2D832CE700D56EF7 /* ClickLog.swift */; };
 		ADD825D22D8332BE00D56EF7 /* Puree.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADD825D12D8332BC00D56EF7 /* Puree.swift */; };
-		ADD825D52D83356200D56EF7 /* LogcatOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADD825D42D83347E00D56EF7 /* LogcatOutput.swift */; };
+		ADD825D52D83356200D56EF7 /* OSLogOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADD825D42D83347E00D56EF7 /* OSLogOutput.swift */; };
+		ADD825D72D859D0600D56EF7 /* MenuLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADD825D62D859D0200D56EF7 /* MenuLog.swift */; };
+		ADD825DA2D85A23900D56EF7 /* PeriodicLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADD825D82D859E2400D56EF7 /* PeriodicLog.swift */; };
+		ADD825DC2D85DF6600D56EF7 /* OSLogBufferedOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADD825DB2D85DF5D00D56EF7 /* OSLogBufferedOutput.swift */; };
+		ADD825E12D85E07400D56EF7 /* AddTimeFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADD825E02D85E07400D56EF7 /* AddTimeFilter.swift */; };
+		ADD825E32D86C47300D56EF7 /* PurgeableOSLogWarningBufferedOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADD825E22D86C46500D56EF7 /* PurgeableOSLogWarningBufferedOutput.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,7 +29,12 @@
 		AB3632DC29227652001CCB65 /* Config.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
 		ADD825CF2D832CE700D56EF7 /* ClickLog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClickLog.swift; sourceTree = "<group>"; };
 		ADD825D12D8332BC00D56EF7 /* Puree.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Puree.swift; sourceTree = "<group>"; };
-		ADD825D42D83347E00D56EF7 /* LogcatOutput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogcatOutput.swift; sourceTree = "<group>"; };
+		ADD825D42D83347E00D56EF7 /* OSLogOutput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OSLogOutput.swift; sourceTree = "<group>"; };
+		ADD825D62D859D0200D56EF7 /* MenuLog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuLog.swift; sourceTree = "<group>"; };
+		ADD825D82D859E2400D56EF7 /* PeriodicLog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeriodicLog.swift; sourceTree = "<group>"; };
+		ADD825DB2D85DF5D00D56EF7 /* OSLogBufferedOutput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OSLogBufferedOutput.swift; sourceTree = "<group>"; };
+		ADD825E02D85E07400D56EF7 /* AddTimeFilter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTimeFilter.swift; sourceTree = "<group>"; };
+		ADD825E22D86C46500D56EF7 /* PurgeableOSLogWarningBufferedOutput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurgeableOSLogWarningBufferedOutput.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -66,6 +76,7 @@
 		7555FF7D242A565900829871 /* iosApp */ = {
 			isa = PBXGroup;
 			children = (
+				ADD825DF2D85E06400D56EF7 /* Filter */,
 				ADD825D32D83347300D56EF7 /* Output */,
 				ADD825CE2D832CD900D56EF7 /* Model */,
 				058557BA273AAA24004C7B11 /* Assets.xcassets */,
@@ -88,6 +99,8 @@
 		ADD825CE2D832CD900D56EF7 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				ADD825D82D859E2400D56EF7 /* PeriodicLog.swift */,
+				ADD825D62D859D0200D56EF7 /* MenuLog.swift */,
 				ADD825CF2D832CE700D56EF7 /* ClickLog.swift */,
 			);
 			path = Model;
@@ -96,9 +109,19 @@
 		ADD825D32D83347300D56EF7 /* Output */ = {
 			isa = PBXGroup;
 			children = (
-				ADD825D42D83347E00D56EF7 /* LogcatOutput.swift */,
+				ADD825E22D86C46500D56EF7 /* PurgeableOSLogWarningBufferedOutput.swift */,
+				ADD825DB2D85DF5D00D56EF7 /* OSLogBufferedOutput.swift */,
+				ADD825D42D83347E00D56EF7 /* OSLogOutput.swift */,
 			);
 			path = Output;
+			sourceTree = "<group>";
+		};
+		ADD825DF2D85E06400D56EF7 /* Filter */ = {
+			isa = PBXGroup;
+			children = (
+				ADD825E02D85E07400D56EF7 /* AddTimeFilter.swift */,
+			);
+			path = Filter;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -198,10 +221,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				2152FB042600AC8F00CF470E /* Demo.swift in Sources */,
+				ADD825D72D859D0600D56EF7 /* MenuLog.swift in Sources */,
 				ADD825D02D832D0C00D56EF7 /* ClickLog.swift in Sources */,
-				ADD825D52D83356200D56EF7 /* LogcatOutput.swift in Sources */,
+				ADD825D52D83356200D56EF7 /* OSLogOutput.swift in Sources */,
+				ADD825DC2D85DF6600D56EF7 /* OSLogBufferedOutput.swift in Sources */,
 				7555FF83242A565900829871 /* ContentView.swift in Sources */,
 				ADD825D22D8332BE00D56EF7 /* Puree.swift in Sources */,
+				ADD825E32D86C47300D56EF7 /* PurgeableOSLogWarningBufferedOutput.swift in Sources */,
+				ADD825DA2D85A23900D56EF7 /* PeriodicLog.swift in Sources */,
+				ADD825E12D85E07400D56EF7 /* AddTimeFilter.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

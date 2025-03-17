@@ -1,9 +1,9 @@
 package com.cookpad.puree.store
 
-import com.cookpad.puree.formatter
 import com.cookpad.puree.output.PureeBufferedLog
 import com.cookpad.puree.store.internal.db.PureeLogEntity
 import com.cookpad.puree.store.internal.db.getPureeDatabase
+import com.cookpad.puree.type.toJsonObject
 import kotlinx.datetime.Instant
 import kotlin.time.Duration
 
@@ -32,7 +32,7 @@ class DefaultPureeLogStore(dbName: String) : PureeLogStore {
             PureeBufferedLog(
                 id = it.id,
                 createdAt = Instant.parse(it.createdAt),
-                log = formatter.decodeFromString(it.log),
+                log = it.log.toJsonObject(),
             )
         }
     }
