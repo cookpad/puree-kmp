@@ -1,7 +1,7 @@
 import Foundation
 import Puree
 
-class PeriodicLog: NSObject, PureeLog, Encodable {
+class PeriodicLog: PureeLog, Encodable {
     let sequence: Int
     
     init(sequence: Int) {

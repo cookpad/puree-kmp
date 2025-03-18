@@ -36,33 +36,33 @@ abstract class PureeBufferedOutput(
      * The frequency interval when the buffer is flushed to be emitted in batches. Behavior is
      * undefined if set to a negative value.
      */
-    open val flushInterval: Duration = 2.minutes
+    open var flushInterval: Duration = 2.minutes
 
     /**
      * The maximum number of logs in a batch.
      */
-    open val logsPerFlush: Int = 100
+    open var logsPerFlush: Int = 100
 
     /**
      * The number of times to retry a failed batch.
      */
-    open val maxRetryCount: Int = 5
+    open var maxRetryCount: Int = 5
 
     /**
      * The base duration to wait when retrying a failed batch. Negative duration is automatically converted to absolute value.
      */
-    open val exponentialBackoffBase: Duration = 2.seconds
+    open var exponentialBackoffBase: Duration = 2.seconds
 
     /**
      * If set to a non-null value, logs of this age will be not be processed and deleted. Behavior
      * is undefined if set to a negative value.
      */
-    open val purgeableAge: Duration? = null
+    open var purgeableAge: Duration? = null
 
     /**
      * If set, maximum number of bytes to include in a single flush
      */
-    open val maxFlushSizeInBytes: Long = Long.MAX_VALUE
+    open var maxFlushSizeInBytes: Long = Long.MAX_VALUE
 
     private lateinit var logStore: PureeLogStore
     private lateinit var clock: Clock

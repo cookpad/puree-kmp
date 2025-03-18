@@ -1,7 +1,7 @@
 import Foundation
 import Puree
 
-class ClickLog: NSObject, PureeLog, Encodable {
+class ClickLog: PureeLog, Encodable {
     let buttonName: String
     
     init(buttonName: String) {

@@ -1,10 +1,9 @@
 package com.cookpad.puree
 
 import androidx.annotation.VisibleForTesting
-import androidx.lifecycle.Lifecycle
 import com.cookpad.puree.output.PureeBufferedOutput
 import com.cookpad.puree.output.PureeOutput
-import com.cookpad.puree.serializer.PureeLogSerializer
+import com.cookpad.puree.serializer.DefaultPureeLogSerializer
 import com.cookpad.puree.store.PureeLogStore
 import com.cookpad.puree.type.PlatformClass
 import io.github.aakira.napier.DebugAntilog
@@ -20,8 +19,6 @@ import platform.Foundation.NSStringFromClass
 
 actual class Puree(
     private val logStore: PureeLogStore,
-    private val logSerializer: PureeLogSerializer,
-    private val lifecycle: Lifecycle = defaultLifecycleOwner.lifecycle,
 ) {
     @VisibleForTesting
     @OptIn(ExperimentalCoroutinesApi::class, DelicateCoroutinesApi::class)
@@ -49,14 +46,11 @@ actual class Puree(
 
     @OptIn(BetaInteropApi::class)
     fun output(output: PureeOutput, logTypes: NSArray): Puree {
-        Napier.d { "output: $output" }
         if (output is PureeBufferedOutput) {
             require(output.uniqueId !in outputIds) { "Cannot register another PureeBufferedOutput with uniqueId: ${output.uniqueId}." }
 
             outputIds.add(output.uniqueId)
             bufferedOutputs.add(output)
-
-            Napier.d { "added buffered output: ${output.uniqueId}" }
         }
 
         logTypes.toList<ObjCClass>().forEach {
@@ -79,8 +73,8 @@ actual class Puree(
 
     fun build(): PureeLogger {
         return PureeLogger(
-            lifecycle = lifecycle,
-            logSerializer = logSerializer,
+            lifecycle = DefaultLifecycleOwner().lifecycle,
+            logSerializer = DefaultPureeLogSerializer(),
             logStore = logStore,
             dispatcher = dispatcher,
             clock = clock,

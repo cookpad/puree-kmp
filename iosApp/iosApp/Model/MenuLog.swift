@@ -1,7 +1,7 @@
 import Foundation
 import Puree
 
-class MenuLog: NSObject, PureeLog, Encodable {
+class MenuLog: PureeLog, Encodable {
     let menuName: String
     
     init(menuName: String) {
