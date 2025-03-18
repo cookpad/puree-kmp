@@ -1,5 +1,6 @@
 package com.cookpad.puree.serializer
 
+import com.cookpad.puree.PureeLog
 import com.cookpad.puree.type.JsonObject
 import com.cookpad.puree.type.PlatformClass
 
@@ -16,5 +17,5 @@ interface PureeLogSerializer {
      *
      * @return Serialized log in JSON format.
      */
-    fun <T : Any> serialize(log: T, platformClass: PlatformClass<T>): JsonObject
+    fun <T : PureeLog> serialize(log: T, platformClass: PlatformClass<T>): JsonObject
 }

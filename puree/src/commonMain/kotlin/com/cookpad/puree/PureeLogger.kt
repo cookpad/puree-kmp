@@ -42,7 +42,7 @@ class PureeLogger internal constructor(
         )
     }
 
-    fun <T : Any> postLog(log: T, platformClass: PlatformClass<T>) {
+    fun <T : PureeLog> postLog(log: T, platformClass: PlatformClass<T>) {
         val config = registeredLogs[platformClass.simpleName] ?: throw LogNotRegisteredException()
 
         scope.launch {

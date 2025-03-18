@@ -3,7 +3,7 @@ package com.cookpad.puree
 import androidx.annotation.VisibleForTesting
 import com.cookpad.puree.output.PureeBufferedOutput
 import com.cookpad.puree.output.PureeOutput
-import com.cookpad.puree.serializer.DefaultPureeLogSerializer
+import com.cookpad.puree.serializer.PureeLogSerializer
 import com.cookpad.puree.store.PureeLogStore
 import com.cookpad.puree.type.PlatformClass
 import io.github.aakira.napier.DebugAntilog
@@ -19,6 +19,7 @@ import platform.Foundation.NSStringFromClass
 
 actual class Puree(
     private val logStore: PureeLogStore,
+    private val logSerializer: PureeLogSerializer,
 ) {
     @VisibleForTesting
     @OptIn(ExperimentalCoroutinesApi::class, DelicateCoroutinesApi::class)
@@ -74,7 +75,7 @@ actual class Puree(
     fun build(): PureeLogger {
         return PureeLogger(
             lifecycle = DefaultLifecycleOwner().lifecycle,
-            logSerializer = DefaultPureeLogSerializer(),
+            logSerializer = logSerializer,
             logStore = logStore,
             dispatcher = dispatcher,
             clock = clock,
@@ -85,6 +86,6 @@ actual class Puree(
 }
 
 @OptIn(BetaInteropApi::class)
-fun PureeLogger.postLog(log: String, clazz: ObjCClass) {
+fun PureeLogger.postLog(log: PureeLog, clazz: ObjCClass) {
     postLog(log, PlatformClass(clazz))
 }
