@@ -1,6 +1,6 @@
 package com.cookpad.puree
 
-import kotlinx.serialization.json.JsonObject
+import com.cookpad.puree.type.JsonObject
 
 /**
  * The filter to be applied to logs.

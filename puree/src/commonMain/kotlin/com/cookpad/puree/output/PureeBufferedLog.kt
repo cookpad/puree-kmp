@@ -1,7 +1,7 @@
 package com.cookpad.puree.output
 
+import com.cookpad.puree.type.JsonObject
 import kotlinx.datetime.Instant
-import kotlinx.serialization.json.JsonObject
 
 /**
  * Log object that is buffered to a [com.cookpad.puree.store.PureeLogStore].

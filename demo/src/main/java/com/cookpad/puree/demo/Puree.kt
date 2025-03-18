@@ -1,5 +1,6 @@
 package com.cookpad.puree.demo
 
+import com.cookpad.puree.Puree
 import com.cookpad.puree.PureeLog
 import com.cookpad.puree.PureeLogger
 import com.cookpad.puree.demo.log.filter.AddTimeFilter
@@ -9,10 +10,11 @@ import com.cookpad.puree.demo.log.model.PeriodicLog
 import com.cookpad.puree.demo.log.output.LogcatDebugBufferedOutput
 import com.cookpad.puree.demo.log.output.LogcatOutput
 import com.cookpad.puree.demo.log.output.PurgeableLogcatWarningBufferedOutput
+import com.cookpad.puree.send
 import com.cookpad.puree.store.DefaultPureeLogStore
 
 object Puree {
-    val logger: PureeLogger = PureeLogger.Builder(
+    val logger: PureeLogger = Puree(
         logStore = DefaultPureeLogStore("log.db"),
     )
         .filter(
@@ -39,6 +41,6 @@ object Puree {
         .build()
 
     inline fun <reified T : PureeLog> send(log: T) {
-        logger.postLog(log)
+        logger.send(log)
     }
 }

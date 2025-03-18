@@ -17,7 +17,7 @@ interface PureeLogStore {
      * @param outputId The id of the [com.cookpad.puree.output.PureeBufferedOutput] that owns this log.
      * @param bufferedLog The log to be stored
      */
-    fun add(outputId: String, bufferedLog: PureeBufferedLog)
+    suspend fun add(outputId: String, bufferedLog: PureeBufferedLog)
 
     /**
      * Retrieves the logs from the store.
@@ -27,7 +27,7 @@ interface PureeLogStore {
      *
      * @return List of buffered logs.
      */
-    fun get(outputId: String, maxCount: Int): List<PureeBufferedLog>
+    suspend fun get(outputId: String, maxCount: Int): List<PureeBufferedLog>
 
     /**
      * Deletes the logs from the store.
@@ -35,7 +35,7 @@ interface PureeLogStore {
      * @param outputId The id of the [com.cookpad.puree.output.PureeBufferedOutput] that owns the logs.
      * @param bufferedLogs The logs to be deleted.
      */
-    fun remove(outputId: String, bufferedLogs: List<PureeBufferedLog>)
+    suspend fun remove(outputId: String, bufferedLogs: List<PureeBufferedLog>)
 
     /**
      * Deletes all the logs according the age of the log.
@@ -44,5 +44,5 @@ interface PureeLogStore {
      * @param now The current date-time.
      * @param age The age of the of the logs to be deleted.
      */
-    fun purgeLogsWithAge(outputId: String, now: Instant, age: Duration)
+    suspend fun purgeLogsWithAge(outputId: String, now: Instant, age: Duration)
 }

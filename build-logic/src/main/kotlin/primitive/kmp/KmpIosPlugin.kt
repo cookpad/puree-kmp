@@ -5,6 +5,8 @@ import org.gradle.api.Project
 class KmpIosPlugin : Plugin<Project> {
     override fun apply(target: Project) {
         with(target) {
+            pluginManager.apply("co.touchlab.skie")
+
             kotlin {
                 applyDefaultHierarchyTemplate()
 
@@ -14,7 +16,7 @@ class KmpIosPlugin : Plugin<Project> {
                     iosSimulatorArm64(),
                 ).forEach { iosTarget ->
                     iosTarget.binaries.framework {
-                        baseName = "puree"
+                        baseName = "Puree"
                         isStatic = true
                     }
                 }
