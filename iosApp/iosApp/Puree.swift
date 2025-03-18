@@ -7,7 +7,7 @@ final class Puree {
 
     private class DefaultPureeLogSerializer: PureeLogSerializer {
         func serialize(log: any PureeLog, platformClass: PlatformClass<any PureeLog>) -> String {
-            return (log as? Encodable)?.encode() ?? ""
+            return (log as? PureeLog & Encodable)?.encode() ?? ""
         }
     }
 
@@ -15,7 +15,7 @@ final class Puree {
         let logStore = DefaultPureeLogStore(dbName: "puree.db")
         let logSerializer = DefaultPureeLogSerializer()
 
-        return Puree_(logStore: logStore,logSerializer: logSerializer)
+        return Puree_(logStore: logStore, logSerializer: logSerializer)
             .filter(filter: AddTimeFilter(), logTypes: [ClickLog.self, MenuLog.self, PeriodicLog.self])
             .output(output: OSLogOutput(), logTypes: [ClickLog.self, MenuLog.self, PeriodicLog.self])
             .output(output: OSLogBufferedOutput(uniqueId: "buffered"), logTypes: [ClickLog.self, MenuLog.self])
@@ -28,7 +28,7 @@ final class Puree {
     }
 }
 
-extension Encodable {
+extension PureeLog where Self: Encodable {
     func encode() -> String {
         let encoder = JSONEncoder()
         encoder.keyEncodingStrategy = .convertToSnakeCase
