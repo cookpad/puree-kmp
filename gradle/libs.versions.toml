@@ -30,9 +30,9 @@ androidxAnnotation = "1.9.1"
 androidxStartup = "1.2.0"
 androidxBrowser = "1.8.0"
 androidxLifecycle = "2.8.7"
-androidxRoom = "2.7.0-rc01"
+androidxRoom = "2.7.0-rc02"
 androidxSqlite = "2.5"
-androidxCompose = "2025.02.00"
+androidxCompose = "2025.03.00"
 
 # KMP
 kmpCompose = "1.7.3"
@@ -46,8 +46,11 @@ ksp = "2.1.10-1.0.29"
 # koin
 koin = "4.0.2"
 
+# Test
+mokkery = "2.7.1"
+
 # Others
-detekt = "1.23.7"
+detekt = "1.23.8"
 twitterComposeRule = "0.0.26"
 
 # Debugs
@@ -68,6 +71,9 @@ kmp = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
 kmpCompose = { id = "org.jetbrains.compose", version.ref = "kmpCompose" }
 skie = { id = "co.touchlab.skie", version.ref = "skie" }
 
+# Test
+mokkery = { id = "dev.mokkery", version.ref = "mokkery" }
+
 # Others
 room = { id = "androidx.room", version.ref = "androidxRoom"}
 detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "detekt" }
@@ -80,13 +86,16 @@ kotlin-gradlePlugin = { group = "org.jetbrains.kotlin", name = "kotlin-gradle-pl
 room-gradlePlugin = { group = "androidx.room", name = "room-gradle-plugin", version.ref = "androidxRoom" }
 detekt-gradlePlugin = { group = "io.gitlab.arturbosch.detekt", name = "detekt-gradle-plugin", version.ref = "detekt" }
 detekt-formatting = { group = "io.gitlab.arturbosch.detekt", name = "detekt-formatting", version.ref = "detekt" }
+mokkery-gradlePlugin = { module = "dev.mokkery:mokkery-gradle", version.ref = "mokkery" }
 
 # Kotlin
 kotlin-bom = { module = "org.jetbrains.kotlin:kotlin-bom", version.ref = "kotlin" }
 kotlin-stdlib = { module = "org.jetbrains.kotlin:kotlin-stdlib-jdk8" }
+kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
 
 # KotlinX
 kotlinx-coroutines-core = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-core", version.ref = "kotlinxCoroutines" }
+kotlinx-coroutines-test = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-test", version.ref = "kotlinxCoroutines" }
 kotlinx-datetime = { group = "org.jetbrains.kotlinx", name = "kotlinx-datetime", version.ref = "kotlinxDatetime" }
 kotlinx-serialization-json = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-json", version.ref = "kotlinxSerializationJson" }
 kotlinx-collections-immutable = { group = "org.jetbrains.kotlinx", name = "kotlinx-collections-immutable", version.ref = "kotlinxImmutable" }
@@ -184,4 +193,9 @@ koin = [
 database = [
     "kmp-room",
     "kmp-sqlite",
+]
+
+test = [
+    "kotlin-test",
+    "kotlinx-coroutines-test",
 ]

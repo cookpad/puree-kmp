@@ -22,6 +22,7 @@ dependencies {
     implementation(libs.kotlin.gradlePlugin)
     implementation(libs.room.gradlePlugin)
     implementation(libs.detekt.gradlePlugin)
+    implementation(libs.mokkery.gradlePlugin)
 }
 
 gradlePlugin {

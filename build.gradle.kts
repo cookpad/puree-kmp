@@ -13,6 +13,9 @@ plugins {
     alias(libs.plugins.kotlin.serialization) apply false
     alias(libs.plugins.kotlin.compose.compiler) apply false
 
+    // Test
+    alias(libs.plugins.mokkery) apply false
+
     // Others
     alias(libs.plugins.detekt) apply false
     alias(libs.plugins.ksp) apply false
