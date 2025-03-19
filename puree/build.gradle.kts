@@ -26,8 +26,8 @@ kotlin {
             implementation(libs.androidx.lifecycle.process)
         }
 
-        commonTest.dependencies {
-            implementation(libs.bundles.test)
+        androidUnitTest.dependencies {
+            implementation(libs.bundles.test.jvm)
         }
     }
 }
