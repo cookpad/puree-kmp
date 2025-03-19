@@ -19,7 +19,7 @@ import org.mockito.kotlin.spy
 import org.mockito.kotlin.times
 import org.mockito.kotlin.verify
 import org.mockito.kotlin.whenever
-import rule.MainDispatcherRule
+import rule.LifecycleCoroutineRule
 import java.io.IOException
 import kotlin.math.pow
 import kotlin.test.Test
@@ -27,7 +27,7 @@ import kotlin.time.Duration.Companion.minutes
 import kotlin.time.Duration.Companion.seconds
 
 @OptIn(ExperimentalCoroutinesApi::class)
-class PureeBufferedOutputTest : MainDispatcherRule() {
+class PureeBufferedOutputTest : LifecycleCoroutineRule() {
 
     private lateinit var logStore: PureeLogStore
     private lateinit var clock: ManualClock
