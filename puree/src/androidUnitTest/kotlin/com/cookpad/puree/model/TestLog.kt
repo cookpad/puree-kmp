@@ -1,4 +1,4 @@
-package model
+package com.cookpad.puree.model
 
 import com.cookpad.puree.PureeLog
 import com.cookpad.puree.serializer.PureeLogSerializer

@@ -1,4 +1,4 @@
-package rule
+package com.cookpad.puree.rule
 
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.testing.TestLifecycleOwner

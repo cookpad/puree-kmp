@@ -1,5 +1,11 @@
+@file:Suppress("FunctionNaming")
+
+package com.cookpad.puree
+
+import com.cookpad.puree.model.ManualClock
 import com.cookpad.puree.output.PureeBufferedLog
 import com.cookpad.puree.output.PureeBufferedOutput
+import com.cookpad.puree.rule.LifecycleCoroutineRule
 import com.cookpad.puree.store.PureeLogStore
 import com.cookpad.puree.type.JsonObject
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -10,7 +16,6 @@ import kotlinx.datetime.Clock
 import kotlinx.datetime.Instant
 import kotlinx.serialization.json.buildJsonObject
 import kotlinx.serialization.json.put
-import model.ManualClock
 import org.mockito.kotlin.any
 import org.mockito.kotlin.doAnswer
 import org.mockito.kotlin.eq
@@ -19,7 +24,6 @@ import org.mockito.kotlin.spy
 import org.mockito.kotlin.times
 import org.mockito.kotlin.verify
 import org.mockito.kotlin.whenever
-import rule.LifecycleCoroutineRule
 import java.io.IOException
 import kotlin.math.pow
 import kotlin.test.Test

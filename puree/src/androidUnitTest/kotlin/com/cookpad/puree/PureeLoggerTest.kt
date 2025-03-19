@@ -1,17 +1,19 @@
-import com.cookpad.puree.Puree
-import com.cookpad.puree.PureeFilter
+@file:Suppress("FunctionNaming")
+
+package com.cookpad.puree
+
+import com.cookpad.puree.model.ManualClock
+import com.cookpad.puree.model.TestLog
+import com.cookpad.puree.model.TestLogSerializer
 import com.cookpad.puree.output.PureeBufferedOutput
 import com.cookpad.puree.output.PureeOutput
-import com.cookpad.puree.send
+import com.cookpad.puree.rule.LifecycleCoroutineRule
 import com.cookpad.puree.store.PureeLogStore
 import com.cookpad.puree.type.JsonObject
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.advanceUntilIdle
 import kotlinx.coroutines.test.runTest
 import kotlinx.datetime.Clock
-import model.ManualClock
-import model.TestLog
-import model.TestLogSerializer
 import org.junit.Test
 import org.mockito.kotlin.any
 import org.mockito.kotlin.doAnswer
@@ -20,7 +22,6 @@ import org.mockito.kotlin.mock
 import org.mockito.kotlin.never
 import org.mockito.kotlin.verify
 import org.mockito.kotlin.whenever
-import rule.LifecycleCoroutineRule
 
 class PureeLoggerTest : LifecycleCoroutineRule() {
 

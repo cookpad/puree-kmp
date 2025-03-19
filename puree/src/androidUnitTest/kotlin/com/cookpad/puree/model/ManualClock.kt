@@ -1,4 +1,4 @@
-package model
+package com.cookpad.puree.model
 
 import kotlinx.datetime.Clock
 import kotlinx.datetime.Instant
