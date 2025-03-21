@@ -5,17 +5,29 @@ import com.cookpad.puree.type.JsonObject
 import com.cookpad.puree.type.PlatformClass
 
 /**
- * Serializes log objects into JSON format.
- * An instance of this interface are set to [com.cookpad.puree.PureeLogger] through [com.cookpad.puree.Puree].
+ * Interface for serializing log objects into JSON format.
+ *
+ * This interface defines the contract for converting PureeLog objects into a JSON representation
+ * that can be processed by outputs. Implementations of this interface handle the platform-specific
+ * serialization details, allowing the logging system to work with structured data across different platforms.
+ *
+ * An instance of this interface is provided to [com.cookpad.puree.PureeLogger] through the
+ * [com.cookpad.puree.Puree] builder during initialization.
  */
 interface PureeLogSerializer {
     /**
-     * Serialize the log into JSON format.
+     * Serializes a log object into JSON format.
      *
-     * @param log Log object to be serialized.
-     * @param platformClass The platform class of the log object.
+     * This method converts a PureeLog object into a JSON representation that can be
+     * processed by outputs. The serialization process may vary across platforms, but
+     * the result should be a consistent JSON structure that represents the log data.
      *
-     * @return Serialized log in JSON format.
+     * The platformClass parameter provides platform-specific class information needed
+     * for the serialization process, such as reflection data or class references.
+     *
+     * @param log The log object to be serialized.
+     * @param platformClass Platform-specific class information for the log type.
+     * @return The serialized log as a JsonObject.
      */
     fun <T : PureeLog> serialize(log: T, platformClass: PlatformClass<T>): JsonObject
 }

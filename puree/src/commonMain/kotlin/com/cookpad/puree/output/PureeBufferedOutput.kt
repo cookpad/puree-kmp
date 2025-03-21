@@ -2,13 +2,7 @@ package com.cookpad.puree.output
 
 import com.cookpad.puree.store.PureeLogStore
 import com.cookpad.puree.type.JsonObject
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.SupervisorJob
-import kotlinx.coroutines.cancelChildren
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.isActive
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.suspendCancellableCoroutine
+import kotlinx.coroutines.*
 import kotlinx.datetime.Clock
 import kotlinx.datetime.Instant
 import kotlin.coroutines.CoroutineContext
@@ -21,14 +15,23 @@ import kotlin.time.Duration.Companion.minutes
 import kotlin.time.Duration.Companion.seconds
 
 /**
- * The output that emits posted logs in batches.
+ * Abstract base class for outputs that buffer logs before emitting them in batches.
+ *
+ * PureeBufferedOutput extends the basic PureeOutput interface to provide buffering capabilities,
+ * which allows for more efficient processing of logs. Instead of emitting each log immediately,
+ * this class stores logs temporarily and emits them in batches according to configurable criteria.
+ *
+ * Buffered outputs are lifecycle-aware and will automatically suspend and resume
+ * their flushing operations based on the application's lifecycle events.
+ *
+ * Implementations must provide the actual emission logic by implementing the
+ * abstract emit method that handles batches of logs.
  */
 abstract class PureeBufferedOutput(
     /**
      * Uniquely identifies this output.
      * This values is used to match the registered [PureeBufferedOutput] to the buffered logs when saving and retrieving
      * to and from the [PureeLogStore].
-     * Changing this value will prevent the log from being processed correctly.
      */
     internal val uniqueId: String,
 ) : PureeOutput {
@@ -72,11 +75,16 @@ abstract class PureeBufferedOutput(
     private var retryCount: Int = 0
 
     /**
-     * Emits the logs.
+     * Emits a batch of logs to their destination.
      *
-     * @param logs The logs in JSON format
-     * @param onSuccess Should be invoked if successful.
-     * @param onFailed Should be invoked if failed.
+     * This abstract method must be implemented by concrete subclasses to define how
+     * batches of logs are sent to their final destination. Unlike the emit method from
+     * PureeOutput which handles single logs, this method processes multiple logs at once
+     * for more efficient delivery.
+     *
+     * @param logs The list of logs serialized in JSON format to be emitted
+     * @param onSuccess Callback to be invoked when the batch is successfully delivered
+     * @param onFailed Callback to be invoked with the exception when delivery fails
      */
     abstract fun emit(logs: List<JsonObject>, onSuccess: () -> Unit, onFailed: (Throwable) -> Unit)
 
