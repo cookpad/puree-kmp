@@ -1,4 +1,4 @@
-# Puree-KMP
+# puree-kmp
 
 Puree-KMP is a structured logging library for Kotlin Multiplatform (KMP) applications, supporting both Android and iOS
 platforms. It provides a flexible and extensible framework for capturing, processing, and routing logs to various
@@ -105,13 +105,13 @@ val logger = Puree(
     .build()
 ```
 
-### 3. Send Logs
+### 4. Send Logs
 
 ```kotlin
 logger.send(ClickLog(buttonName = "submit"))
 ```
 
-### 4. Lifecycle Management
+### 5. Lifecycle Management
 
 Puree automatically integrates with the application lifecycle (for Android only):
 
