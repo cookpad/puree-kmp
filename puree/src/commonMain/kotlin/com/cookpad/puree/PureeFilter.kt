@@ -5,7 +5,7 @@ import com.cookpad.puree.type.JsonObject
 /**
  * The filter to be applied to logs.
  * The type of logs on which this filter will be applied are determined when creating the [PureeLogger]
- * object through [PureeLogger.Builder].
+ * object through [Puree].
  */
 interface PureeFilter {
     /**

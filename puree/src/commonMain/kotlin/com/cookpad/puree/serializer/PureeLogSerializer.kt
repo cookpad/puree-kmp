@@ -6,14 +6,14 @@ import com.cookpad.puree.type.PlatformClass
 
 /**
  * Serializes log objects into JSON format.
- * An instance of this interface are set to [com.cookpad.puree.kotlin.PureeLogger] through
- * [com.cookpad.puree.kotlin.PureeLogger.Builder]
+ * An instance of this interface are set to [com.cookpad.puree.PureeLogger] through [com.cookpad.puree.Puree].
  */
 interface PureeLogSerializer {
     /**
      * Serialize the log into JSON format.
      *
      * @param log Log object to be serialized.
+     * @param platformClass The platform class of the log object.
      *
      * @return Serialized log in JSON format.
      */
