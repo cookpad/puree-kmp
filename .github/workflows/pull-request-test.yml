@@ -9,7 +9,7 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  detekt:
+  test:
     runs-on: ubuntu-latest
     timeout-minutes: 20
     permissions:
