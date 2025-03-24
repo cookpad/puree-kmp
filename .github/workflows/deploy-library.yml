@@ -10,7 +10,7 @@ jobs:
     name: Release build and publish
     runs-on: macOS-latest
     permissions:
-      contents: read
+      contents: write
       packages: write
     env:
       ORG_GRADLE_PROJECT_mavenCentralUsername: ${{ secrets.MAVEN_CENTRAL_USERNAME }}
