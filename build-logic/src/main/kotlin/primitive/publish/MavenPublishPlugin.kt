@@ -62,7 +62,7 @@ class MavenPublishPlugin : Plugin<Project> {
             }
 
             dokkaPublications.getByName("html") {
-                outputDirectory = file("$rootDir/docs")
+                outputDirectory = file("$rootDir/dokka")
             }
 
             dependencies {
