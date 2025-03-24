@@ -29,7 +29,7 @@ androidxAnnotation = "1.9.1"
 androidxStartup = "1.2.0"
 androidxBrowser = "1.8.0"
 androidxLifecycle = "2.8.7"
-androidxRoom = "2.7.0-rc02"
+androidxRoom = "2.7.0-alpha13"
 androidxSqlite = "2.5"
 androidxCompose = "2025.03.00"
 
