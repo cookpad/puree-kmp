@@ -22,7 +22,6 @@ kotlinxImmutable = "0.3.8"
 
 # AndroidX
 androidxCore = "1.15.0"
-androidxCoreSplash = "1.0.1"
 androidxAppCompat = "1.7.0"
 androidxActivity = "1.10.1"
 androidxFragment = "1.8.6"
@@ -36,12 +35,12 @@ androidxCompose = "2025.03.00"
 
 # KMP
 kmpCompose = "1.7.3"
-kmpLifecycle = "2.9.0-alpha03"
+kmpLifecycle = "2.9.0-alpha05"
 kmpNavigation = "2.8.0-alpha12"
 skie = "0.10.1"
 
 # Google
-ksp = "2.1.10-1.0.29"
+ksp = "2.1.10-1.0.31"
 
 # koin
 koin = "4.0.2"
@@ -54,7 +53,7 @@ maven-publish = "0.30.0"
 # Test
 junit = "4.13.2"
 mockito = "5.4.0"
-androidxTest = "1.6.1"
+androidxTest = "1.6.2"
 androidxJUnit = "1.2.1"
 
 # Others
@@ -143,8 +142,8 @@ androidx-test-rules = { module = "androidx.test:rules", version.ref = "androidxT
 androidx-test-runner = { module = "androidx.test:runner", version.ref = "androidxTest" }
 
 # KMP
-kmp-lifecycle-runtime = { module = "androidx.lifecycle:lifecycle-runtime", version.ref = "kmpLifecycle" }
-kmp-lifecycle-test = { module = "androidx.lifecycle:lifecycle-runtime-testing", version.ref = "kmpLifecycle" }
+kmp-lifecycle-runtime = { module = "androidx.lifecycle:lifecycle-runtime", version.ref = "androidxLifecycle" }
+kmp-lifecycle-test = { module = "androidx.lifecycle:lifecycle-runtime-testing", version.ref = "androidxLifecycle" }
 kmp-lifecycle-runtime-compose = { module = "org.jetbrains.androidx.lifecycle:lifecycle-runtime-compose", version.ref = "kmpLifecycle" }
 kmp-lifecycle-viewmodel-compose = { module = "org.jetbrains.androidx.lifecycle:lifecycle-viewmodel-compose", version.ref = "kmpLifecycle" }
 kmp-navigation-compose = { module = "org.jetbrains.androidx.navigation:navigation-compose", version.ref = "kmpNavigation" }
