@@ -24,7 +24,7 @@ final class Puree {
     }()
 
     func send<T: PureeLog & Encodable>(_ log: T) {
-        pureeLogger.postLog(log: log, clazz: T.self)
+        pureeLogger.send(log: log, clazz: T.self)
     }
 }
 
