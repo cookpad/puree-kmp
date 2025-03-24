@@ -22,6 +22,9 @@ dependencies {
     implementation(libs.kotlin.gradlePlugin)
     implementation(libs.room.gradlePlugin)
     implementation(libs.detekt.gradlePlugin)
+    implementation(libs.maven.publish.gradlePlugin)
+    implementation(libs.nexus.publish.gradlePlugin)
+    implementation(libs.dokka.gradlePlugin)
 }
 
 gradlePlugin {
@@ -70,6 +73,16 @@ gradlePlugin {
         register("RoomPlugin") {
             id = "cookpad.primitive.room"
             implementationClass = "primitive.RoomPlugin"
+        }
+
+        // Publishing
+        register("NexusPublishPlugin") {
+            id = "cookpad.primitive.publish.nexus"
+            implementationClass = "primitive.publish.NexusPublishPlugin"
+        }
+        register("MavenPublishPlugin") {
+            id = "cookpad.primitive.publish.maven"
+            implementationClass = "primitive.publish.MavenPublishPlugin"
         }
     }
 }

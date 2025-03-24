@@ -13,6 +13,11 @@ plugins {
     alias(libs.plugins.kotlin.serialization) apply false
     alias(libs.plugins.kotlin.compose.compiler) apply false
 
+    // Publishing
+    id("cookpad.primitive.publish.nexus")
+    alias(libs.plugins.dokka) apply false
+    alias(libs.plugins.maven.publish) apply false
+
     // Others
     alias(libs.plugins.detekt) apply false
     alias(libs.plugins.ksp) apply false

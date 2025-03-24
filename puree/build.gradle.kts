@@ -6,6 +6,7 @@ plugins {
     id("cookpad.primitive.kmp.ios")
     id("cookpad.primitive.room")
     id("cookpad.primitive.detekt")
+    id("cookpad.primitive.publish.maven")
 }
 
 android {
