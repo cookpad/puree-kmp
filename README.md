@@ -22,7 +22,7 @@ destinations.
 
 ```kotlin
 dependencies {
-    implementation("com.cookpad:puree:0.0.1")
+    implementation("com.cookpad:puree:$latestVersion")
 }
 ```
 
