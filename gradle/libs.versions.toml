@@ -30,9 +30,9 @@ androidxAnnotation = "1.9.1"
 androidxStartup = "1.2.0"
 androidxBrowser = "1.8.0"
 androidxLifecycle = "2.8.7"
-androidxRoom = "2.7.0-rc01"
+androidxRoom = "2.7.0-rc02"
 androidxSqlite = "2.5"
-androidxCompose = "2025.02.00"
+androidxCompose = "2025.03.00"
 
 # KMP
 kmpCompose = "1.7.3"
@@ -46,8 +46,14 @@ ksp = "2.1.10-1.0.29"
 # koin
 koin = "4.0.2"
 
+# Test
+junit = "4.13.2"
+mockito = "5.4.0"
+androidxTest = "1.6.1"
+androidxJUnit = "1.2.1"
+
 # Others
-detekt = "1.23.7"
+detekt = "1.23.8"
 twitterComposeRule = "0.0.26"
 
 # Debugs
@@ -84,9 +90,11 @@ detekt-formatting = { group = "io.gitlab.arturbosch.detekt", name = "detekt-form
 # Kotlin
 kotlin-bom = { module = "org.jetbrains.kotlin:kotlin-bom", version.ref = "kotlin" }
 kotlin-stdlib = { module = "org.jetbrains.kotlin:kotlin-stdlib-jdk8" }
+kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
 
 # KotlinX
 kotlinx-coroutines-core = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-core", version.ref = "kotlinxCoroutines" }
+kotlinx-coroutines-test = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-test", version.ref = "kotlinxCoroutines" }
 kotlinx-datetime = { group = "org.jetbrains.kotlinx", name = "kotlinx-datetime", version.ref = "kotlinxDatetime" }
 kotlinx-serialization-json = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-json", version.ref = "kotlinxSerializationJson" }
 kotlinx-collections-immutable = { group = "org.jetbrains.kotlinx", name = "kotlinx-collections-immutable", version.ref = "kotlinxImmutable" }
@@ -114,8 +122,15 @@ androidx-compose-ui = { module = "androidx.compose.ui:ui" }
 androidx-compose-ui-tooling = { module = "androidx.compose.ui:ui-tooling" }
 androidx-compose-ui-tooling-preview = { module = "androidx.compose.ui:ui-tooling-preview" }
 
+# AndroidX Test
+androidx-test-core = { module = "androidx.test:core-ktx", version.ref = "androidxTest" }
+androidx-test-junit = { module = "androidx.test.ext:junit-ktx", version.ref = "androidxJUnit" }
+androidx-test-rules = { module = "androidx.test:rules", version.ref = "androidxTest" }
+androidx-test-runner = { module = "androidx.test:runner", version.ref = "androidxTest" }
+
 # KMP
 kmp-lifecycle-runtime = { module = "androidx.lifecycle:lifecycle-runtime", version.ref = "kmpLifecycle" }
+kmp-lifecycle-test = { module = "androidx.lifecycle:lifecycle-runtime-testing", version.ref = "kmpLifecycle" }
 kmp-lifecycle-runtime-compose = { module = "org.jetbrains.androidx.lifecycle:lifecycle-runtime-compose", version.ref = "kmpLifecycle" }
 kmp-lifecycle-viewmodel-compose = { module = "org.jetbrains.androidx.lifecycle:lifecycle-viewmodel-compose", version.ref = "kmpLifecycle" }
 kmp-navigation-compose = { module = "org.jetbrains.androidx.navigation:navigation-compose", version.ref = "kmpNavigation" }
@@ -130,6 +145,10 @@ koin-android = { module = "io.insert-koin:koin-android" }
 koin-androidx-startup = { module = "io.insert-koin:koin-androidx-startup", version.ref = "koin" }
 koin-compose = { module = "io.insert-koin:koin-compose", version.ref = "koin" }
 koin-compose-viewmodel = { module = "io.insert-koin:koin-compose-viewmodel", version.ref = "koin" }
+
+# Test
+junit = { module = "junit:junit", version.ref = "junit" }
+mockito = { module = "org.mockito.kotlin:mockito-kotlin", version.ref = "mockito" }
 
 # Others
 desugar = { module = "com.android.tools:desugar_jdk_libs", version = "2.1.5" }
@@ -184,4 +203,16 @@ koin = [
 database = [
     "kmp-room",
     "kmp-sqlite",
+]
+
+test-jvm = [
+    "junit",
+    "mockito",
+    "kotlin-test",
+    "kotlinx-coroutines-test",
+    "androidx-test-core",
+    "androidx-test-junit",
+    "androidx-test-rules",
+    "androidx-test-runner",
+    "kmp-lifecycle-test"
 ]

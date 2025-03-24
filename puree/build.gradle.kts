@@ -25,5 +25,9 @@ kotlin {
             implementation(libs.androidx.startup)
             implementation(libs.androidx.lifecycle.process)
         }
+
+        androidUnitTest.dependencies {
+            implementation(libs.bundles.test.jvm)
+        }
     }
 }

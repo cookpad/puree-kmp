@@ -540,9 +540,6 @@ style:
     customMessage: ''
   ForbiddenImport:
     active: true
-    imports:
-      - 'org.junit.Assert.*'
-    forbiddenPatterns: 'kotlin\.test\.(?!assertFailsWith|assertFails|fail).*'
   ForbiddenMethodCall:
     active: false
     methods:

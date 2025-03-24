@@ -10,6 +10,7 @@ import com.cookpad.puree.store.PureeLogStore
 import com.cookpad.puree.type.PlatformClass
 import io.github.aakira.napier.DebugAntilog
 import io.github.aakira.napier.Napier
+import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.newSingleThreadContext
@@ -30,7 +31,7 @@ actual class Puree(
 ) {
     @VisibleForTesting
     @OptIn(ExperimentalCoroutinesApi::class, DelicateCoroutinesApi::class)
-    internal val dispatcher = newSingleThreadContext("PureeLogger")
+    internal var dispatcher: CoroutineDispatcher = newSingleThreadContext("PureeLogger")
 
     @VisibleForTesting
     internal var clock: Clock = Clock.System

@@ -3,6 +3,7 @@ package com.cookpad.puree.output
 import com.cookpad.puree.store.PureeLogStore
 import com.cookpad.puree.type.JsonObject
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.NonCancellable.isActive
 import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.cancelChildren
@@ -103,7 +104,7 @@ abstract class PureeBufferedOutput(
         this.clock = clock
         nextFlush = clock.now() + flushInterval
         retryCount = 0
-        coroutineScope = CoroutineScope(coroutineContext + SupervisorJob())
+        coroutineScope = CoroutineScope(coroutineContext + SupervisorJob(coroutineContext[Job]))
     }
 
     /**
