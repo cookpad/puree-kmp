@@ -5,8 +5,6 @@ import org.gradle.api.Project
 class KmpIosPlugin : Plugin<Project> {
     override fun apply(target: Project) {
         with(target) {
-            pluginManager.apply("co.touchlab.skie")
-
             kotlin {
                 applyDefaultHierarchyTemplate()
 

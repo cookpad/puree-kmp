@@ -12,7 +12,7 @@ compileSdk = "35"
 gradle = "8.7.3"
 
 # Kotlin
-kotlin = "2.1.10"
+kotlin = "2.1.20"
 
 # KotlinX
 kotlinxCoroutines = "1.10.1"
@@ -29,7 +29,7 @@ androidxAnnotation = "1.9.1"
 androidxStartup = "1.2.0"
 androidxBrowser = "1.8.0"
 androidxLifecycle = "2.8.7"
-androidxRoom = "2.7.0-alpha13"
+androidxRoom = "2.7.0-rc02"
 androidxSqlite = "2.5"
 androidxCompose = "2025.03.00"
 
@@ -37,10 +37,9 @@ androidxCompose = "2025.03.00"
 kmpCompose = "1.7.3"
 kmpLifecycle = "2.9.0-alpha05"
 kmpNavigation = "2.8.0-alpha12"
-skie = "0.10.1"
 
 # Google
-ksp = "2.1.10-1.0.31"
+ksp = "2.1.20-1.0.31"
 
 # koin
 koin = "4.0.2"
@@ -80,7 +79,6 @@ dokka = { id = "org.jetbrains.dokka", version.ref = "dokka" }
 # KMP
 kmp = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
 kmpCompose = { id = "org.jetbrains.compose", version.ref = "kmpCompose" }
-skie = { id = "co.touchlab.skie", version.ref = "skie" }
 
 # Others
 room = { id = "androidx.room", version.ref = "androidxRoom"}
