@@ -31,12 +31,6 @@ class MavenPublishPlugin : Plugin<Project> {
                 version = libs.version("versionName")
             }
 
-            afterEvaluate {
-                tasks.filter { it.name.contains("SourcesJar", true) }.forEach {
-                    it.dependsOn("kspCommonMainKotlinMetadata")
-                }
-            }
-
             configureDokka()
             configureMavenPublish()
             configureSigning()
@@ -74,7 +68,7 @@ class MavenPublishPlugin : Plugin<Project> {
     private fun Project.configureMavenPublish() {
         extensions.configure<MavenPublishBaseExtension> {
             configure(KotlinMultiplatform(javadocJar = JavadocJar.Dokka("dokkaGeneratePublicationHtml")))
-            publishToMavenCentral(SonatypeHost.CENTRAL_PORTAL, true)
+            publishToMavenCentral(SonatypeHost.DEFAULT, true)
 
             val hasUserNameFromProject = project.hasProperty("mavenCentralUsername")
             val hasUserNameFromEnv = System.getenv("ORG_GRADLE_PROJECT_mavenCentralUsername") != null
