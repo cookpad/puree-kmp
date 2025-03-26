@@ -1,7 +1,7 @@
 [versions]
 # Application
-versionName = "0.0.2"
-versionCode = "2"
+versionName = "0.0.3"
+versionCode = "3"
 
 # SDK
 minSdk = "21"
@@ -40,9 +40,6 @@ kmpNavigation = "2.8.0-alpha12"
 
 # Google
 ksp = "2.1.20-1.0.31"
-
-# koin
-koin = "4.0.2"
 
 # Publishing
 dokka = "2.0.0"
@@ -149,20 +146,9 @@ kmp-room = { module = "androidx.room:room-runtime", version.ref = "androidxRoom"
 kmp-room-compiler = { module = "androidx.room:room-compiler", version.ref = "androidxRoom" }
 kmp-sqlite = { module = "androidx.sqlite:sqlite-bundled", version.ref = "androidxSqlite" }
 
-# Koin
-koin-bom = { module = "io.insert-koin:koin-bom", version.ref = "koin" }
-koin-core = { module = "io.insert-koin:koin-core"  }
-koin-android = { module = "io.insert-koin:koin-android" }
-koin-androidx-startup = { module = "io.insert-koin:koin-androidx-startup", version.ref = "koin" }
-koin-compose = { module = "io.insert-koin:koin-compose", version.ref = "koin" }
-koin-compose-viewmodel = { module = "io.insert-koin:koin-compose-viewmodel", version.ref = "koin" }
-
 # Test
 junit = { module = "junit:junit", version.ref = "junit" }
 mockito = { module = "org.mockito.kotlin:mockito-kotlin", version.ref = "mockito" }
-
-# Others
-desugar = { module = "com.android.tools:desugar_jdk_libs", version = "2.1.5" }
 
 # Debugs
 napier = { module = "io.github.aakira:napier", version.ref = "napier" }
@@ -203,12 +189,6 @@ ui-android = [
     "androidx-compose-ui",
     "androidx-compose-ui-tooling",
     "androidx-compose-ui-tooling-preview",
-]
-
-koin = [
-    "koin-core",
-    "koin-compose",
-    "koin-compose-viewmodel",
 ]
 
 database = [

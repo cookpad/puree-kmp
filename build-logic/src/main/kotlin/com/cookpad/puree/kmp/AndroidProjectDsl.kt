@@ -8,7 +8,6 @@ import org.gradle.api.JavaVersion
 import org.gradle.api.Project
 import org.gradle.api.plugins.ExtensionAware
 import org.gradle.kotlin.dsl.configure
-import org.gradle.kotlin.dsl.dependencies
 import org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformExtension
 
 internal fun Project.androidExt(configure: BaseExtension.() -> Unit) {
@@ -71,11 +70,6 @@ fun Project.setupAndroid() {
         compileOptions {
             sourceCompatibility = JavaVersion.VERSION_17
             targetCompatibility = JavaVersion.VERSION_17
-            isCoreLibraryDesugaringEnabled = true
-        }
-
-        dependencies {
-            add("coreLibraryDesugaring", libs.library("desugar"))
         }
     }
 }
