@@ -117,7 +117,7 @@ class PureeLoggerTest : LifecycleCoroutineRule() {
     }
 
     private fun createPureeBuilder(): Puree {
-        return com.cookpad.puree.kmp.Puree(
+        return Puree(
             logStore = logStore,
             logSerializer = TestLogSerializer(),
             lifecycle = lifecycleOwner.lifecycle,
