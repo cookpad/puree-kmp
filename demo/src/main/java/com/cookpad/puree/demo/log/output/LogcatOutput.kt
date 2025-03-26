@@ -1,7 +1,7 @@
 package com.cookpad.puree.demo.log.output
 
 import android.util.Log
-import com.cookpad.puree.output.PureeOutput
+import com.cookpad.puree.kmp.output.PureeOutput
 import kotlinx.serialization.json.JsonObject
 
 class LogcatOutput : PureeOutput {

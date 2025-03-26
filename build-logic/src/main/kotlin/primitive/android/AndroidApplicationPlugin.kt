@@ -1,8 +1,8 @@
 package primitive.android
-import com.cookpad.puree.androidApplication
-import com.cookpad.puree.libs
-import com.cookpad.puree.setupAndroid
-import com.cookpad.puree.version
+import com.cookpad.puree.kmp.androidApplication
+import com.cookpad.puree.kmp.libs
+import com.cookpad.puree.kmp.setupAndroid
+import com.cookpad.puree.kmp.version
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 

@@ -1,13 +1,10 @@
 package primitive.android
 
-import com.cookpad.puree.isApplicationProject
-import com.cookpad.puree.isLibraryProject
-import com.cookpad.puree.isMultiplatformProject
+import com.cookpad.puree.kmp.isMultiplatformProject
 import org.gradle.api.JavaVersion
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
-import primitive.kmp.kotlin
 
 class AndroidCommonPlugin : Plugin<Project> {
     override fun apply(target: Project) {

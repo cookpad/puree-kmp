@@ -1,7 +1,7 @@
 package primitive.publish
 
-import com.cookpad.puree.libs
-import com.cookpad.puree.version
+import com.cookpad.puree.kmp.libs
+import com.cookpad.puree.kmp.version
 import com.vanniktech.maven.publish.JavadocJar
 import com.vanniktech.maven.publish.KotlinMultiplatform
 import com.vanniktech.maven.publish.MavenPublishBaseExtension
@@ -80,7 +80,7 @@ class MavenPublishPlugin : Plugin<Project> {
             coordinates(
                 groupId = group.toString(),
                 version = version.toString(),
-                artifactId = project.name,
+                artifactId = "puree-kmp",
             )
 
             pom {

@@ -1,7 +1,7 @@
 package com.cookpad.puree.demo.log.output
 
 import android.util.Log
-import com.cookpad.puree.output.PureeBufferedOutput
+import com.cookpad.puree.kmp.output.PureeBufferedOutput
 import kotlinx.serialization.json.JsonObject
 import kotlin.time.Duration.Companion.seconds
 
