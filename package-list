@@ -1,9 +1,9 @@
 $dokka.format:html-v1
 $dokka.linkExtension:html
-$dokka.location:com.cookpad.puree/Puree/build/#/PointingToDeclaration/puree/com.cookpad.puree/-puree/[ios]build.html
+$dokka.location:com.cookpad.puree.kmp/Puree/build/#/PointingToDeclaration/puree/com.cookpad.puree.kmp/-puree/[ios]build.html
 module:puree
-com.cookpad.puree
-com.cookpad.puree.output
-com.cookpad.puree.serializer
-com.cookpad.puree.store
-com.cookpad.puree.type
+com.cookpad.puree.kmp
+com.cookpad.puree.kmp.output
+com.cookpad.puree.kmp.serializer
+com.cookpad.puree.kmp.store
+com.cookpad.puree.kmp.type
