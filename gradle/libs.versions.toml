@@ -1,7 +1,7 @@
 [versions]
 # Application
-versionName = "0.0.1"
-versionCode = "1"
+versionName = "0.0.2"
+versionCode = "2"
 
 # SDK
 minSdk = "21"
@@ -52,7 +52,7 @@ maven-publish = "0.30.0"
 # Test
 junit = "4.13.2"
 mockito = "5.4.0"
-androidxTest = "1.6.2"
+androidxTest = "1.6.1"
 androidxJUnit = "1.2.1"
 
 # Others

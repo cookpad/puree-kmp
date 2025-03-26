@@ -6,14 +6,14 @@ struct ContentView: View {
     @State private var periodicLogSequence = 0
     @State private var isSendLogPerSecond = false
 
-    let puree = Puree()
+    let log = Log()
     let timer = Timer.publish(every: 1.0, on: .main, in: .common).autoconnect()
     
     var body: some View {
         NavigationView {
             VStack(spacing: 16) {
                 Button(action: {
-                    puree.send(ClickLog(buttonName: "button"))
+                    log.send(ClickLog(buttonName: "button"))
                 }) {
                     Text("Send log")
                         .font(.headline)
@@ -36,7 +36,7 @@ struct ContentView: View {
             .padding()
             .navigationBarTitle("puree-kmp", displayMode: .inline)
             .navigationBarItems(trailing: Button(action: {
-                puree.send(MenuLog(menuName: "add"))
+                log.send(MenuLog(menuName: "add"))
             }) {
                 Image(systemName: "plus")
             })
@@ -45,7 +45,7 @@ struct ContentView: View {
         .onReceive(timer) { _ in
             if isSendLogPerSecond {
                 periodicLogSequence += 1
-                puree.send(PeriodicLog(sequence: periodicLogSequence))
+                log.send(PeriodicLog(sequence: periodicLogSequence))
             }
         }
     }

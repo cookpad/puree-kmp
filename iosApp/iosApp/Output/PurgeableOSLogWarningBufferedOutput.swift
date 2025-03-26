@@ -9,7 +9,7 @@ class PurgeableOSLogWarningBufferedOutput: PureeBufferedOutput {
     }
 
     override func emit(logs: [String], onSuccess: @escaping () -> Void, onFailed: @escaping (KotlinThrowable) -> Void) {
-        Puree.logger.warning("Logs: \(logs)")
+        Log.logger.warning("Logs: \(logs)")
         onSuccess()
     }
 }

@@ -11,7 +11,7 @@
             android:exported="false">
 
             <meta-data
-                android:name="com.cookpad.puree.PureeInitializer"
+                android:name="com.cookpad.puree.kmp.PureeInitializer"
                 android:value="androidx.startup" />
         </provider>
     </application>

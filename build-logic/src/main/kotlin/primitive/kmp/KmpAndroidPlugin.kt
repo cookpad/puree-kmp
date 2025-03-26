@@ -1,5 +1,6 @@
 package primitive.kmp
-import com.cookpad.puree.androidExt
+
+import com.cookpad.puree.kmp.androidExt
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget

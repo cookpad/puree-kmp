@@ -2,7 +2,7 @@ import Foundation
 import os
 import Puree
 
-final class Puree {
+final class Log {
     static let logger = Logger(subsystem: "com.cookpad.puree", category: "default")
 
     private class DefaultPureeLogSerializer: PureeLogSerializer {
@@ -15,7 +15,7 @@ final class Puree {
         let logStore = DefaultPureeLogStore(dbName: "puree.db")
         let logSerializer = DefaultPureeLogSerializer()
 
-        return Puree_(logStore: logStore, logSerializer: logSerializer)
+        return Puree(logStore: logStore, logSerializer: logSerializer)
             .filter(filter: AddTimeFilter(), logTypes: [ClickLog.self, MenuLog.self, PeriodicLog.self])
             .output(output: OSLogOutput(), logTypes: [ClickLog.self, MenuLog.self, PeriodicLog.self])
             .output(output: OSLogBufferedOutput(uniqueId: "buffered"), logTypes: [ClickLog.self, MenuLog.self])
@@ -24,7 +24,7 @@ final class Puree {
     }()
 
     func send<T: PureeLog & Encodable>(_ log: T) {
-        pureeLogger.send(log: log, clazz: T.self)
+        pureeLogger.postLog(log: log, platformClass: PlatformClass(clazz: T.self))
     }
 }
 

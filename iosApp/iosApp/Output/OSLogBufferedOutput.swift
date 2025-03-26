@@ -7,7 +7,7 @@ class OSLogBufferedOutput: PureeBufferedOutput {
     }
 
     override func emit(logs: [String], onSuccess: @escaping () -> Void, onFailed: @escaping (KotlinThrowable) -> Void) {
-        Puree.logger.debug("Logs: \(logs)")
+        Log.logger.debug("Logs: \(logs)")
         onSuccess()
     }
 }

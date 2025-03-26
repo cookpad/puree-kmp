@@ -1,6 +1,6 @@
 package com.cookpad.puree.demo.log.filter
 
-import com.cookpad.puree.PureeFilter
+import com.cookpad.puree.kmp.PureeFilter
 import kotlinx.serialization.json.JsonObject
 import kotlinx.serialization.json.JsonPrimitive
 

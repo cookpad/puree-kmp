@@ -1,8 +1,5 @@
 package com.cookpad.puree.demo
 
-import com.cookpad.puree.Puree
-import com.cookpad.puree.PureeLog
-import com.cookpad.puree.PureeLogger
 import com.cookpad.puree.demo.log.filter.AddTimeFilter
 import com.cookpad.puree.demo.log.model.ClickLog
 import com.cookpad.puree.demo.log.model.MenuLog
@@ -10,8 +7,11 @@ import com.cookpad.puree.demo.log.model.PeriodicLog
 import com.cookpad.puree.demo.log.output.LogcatDebugBufferedOutput
 import com.cookpad.puree.demo.log.output.LogcatOutput
 import com.cookpad.puree.demo.log.output.PurgeableLogcatWarningBufferedOutput
-import com.cookpad.puree.send
-import com.cookpad.puree.store.DefaultPureeLogStore
+import com.cookpad.puree.kmp.Puree
+import com.cookpad.puree.kmp.PureeLog
+import com.cookpad.puree.kmp.PureeLogger
+import com.cookpad.puree.kmp.send
+import com.cookpad.puree.kmp.store.DefaultPureeLogStore
 
 object Puree {
     val logger: PureeLogger = Puree(

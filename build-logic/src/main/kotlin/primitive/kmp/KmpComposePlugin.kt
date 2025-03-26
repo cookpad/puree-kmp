@@ -1,11 +1,11 @@
 package primitive.kmp
 
-import com.cookpad.puree.androidExt
-import com.cookpad.puree.androidTestImplementation
-import com.cookpad.puree.debugImplementation
-import com.cookpad.puree.implementation
-import com.cookpad.puree.library
-import com.cookpad.puree.libs
+import com.cookpad.puree.kmp.androidExt
+import com.cookpad.puree.kmp.androidTestImplementation
+import com.cookpad.puree.kmp.debugImplementation
+import com.cookpad.puree.kmp.implementation
+import com.cookpad.puree.kmp.library
+import com.cookpad.puree.kmp.libs
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.kotlin.dsl.dependencies
