@@ -1,5 +1,6 @@
 package com.cookpad.puree.demo
 
+import android.content.Context
 import com.cookpad.puree.demo.log.filter.AddTimeFilter
 import com.cookpad.puree.demo.log.model.ClickLog
 import com.cookpad.puree.demo.log.model.MenuLog
@@ -11,36 +12,40 @@ import com.cookpad.puree.kmp.Puree
 import com.cookpad.puree.kmp.PureeLog
 import com.cookpad.puree.kmp.PureeLogger
 import com.cookpad.puree.kmp.send
-import com.cookpad.puree.kmp.store.DefaultPureeLogStore
+import com.cookpad.puree.kmp.store.PlatformDefaultPureeLogStore
 
 object Puree {
-    val logger: PureeLogger = Puree(
-        logStore = DefaultPureeLogStore("log.db"),
-    )
-        .filter(
-            AddTimeFilter(),
-            ClickLog::class,
-            MenuLog::class,
-            PeriodicLog::class,
+    var logger: PureeLogger? = null
+
+    fun initialize(context: Context) {
+        logger = Puree(
+            logStore = PlatformDefaultPureeLogStore(context, "log.db"),
         )
-        .output(
-            LogcatOutput(),
-            ClickLog::class,
-            MenuLog::class,
-            PeriodicLog::class,
-        )
-        .output(
-            LogcatDebugBufferedOutput("logcat_debug"),
-            ClickLog::class,
-            MenuLog::class,
-        )
-        .output(
-            PurgeableLogcatWarningBufferedOutput("logcat_warning"),
-            PeriodicLog::class,
-        )
-        .build()
+            .filter(
+                AddTimeFilter(),
+                ClickLog::class,
+                MenuLog::class,
+                PeriodicLog::class,
+            )
+            .output(
+                LogcatOutput(),
+                ClickLog::class,
+                MenuLog::class,
+                PeriodicLog::class,
+            )
+            .output(
+                LogcatDebugBufferedOutput("logcat_debug"),
+                ClickLog::class,
+                MenuLog::class,
+            )
+            .output(
+                PurgeableLogcatWarningBufferedOutput("logcat_warning"),
+                PeriodicLog::class,
+            )
+            .build()
+    }
 
     inline fun <reified T : PureeLog> send(log: T) {
-        logger.send(log)
+        logger?.send(log)
     }
 }

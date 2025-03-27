@@ -15,5 +15,3 @@ internal abstract class PureeDatabase : RoomDatabase() {
 internal expect object CookieDatabaseConstructor : RoomDatabaseConstructor<PureeDatabase> {
     override fun initialize(): PureeDatabase
 }
-
-internal expect fun getPureeDatabase(name: String): PureeDatabase

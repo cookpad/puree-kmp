@@ -1,8 +1,8 @@
 package com.cookpad.puree.kmp.store
 
 import com.cookpad.puree.kmp.output.PureeBufferedLog
+import com.cookpad.puree.kmp.store.internal.db.PureeLogDao
 import com.cookpad.puree.kmp.store.internal.db.PureeLogEntity
-import com.cookpad.puree.kmp.store.internal.db.getPureeDatabase
 import com.cookpad.puree.kmp.type.toJsonObject
 import kotlinx.datetime.Instant
 import kotlin.time.Duration
@@ -12,10 +12,9 @@ import kotlin.time.Duration
  *
  * @param dbName The name of the database.
  */
-class DefaultPureeLogStore(dbName: String) : PureeLogStore {
-
-    private val database = getPureeDatabase(dbName)
-    private val dao = database.pureeLogDao()
+internal class DefaultPureeLogStore(
+    private val dao: PureeLogDao,
+) : PureeLogStore {
 
     override suspend fun add(outputId: String, bufferedLog: PureeBufferedLog) {
         dao.insert(
@@ -45,3 +44,5 @@ class DefaultPureeLogStore(dbName: String) : PureeLogStore {
         dao.deleteCreatedUpTo(now.minus(age).toString())
     }
 }
+
+expect class PlatformDefaultPureeLogStore : PureeLogStore

@@ -8,6 +8,7 @@ import com.cookpad.puree.kmp.output.PureeOutput
 import com.cookpad.puree.kmp.serializer.PureeLogSerializer
 import com.cookpad.puree.kmp.store.PureeLogStore
 import com.cookpad.puree.kmp.type.PlatformClass
+import io.github.aakira.napier.Napier
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.SupervisorJob
@@ -86,6 +87,8 @@ class PureeLogger internal constructor(
                 config.outputs.forEach { output ->
                     output.emit(it)
                 }
+            }.onFailure {
+                Napier.e("Failed to process log: $log", it)
             }
         }
     }

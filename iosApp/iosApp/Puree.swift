@@ -12,7 +12,7 @@ final class Log {
     }
 
     private let pureeLogger: PureeLogger = {
-        let logStore = DefaultPureeLogStore(dbName: "puree.db")
+        let logStore = PlatformDefaultPureeLogStore(dbName: "puree.db")
         let logSerializer = DefaultPureeLogSerializer()
 
         return Puree(logStore: logStore, logSerializer: logSerializer)
