@@ -1,5 +1,8 @@
 $dokka.format:html-v1
 $dokka.linkExtension:html
+$dokka.location:com.cookpad.puree.kmp.store/PlatformDefaultPureeLogStore///PointingToDeclaration/puree/com.cookpad.puree.kmp.store/[ios]-platform-default-puree-log-store/index.html
+$dokka.location:com.cookpad.puree.kmp.store/PlatformDefaultPureeLogStore/PlatformDefaultPureeLogStore/#android.content.Context#kotlin.String/PointingToDeclaration/puree/com.cookpad.puree.kmp.store/[android]-platform-default-puree-log-store/-platform-default-puree-log-store.html
+$dokka.location:com.cookpad.puree.kmp.store/PlatformDefaultPureeLogStore/PlatformDefaultPureeLogStore/#kotlin.String/PointingToDeclaration/puree/com.cookpad.puree.kmp.store/[ios]-platform-default-puree-log-store/-platform-default-puree-log-store.html
 $dokka.location:com.cookpad.puree.kmp/Puree/build/#/PointingToDeclaration/puree/com.cookpad.puree.kmp/-puree/[ios]build.html
 module:puree
 com.cookpad.puree.kmp
