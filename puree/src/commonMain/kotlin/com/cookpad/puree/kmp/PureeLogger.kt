@@ -88,7 +88,9 @@ class PureeLogger internal constructor(
                     output.emit(it)
                 }
             }.onFailure {
-                Napier.e("Failed to process log: $log", it)
+                if (it !is SkippedLogException) {
+                    Napier.e("Failed to process log: $log", it)
+                }
             }
         }
     }

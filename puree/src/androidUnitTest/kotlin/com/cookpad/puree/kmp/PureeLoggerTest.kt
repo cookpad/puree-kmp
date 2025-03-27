@@ -77,14 +77,14 @@ class PureeLoggerTest : LifecycleCoroutineRule() {
                 invocation.getArgument(0)
             }
         }
-        val puree = createPureeBuilder()
+        val logger = createPureeBuilder()
             .filter(filterSkip, TestLog::class)
             .filter(filter, TestLog::class)
             .output(output, TestLog::class)
             .build()
 
         // Act
-        puree.send(TestLog(sequence = 1))
+        logger.send(TestLog(sequence = 1))
 
         // Assert
         verify(filter, never()).applyFilter(any())
@@ -100,14 +100,14 @@ class PureeLoggerTest : LifecycleCoroutineRule() {
             }
         }
 
-        val puree = createPureeBuilder().apply {
+        val logger = createPureeBuilder().apply {
             outputs.forEach {
                 output(it, TestLog::class)
             }
         }.build()
 
         // Act
-        puree.flush()
+        logger.flush()
         advanceUntilIdle()
 
         // Assert
