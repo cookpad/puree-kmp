@@ -44,5 +44,3 @@ internal class DefaultPureeLogStore(
         dao.deleteCreatedUpTo(now.minus(age).toString())
     }
 }
-
-expect class PlatformDefaultPureeLogStore : PureeLogStore
