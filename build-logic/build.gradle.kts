@@ -42,10 +42,6 @@ gradlePlugin {
             id = "cookpad.primitive.kmp.ios"
             implementationClass = "primitive.kmp.KmpIosPlugin"
         }
-        register("KmpAndroidCompose") {
-            id = "cookpad.primitive.kmp.compose"
-            implementationClass = "primitive.kmp.KmpComposePlugin"
-        }
 
         // Android
         register("AndroidCommonPlugin") {

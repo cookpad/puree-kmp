@@ -1,8 +1,6 @@
 package primitive.android
 
-import com.cookpad.puree.kmp.androidTestImplementation
 import com.cookpad.puree.kmp.commonExt
-import com.cookpad.puree.kmp.debugImplementation
 import com.cookpad.puree.kmp.implementation
 import com.cookpad.puree.kmp.library
 import com.cookpad.puree.kmp.libs
@@ -26,9 +24,6 @@ class AndroidComposePlugin : Plugin<Project> {
                 val bom = libs.library("androidx-compose-bom")
 
                 implementation(project.dependencies.platform(bom))
-                implementation(libs.library("androidx-compose-ui-tooling-preview"))
-                debugImplementation(libs.library("androidx-compose-ui-tooling"))
-                androidTestImplementation(project.dependencies.platform(bom))
             }
         }
     }
