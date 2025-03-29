@@ -1,0 +1,20 @@
+// swift-tools-version:5.5
+import PackageDescription
+
+let package = Package(
+    name: "puree-kmp",
+    products: [
+        .library(
+            name: "puree-kmp",
+            targets: ["puree-kmp"]
+        ),
+    ],
+    dependencies: [],
+    targets: [
+        .binaryTarget(
+            name: "puree-kmp",
+            url: "https://github.com/cookpad/puree-kmp/releases/download/<%= version %>/puree.xcframework.zip",
+            checksum: "<%= checksum %>"
+        ),
+    ]
+)
