@@ -56,7 +56,9 @@ jobs:
         working-directory: puree/build/XCFrameworks/release
 
       - name: Make Package.swift
-        run: ./config/swift/make_package.sh ${{ github.event.inputs.versionName }}
+        run: |
+          chmod +x ./config/swift/make_package.sh
+          ./config/swift/make_package.sh ${{ github.event.inputs.versionName }}
 
       - name: Create tag
         uses: mathieudutour/github-tag-action@a22cf08638b34d5badda920f9daf6e72c477b07b # v6.2
