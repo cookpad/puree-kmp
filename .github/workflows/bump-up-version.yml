@@ -69,9 +69,13 @@ jobs:
           dry_run: true
 
       - name: Setup GitHub CLI
+        env:
+          GH_TOKEN: ${{ github.token }}
         run: gh repo set-default cookpad/puree-kmp
 
       - name: Create search PR alias
+        env:
+          GH_TOKEN: ${{ github.token }}
         run: >
           gh alias set --shell searchpr "gh api graphql -F owner=:owner -F repo=:repo -F hash=\$1 -f query='
             query(\$repo:String!, \$owner:String!, \$hash:String!) {
@@ -92,6 +96,8 @@ jobs:
           ' | jq .data.repository.object.associatedPullRequests.edges[0].node.mergedAt"
 
       - name: List up pull requests to be released
+        env:
+          GH_TOKEN: ${{ github.token }}
         run: |
           echo 'pr_list<<EOF' >> $GITHUB_ENV
           gh pr list --json title,number,author,mergedAt --base master --state closed --search "merged:>$(gh searchpr $(git describe --tags --abbrev=0 | xargs git rev-parse) | tr -d '"')" | jq -r 'map({ "Number": ("#" + (.number|tostring)), Title: .title, Author: .author.login, "Merged At": (.mergedAt|fromdate|strftime("%Y/%m/%d")) })' >> $GITHUB_ENV
