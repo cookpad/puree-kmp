@@ -41,7 +41,7 @@ jobs:
       - name: Bump up version
         run: |
           FILE="gradle/libs.versions.toml"
-          current_version=$(grep 'versionCode' "$FILE" | sed -E 's/.*versionCode\s*=\s*"([^"]+)".*/\1/')
+          current_version=$(awk -F'=' '/versionCode/ {gsub(/"/, "", $2); gsub(/ /, "", $2); print $2}' "$FILE")
           new_versionName="${{ github.event.inputs.versionName }}"
           new_versionCode="$((current_version + 1))"
           sed -i '' "s/versionName *= *\".*\"/versionName = \"$new_versionName\"/" "$FILE"
