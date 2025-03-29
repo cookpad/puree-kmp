@@ -57,8 +57,8 @@ jobs:
 
       - name: Make Package.swift
         run: |
-          chmod +x make_package.sh
-          make_package.sh ${{ github.event.inputs.versionName }}
+          chmod +x ./make_package.sh
+          ./make_package.sh ${{ github.event.inputs.versionName }}
         working-directory: config/swift/
 
       - name: Create tag
