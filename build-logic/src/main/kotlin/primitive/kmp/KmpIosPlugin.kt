@@ -2,12 +2,15 @@ package primitive.kmp
 
 import org.gradle.api.Plugin
 import org.gradle.api.Project
+import org.jetbrains.kotlin.gradle.plugin.mpp.apple.XCFramework
 
 class KmpIosPlugin : Plugin<Project> {
     override fun apply(target: Project) {
         with(target) {
             kotlin {
                 applyDefaultHierarchyTemplate()
+
+                val xcf = XCFramework()
 
                 listOf(
                     iosX64(),
@@ -17,6 +20,8 @@ class KmpIosPlugin : Plugin<Project> {
                     iosTarget.binaries.framework {
                         baseName = "Puree"
                         isStatic = true
+
+                        xcf.add(this)
                     }
                 }
             }
