@@ -1,0 +1,115 @@
+name: Bump up version
+
+on:
+  workflow_dispatch:
+    inputs:
+      versionName:
+        required: true
+        description: "New version name"
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.number }}
+  cancel-in-progress: true
+
+jobs:
+  execute:
+    runs-on: macOS-latest
+    permissions:
+      contents: write
+      packages: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+
+      - name: Validate Gradle Wrapper
+        uses: gradle/actions/setup-gradle@94baf225fe0a508e581a564467443d0e2379123b # v4.3.0
+
+      - uses: actions/cache@5a3ec84eff668545956fd18022155c47e93e2684 # v4.2.3
+        with:
+          path: |
+            ~/.gradle/caches
+            ~/.gradle/configuration-cache
+            ~/.gradle/wrapper
+          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*') }}
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@3a4f6e1af504cf6a31855fa899c6aa5355ba6c12 # v4.7.0
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+
+      - name: Bump up version
+        run: |
+          FILE="gradle/libs.versions.toml"
+          current_version=$(grep 'versionCode' "$FILE" | sed -E 's/.*versionCode\s*=\s*"([^"]+)".*/\1/')
+          new_versionName="${{ github.event.inputs.versionName }}"
+          new_versionCode="$((current_version + 1))"
+          sed -i '' "s/versionName *= *\".*\"/versionName = \"$new_versionName\"/" "$FILE"
+          sed -i '' "s/versionCode *= *\".*\"/versionCode = \"$new_versionCode\"/" "$FILE"
+
+      - name: Make XCFramework
+        run: ./gradlew assembleXCFramework
+
+      - name: Zip XCFramework
+        run: zip -r puree.xcframework.zip puree.xcframework/
+        working-directory: puree/build/XCFrameworks/release
+
+      - name: Make Package.swift
+        run: ./config/swift/make_package.sh ${{ github.event.inputs.versionName }}
+
+      - name: Create tag
+        uses: mathieudutour/github-tag-action@a22cf08638b34d5badda920f9daf6e72c477b07b # v6.2
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          custom_tag: v${{ github.event.inputs.versionName }}
+          dry_run: true
+
+      - name: Setup GitHub CLI
+        run: gh repo set-default cookpad/puree-kmp
+
+      - name: Create search PR alias
+        run: >
+          gh alias set --shell searchpr "gh api graphql -F owner=:owner -F repo=:repo -F hash=\$1 -f query='
+            query(\$repo:String!, \$owner:String!, \$hash:String!) {
+              repository(name: \$repo, owner: \$owner) {
+                object(expression: \$hash) {
+                  ... on Commit {
+                    associatedPullRequests(first: 1) {
+                      edges {
+                        node {
+                          mergedAt
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          ' | jq .data.repository.object.associatedPullRequests.edges[0].node.mergedAt"
+
+      - name: List up pull requests to be released
+        run: |
+          echo 'pr_list<<EOF' >> $GITHUB_ENV
+          gh pr list --json title,number,author,mergedAt --base master --state closed --search "merged:>$(gh searchpr $(git describe --tags --abbrev=0 | xargs git rev-parse) | tr -d '"')" | jq -r 'map({ "Number": ("#" + (.number|tostring)), Title: .title, Author: .author.login, "Merged At": (.mergedAt|fromdate|strftime("%Y/%m/%d")) })' >> $GITHUB_ENV
+          echo 'EOF' >> $GITHUB_ENV
+
+      - name: Create markdown
+        uses: buildingcash/json-to-markdown-table-action@b442169239ef35f1dc4e5c8c3d47686c081a7e65 # v1.1.0
+        id: pr-table
+        with:
+          json: ${{ env.pr_list }}
+
+      - name: Create pull request
+        uses: peter-evans/create-pull-request@271a8d0340265f705b14b6d32b9829c1cb33d45e # v7.0.8
+        with:
+          title: "[skip ci] Bump up version to v${{ github.event.inputs.versionName }}"
+          body: |
+            ## Information
+            :sparkles: :sparkles: **Bump up version in puree-kmp to v${{ github.event.inputs.versionName }}!**:sparkles: :sparkles:
+            
+            ## Included PR
+            The following pull requests are included. 
+            Please make sure that everything is ready for release.
+            
+            ${{ steps.pr-table.outputs.table }}
+          labels: Release
