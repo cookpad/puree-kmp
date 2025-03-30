@@ -71,9 +71,6 @@ data class ClickLog(
 Implement the `PureeFilter` interface to create custom filters:
 
 ```kotlin
-
-import java.util.*
-
 class AddTimeFilter : PureeFilter {
     override fun applyFilter(log: JsonObject): JsonObject {
         buildJsonObject {
