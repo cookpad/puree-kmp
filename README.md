@@ -72,18 +72,17 @@ Implement the `PureeFilter` interface to create custom filters:
 
 ```kotlin
 
-import java.util.UUID
-import kotlin.uuid.Uuid
+import java.util.*
 
 class AddTimeFilter : PureeFilter {
-  override fun applyFilter(log: JsonObject): JsonObject {
-    buildJsonObject {
-      put("time", System.currentTimeMillis())
-      put("device_id", UUID.randomUUID().toString())
-    }.also {
-      return JsonObject(log + it)
+    override fun applyFilter(log: JsonObject): JsonObject {
+        buildJsonObject {
+            put("time", System.currentTimeMillis())
+            put("device_id", UUID.randomUUID().toString())
+        }.also {
+            return JsonObject(log + it)
+        }
     }
-  }
 }
 ```
 
