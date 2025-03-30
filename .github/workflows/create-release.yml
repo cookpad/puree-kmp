@@ -27,8 +27,7 @@ jobs:
             ## What's Changed
             Details of the features included in this release are summarized in #${{ github.event.pull_request.number }}
           files: |
-            config/swift/puree.xcframework.zip
-            config/swift/Package.swift
+            config/swift/PureeKMP.xcframework.zip
             
   Deploy-Documents:
     uses: ./.github/workflows/deploy-documents.yml
@@ -41,4 +40,3 @@ jobs:
       MAVEN_CENTRAL_USERNAME: ${{ secrets.MAVEN_CENTRAL_USERNAME }}
       MAVEN_CENTRAL_PASSWORD: ${{ secrets.MAVEN_CENTRAL_PASSWORD }}
       MAVEN_SIGNING_KEY_ID: ${{ secrets.MAVEN_SIGNING_KEY_ID }}
-

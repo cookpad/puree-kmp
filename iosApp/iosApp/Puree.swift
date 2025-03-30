@@ -1,6 +1,6 @@
 import Foundation
 import os
-import Puree
+import PureeKMP
 
 final class Log {
     static let logger = Logger(subsystem: "com.cookpad.puree", category: "default")

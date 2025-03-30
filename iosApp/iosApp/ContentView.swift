@@ -1,6 +1,6 @@
 import SwiftUI
 import Combine
-import Puree
+import PureeKMP
 
 struct ContentView: View {
     @State private var periodicLogSequence = 0

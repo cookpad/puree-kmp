@@ -1,5 +1,5 @@
 import Foundation
-import Puree
+import PureeKMP
 
 class AddTimeFilter: PureeFilter {
     func applyFilter(log: String) -> String? {

@@ -1,5 +1,5 @@
 import Foundation
-import Puree
+import PureeKMP
 
 class MenuLog: PureeLog, Encodable {
     let menuName: String

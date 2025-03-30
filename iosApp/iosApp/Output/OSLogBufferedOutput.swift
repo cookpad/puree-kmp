@@ -1,4 +1,4 @@
-import Puree
+import PureeKMP
 
 class OSLogBufferedOutput: PureeBufferedOutput {
     override init (uniqueId: String) {

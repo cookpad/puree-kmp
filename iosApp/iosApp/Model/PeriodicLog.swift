@@ -1,5 +1,5 @@
 import Foundation
-import Puree
+import PureeKMP
 
 class PeriodicLog: PureeLog, Encodable {
     let sequence: Int

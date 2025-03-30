@@ -1,5 +1,5 @@
 import Foundation
-import Puree
+import PureeKMP
 
 class ClickLog: PureeLog, Encodable {
     let buttonName: String
