@@ -30,9 +30,11 @@ jobs:
             config/swift/PureeKMP.xcframework.zip
             
   Deploy-Documents:
+    if: ${{ github.event.pull_request.merged == true && contains(github.event.pull_request.labels.*.name, 'Release') }}
     uses: ./.github/workflows/deploy-documents.yml
 
   Deploy-Library:
+    if: ${{ github.event.pull_request.merged == true && contains(github.event.pull_request.labels.*.name, 'Release') }}
     uses: ./.github/workflows/deploy-library.yml
     secrets:
       MAVEN_GPG_KEY_CONTENTS: ${{ secrets.MAVEN_GPG_KEY_CONTENTS }}

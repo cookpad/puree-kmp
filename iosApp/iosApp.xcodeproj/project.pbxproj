@@ -10,8 +10,8 @@
 		058557BB273AAA24004C7B11 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 058557BA273AAA24004C7B11 /* Assets.xcassets */; };
 		2152FB042600AC8F00CF470E /* Demo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2152FB032600AC8F00CF470E /* Demo.swift */; };
 		7555FF83242A565900829871 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7555FF82242A565900829871 /* ContentView.swift */; };
-		AD1371202D8D4981009D671D /* puree.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD13711F2D8D4981009D671D /* puree.xcframework */; };
-		AD1371212D8D4981009D671D /* puree.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = AD13711F2D8D4981009D671D /* puree.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		ADB511612D993695000EFBF0 /* puree.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD13711F2D8D4981009D671D /* puree.xcframework */; };
+		ADB511622D993695000EFBF0 /* puree.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = AD13711F2D8D4981009D671D /* puree.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		ADD825D02D832D0C00D56EF7 /* ClickLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADD825CF2D832CE700D56EF7 /* ClickLog.swift */; };
 		ADD825D22D8332BE00D56EF7 /* Puree.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADD825D12D8332BC00D56EF7 /* Puree.swift */; };
 		ADD825D52D83356200D56EF7 /* OSLogOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADD825D42D83347E00D56EF7 /* OSLogOutput.swift */; };
@@ -23,13 +23,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		AD1371222D8D4981009D671D /* Embed Frameworks */ = {
+		ADB511632D993695000EFBF0 /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				AD1371212D8D4981009D671D /* puree.xcframework in Embed Frameworks */,
+				ADB511622D993695000EFBF0 /* puree.xcframework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -59,7 +59,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AD1371202D8D4981009D671D /* puree.xcframework in Frameworks */,
+				ADB511612D993695000EFBF0 /* puree.xcframework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -154,7 +154,7 @@
 				7555FF77242A565900829871 /* Sources */,
 				B92378962B6B1156000C7307 /* Frameworks */,
 				7555FF79242A565900829871 /* Resources */,
-				AD1371222D8D4981009D671D /* Embed Frameworks */,
+				ADB511632D993695000EFBF0 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
