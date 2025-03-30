@@ -1,5 +1,8 @@
 # puree-kmp
 
+<img src="https://img.shields.io/maven-central/v/com.cookpad.puree/puree-kmp">
+<img src="https://img.shields.io/badge/Swift_Package_Manager-compatible-orange?style=flat-square" >
+
 Puree-KMP is a structured logging library for Kotlin Multiplatform (KMP) applications, supporting both Android and iOS
 platforms. It provides a flexible and extensible framework for capturing, processing, and routing logs to various
 destinations.
@@ -16,21 +19,30 @@ destinations.
 
 ![](./docs/overview.png)
 
+# Platform Support
+
+| Platform | Support                       |
+|----------|-------------------------------|
+| Android  | :white_check_mark: Supported  |
+| iOS      | :white_check_mark: Supported  | 
+| JVM      | :black_square_button: Planing |
+| Desktop  | :black_square_button: Planing |
+| Web      | :x: Not Supported             |
+
 ## Installation
 
 ### Android
 
 ```kotlin
 dependencies {
-    implementation("com.cookpad:puree:$latestVersion")
+    implementation("com.cookpad.puree:puree-kmp:$latestVersion")
 }
 ```
 
 ### iOS
 
-```swift
-WIP
-```
+Distributed through [Swift Package Manager](https://www.swift.org/documentation/package-manager/).
+You can install directly from Xcode by specifying the URL for this repository.
 
 ## Usage
 
@@ -121,4 +133,4 @@ Puree automatically integrates with the application lifecycle (for Android only)
 
 ## License
 
-Please do read the [License](https://github.com/cookpad/Puree-Swift/blob/master/LICENSE) before using and contributing.
+Please do read the [License](./LICENSE) before using and contributing.

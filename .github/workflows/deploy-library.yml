@@ -5,6 +5,17 @@ on:
     types: [ released, prereleased ]
   workflow_dispatch:
   workflow_call:
+    secrets:
+      MAVEN_GPG_KEY_CONTENTS:
+        required: true
+      MAVEN_SIGNING_PASSWORD:
+        required: true
+      MAVEN_CENTRAL_USERNAME:
+        required: true
+      MAVEN_CENTRAL_PASSWORD:
+        required: true
+      MAVEN_SIGNING_KEY_ID:
+        required: true
 
 jobs:
   publish:
