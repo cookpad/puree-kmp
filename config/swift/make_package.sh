@@ -1,5 +1,5 @@
 #!/bin/sh
-mv ../../puree/build/XCFrameworks/release/puree.xcframework.zip ./PureeKMP.xcframework.zip
+mv ../../puree/build/XCFrameworks/release/PureeKMP.xcframework.zip ./PureeKMP.xcframework.zip
 
 VERSION="$1"
 CHECKSUM=$(swift package compute-checksum ./PureeKMP.xcframework.zip)
