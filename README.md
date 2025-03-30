@@ -1,7 +1,9 @@
 # puree-kmp
 
-<img src="https://img.shields.io/maven-central/v/com.cookpad.puree/puree-kmp">
-<img src="https://img.shields.io/badge/Swift_Package_Manager-compatible-orange?style=flat-square" >
+<div>
+  <img src="https://img.shields.io/maven-central/v/com.cookpad.puree/puree-kmp">
+  <img src="https://img.shields.io/badge/Swift_Package_Manager-compatible-orange" >
+</div>
 
 Puree-KMP is a structured logging library for Kotlin Multiplatform (KMP) applications, supporting both Android and iOS
 platforms. It provides a flexible and extensible framework for capturing, processing, and routing logs to various
