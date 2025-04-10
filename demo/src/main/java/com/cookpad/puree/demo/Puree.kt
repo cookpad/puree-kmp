@@ -12,6 +12,7 @@ import com.cookpad.puree.kmp.Puree
 import com.cookpad.puree.kmp.PureeLog
 import com.cookpad.puree.kmp.PureeLogger
 import com.cookpad.puree.kmp.send
+import com.cookpad.puree.kmp.serializer.DefaultPureeLogSerializer
 import com.cookpad.puree.kmp.store.PlatformDefaultPureeLogStore
 
 object Puree {
@@ -20,19 +21,8 @@ object Puree {
     fun initialize(context: Context) {
         logger = Puree(
             logStore = PlatformDefaultPureeLogStore(context, "log.db"),
+            logSerializer = DefaultPureeLogSerializer(),
         )
-            .filter(
-                AddTimeFilter(),
-                ClickLog::class,
-                MenuLog::class,
-                PeriodicLog::class,
-            )
-            .output(
-                LogcatOutput(),
-                ClickLog::class,
-                MenuLog::class,
-                PeriodicLog::class,
-            )
             .output(
                 LogcatDebugBufferedOutput("logcat_debug"),
                 ClickLog::class,
@@ -42,6 +32,8 @@ object Puree {
                 PurgeableLogcatWarningBufferedOutput("logcat_warning"),
                 PeriodicLog::class,
             )
+            .defaultOutput(LogcatOutput())
+            .defaultFilter(AddTimeFilter())
             .build()
     }
 

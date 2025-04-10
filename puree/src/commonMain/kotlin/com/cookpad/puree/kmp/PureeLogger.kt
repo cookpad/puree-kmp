@@ -36,6 +36,8 @@ class PureeLogger internal constructor(
     private val logStore: PureeLogStore,
     private val dispatcher: CoroutineDispatcher,
     private val clock: Clock,
+    private val defaultFilters: List<PureeFilter>,
+    private val defaultOutputs: List<PureeOutput>,
     private val registeredLogs: Map<String, Configuration>,
     private val bufferedOutputs: List<PureeBufferedOutput>,
 ) {
@@ -76,15 +78,21 @@ class PureeLogger internal constructor(
      * @throws LogNotRegisteredException If the log type is not registered with the logger
      */
     fun <T : PureeLog> postLog(log: T, platformClass: PlatformClass<T>) {
-        val config = registeredLogs[platformClass.simpleName] ?: throw LogNotRegisteredException()
+        val config = registeredLogs[platformClass.simpleName]
+        val filters = config?.filters.orEmpty() + defaultFilters
+        val outputs = config?.outputs.orEmpty() + defaultOutputs
+
+        if (filters.isEmpty() && outputs.isEmpty()) {
+            throw LogNotRegisteredException()
+        }
 
         scope.launch {
             runCatching {
-                config.filters.fold(logSerializer.serialize(log, platformClass)) { logJson, filter ->
+                filters.fold(logSerializer.serialize(log, platformClass)) { logJson, filter ->
                     filter.applyFilter(logJson) ?: throw SkippedLogException()
                 }
             }.onSuccess {
-                config.outputs.forEach { output ->
+                outputs.forEach { output ->
                     output.emit(it)
                 }
             }.onFailure {

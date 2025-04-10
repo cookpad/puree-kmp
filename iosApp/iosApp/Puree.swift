@@ -16,10 +16,10 @@ final class Log {
         let logSerializer = DefaultPureeLogSerializer()
 
         return Puree(logStore: logStore, logSerializer: logSerializer)
-            .filter(filter: AddTimeFilter(), logTypes: [ClickLog.self, MenuLog.self, PeriodicLog.self])
-            .output(output: OSLogOutput(), logTypes: [ClickLog.self, MenuLog.self, PeriodicLog.self])
             .output(output: OSLogBufferedOutput(uniqueId: "buffered"), logTypes: [ClickLog.self, MenuLog.self])
             .output(output: PurgeableOSLogWarningBufferedOutput(uniqueId: "purgeable"), logTypes: [PeriodicLog.self])
+            .defaultOutput(outputs: [OSLogOutput()].toKotlinArray())
+            .defaultFilter(filters: [AddTimeFilter()].toKotlinArray())
             .build()
     }()
 
@@ -37,5 +37,16 @@ extension PureeLog where Self: Encodable {
             return ""
         }
         return jsonString
+    }
+}
+
+extension Array {
+     func toKotlinArray<Item: AnyObject>() -> KotlinArray<Item> {
+        return KotlinArray(size: Int32(self.count)) { (i: KotlinInt) in
+            guard let item = self[i.intValue] as? Item else {
+                 fatalError("Element at index \(i) cannot be cast to \(Item.self)")
+             }
+             return item
+        }
     }
 }
