@@ -17,18 +17,18 @@ kotlin = "2.1.20"
 # KotlinX
 kotlinxCoroutines = "1.10.1"
 kotlinxDatetime = "0.6.1"
-kotlinxSerializationJson = "1.8.0"
+kotlinxSerializationJson = "1.8.1"
 kotlinxImmutable = "0.3.8"
 
 # AndroidX
-androidxCore = "1.15.0"
+androidxCore = "1.16.0"
 androidxAppCompat = "1.7.0"
 androidxActivity = "1.10.1"
 androidxStartup = "1.2.0"
 androidxLifecycle = "2.8.7"
-androidxRoom = "2.7.0-rc02"
-androidxSqlite = "2.5"
-androidxCompose = "2025.03.00"
+androidxRoom = "2.7.0"
+androidxSqlite = "2.5.0"
+androidxCompose = "2025.04.00"
 
 # KMP
 kmpLifecycle = "2.9.0-alpha05"
@@ -44,7 +44,7 @@ maven-publish = "0.30.0"
 # Test
 junit = "4.13.2"
 mockito = "5.4.0"
-androidxTest = "1.6.1"
+androidxTest = "1.6.2"
 androidxJUnit = "1.2.1"
 
 # Others

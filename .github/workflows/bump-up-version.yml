@@ -54,7 +54,6 @@ jobs:
 
       - name: Zip XCFramework
         run: |
-          mv puree.xcframework PureeKMP.xcframework
           zip -r PureeKMP.xcframework.zip PureeKMP.xcframework/
         working-directory: puree/build/XCFrameworks/release
 

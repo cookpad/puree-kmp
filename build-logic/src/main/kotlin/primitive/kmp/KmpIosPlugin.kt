@@ -10,7 +10,7 @@ class KmpIosPlugin : Plugin<Project> {
             kotlin {
                 applyDefaultHierarchyTemplate()
 
-                val xcf = XCFramework()
+                val xcf = XCFramework("PureeKMP")
 
                 listOf(
                     iosX64(),
