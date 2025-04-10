@@ -50,7 +50,7 @@ jobs:
           cat ./gradle/libs.versions.toml | head -5
 
       - name: Make XCFramework
-        run: ./gradlew assembleXCFramework
+        run: ./gradlew assemblePureeKMPXCFramework
 
       - name: Zip XCFramework
         run: |
