@@ -27,7 +27,7 @@ import kotlin.reflect.KClass
 actual class Puree(
     private val logStore: PureeLogStore,
     private val logSerializer: PureeLogSerializer = DefaultPureeLogSerializer(),
-    private val lifecycle: Lifecycle = defaultLifecycleOwner.lifecycle,
+    private val lifecycle: Lifecycle = DefaultLifecycleOwner().lifecycle,
 ) {
     @VisibleForTesting
     @OptIn(ExperimentalCoroutinesApi::class, DelicateCoroutinesApi::class)
@@ -36,12 +36,47 @@ actual class Puree(
     @VisibleForTesting
     internal var clock: Clock = Clock.System
 
+    private val defaultFilters: MutableList<PureeFilter> = mutableListOf()
+    private val defaultOutputs: MutableList<PureeOutput> = mutableListOf()
     private val configuredLogs: MutableMap<String, Configuration> = mutableMapOf()
     private val outputIds: MutableSet<String> = mutableSetOf()
     private val bufferedOutputs: MutableList<PureeBufferedOutput> = mutableListOf()
 
     init {
         Napier.base(DebugAntilog())
+    }
+
+    /**
+     * Registers the default filter.
+     * @see filter for more information about filters.
+     *
+     * @param filters The filters to be applied to all log types by default
+     * @return This Puree instance for method chaining
+     */
+    fun defaultFilter(vararg filters: PureeFilter): Puree {
+        defaultFilters.addAll(filters)
+        return this
+    }
+
+    /**
+     * Registers the default output destination.
+     * @see output for more information about outputs.
+     *
+     * @param outputs The outputs to be used for all log types by default
+     * @return This Puree instance for method chaining
+     * @throws IllegalArgumentException If attempting to register a buffered output with a duplicate uniqueId
+     */
+    fun defaultOutput(vararg outputs: PureeOutput): Puree {
+        outputs.forEach {
+            if (it is PureeBufferedOutput) {
+                require(it.uniqueId !in outputIds) { "Cannot register another PureeBufferedOutput with uniqueId: ${it.uniqueId}." }
+                outputIds.add(it.uniqueId)
+                bufferedOutputs.add(it)
+            }
+        }
+
+        defaultOutputs.addAll(outputs)
+        return this
     }
 
     /**
@@ -105,6 +140,8 @@ actual class Puree(
             logStore = logStore,
             dispatcher = dispatcher,
             clock = clock,
+            defaultFilters = defaultFilters,
+            defaultOutputs = defaultOutputs,
             registeredLogs = configuredLogs,
             bufferedOutputs = bufferedOutputs,
         )
