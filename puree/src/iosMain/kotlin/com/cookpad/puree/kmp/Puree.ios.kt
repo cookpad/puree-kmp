@@ -149,7 +149,7 @@ actual class Puree(
      */
     fun build(): PureeLogger {
         return PureeLogger(
-            lifecycle = DefaultLifecycleOwner().lifecycle,
+            lifecycle = DefaultLifecycleOwner.lifecycle,
             logSerializer = logSerializer,
             logStore = logStore,
             dispatcher = dispatcher,

@@ -27,7 +27,7 @@ import kotlin.reflect.KClass
 actual class Puree(
     private val logStore: PureeLogStore,
     private val logSerializer: PureeLogSerializer = DefaultPureeLogSerializer(),
-    private val lifecycle: Lifecycle = DefaultLifecycleOwner().lifecycle,
+    private val lifecycle: Lifecycle = DefaultLifecycleOwner.lifecycle,
 ) {
     @VisibleForTesting
     @OptIn(ExperimentalCoroutinesApi::class, DelicateCoroutinesApi::class)
