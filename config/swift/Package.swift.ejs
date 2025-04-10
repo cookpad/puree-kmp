@@ -2,18 +2,18 @@
 import PackageDescription
 
 let package = Package(
-    name: "puree-kmp",
+    name: "PureeKMP",
     products: [
         .library(
-            name: "puree-kmp",
-            targets: ["puree-kmp"]
+            name: "PureeKMP",
+            targets: ["PureeKMP"]
         ),
     ],
     dependencies: [],
     targets: [
         .binaryTarget(
-            name: "puree-kmp",
-            url: "https://github.com/cookpad/puree-kmp/releases/download/<%= version %>/PureeKMP.xcframework.zip",
+            name: "PureeKMP",
+            url: "https://github.com/cookpad/puree-kmp/releases/download/v<%= version %>/PureeKMP.xcframework.zip",
             checksum: "<%= checksum %>"
         ),
     ]
