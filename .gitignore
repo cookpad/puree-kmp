@@ -17,6 +17,7 @@ bin/
 gen/
 out/
 build/
+.build/
 !src/**/build/
 dokka/
 
