@@ -5,7 +5,7 @@ import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.LifecycleRegistry
 
 actual class DefaultLifecycleOwner : LifecycleOwner {
-    override val lifecycle: Lifecycle = LifecycleRegistry(this).apply {
+    actual override val lifecycle: Lifecycle = LifecycleRegistry(this).apply {
         currentState = Lifecycle.State.STARTED
     }
 }

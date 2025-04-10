@@ -1,0 +1,8 @@
+framework module "PureeKMP" {
+    umbrella header "PureeKMP.h"
+
+    export *
+    module * { export * }
+
+    use Foundation
+}

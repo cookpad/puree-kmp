@@ -1,0 +1,26 @@
+{
+  "object" : {
+    "artifacts" : [
+      {
+        "kind" : "xcframework",
+        "packageRef" : {
+          "identity" : "puree-kmp",
+          "kind" : "root",
+          "location" : "/Users/daichi-matsumoto/dev/Cookpad/puree-kmp",
+          "name" : "puree-kmp"
+        },
+        "path" : "/Users/daichi-matsumoto/dev/Cookpad/puree-kmp/.build/artifacts/puree-kmp/PureeKMP/PureeKMP.xcframework",
+        "source" : {
+          "checksum" : "f7766bbf2c46f5a59ac1107f9b1b6da2201c0d650b636e1d048993d108d8b782",
+          "type" : "remote",
+          "url" : "https://github.com/cookpad/puree-kmp/releases/download/v0.0.10/PureeKMP.xcframework.zip"
+        },
+        "targetName" : "PureeKMP"
+      }
+    ],
+    "dependencies" : [
+
+    ]
+  },
+  "version" : 6
+}
