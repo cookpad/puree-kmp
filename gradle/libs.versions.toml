@@ -44,7 +44,8 @@ maven-publish = "0.30.0"
 # Test
 junit = "4.13.2"
 mockito = "5.4.0"
-androidxTest = "1.6.2"
+androidxTest = "1.6.1"
+androidxTestRunner = "1.6.2"
 androidxJUnit = "1.2.1"
 
 # Others
@@ -119,7 +120,7 @@ androidx-compose-material3 = { module = "androidx.compose.material3:material3" }
 androidx-test-core = { module = "androidx.test:core-ktx", version.ref = "androidxTest" }
 androidx-test-junit = { module = "androidx.test.ext:junit-ktx", version.ref = "androidxJUnit" }
 androidx-test-rules = { module = "androidx.test:rules", version.ref = "androidxTest" }
-androidx-test-runner = { module = "androidx.test:runner", version.ref = "androidxTest" }
+androidx-test-runner = { module = "androidx.test:runner", version.ref = "androidxTestRunner" }
 
 # KMP
 kmp-lifecycle-runtime = { module = "androidx.lifecycle:lifecycle-runtime", version.ref = "androidxLifecycle" }
