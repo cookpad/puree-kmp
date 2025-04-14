@@ -112,7 +112,7 @@ class PureeLoggerTest : LifecycleCoroutineRule() {
 
         // Assert
         outputs.forEach { output ->
-            verify(output).flush()
+            verify(output).requestFlush()
         }
     }
 

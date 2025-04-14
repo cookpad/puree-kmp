@@ -137,24 +137,7 @@ abstract class PureeBufferedOutput(
                 val delayMillis = max(0, nextFlushTime)
 
                 delay(delayMillis)
-
-                runCatching { flush() }
-                    .onSuccess {
-                        retryCount = 0
-                        nextFlush = clock.now() + flushInterval
-                    }
-                    .onFailure {
-                        retryCount++
-
-                        if (retryCount > maxRetryCount) {
-                            retryCount = 0
-                            nextFlush = clock.now() + flushInterval
-                        } else {
-                            nextFlush = clock.now() + exponentialBackoffBase.absoluteValue.times(
-                                2.0.pow((retryCount - 1).toDouble()),
-                            )
-                        }
-                    }
+                requestFlush()
             }
         }
     }
@@ -169,6 +152,33 @@ abstract class PureeBufferedOutput(
     }
 
     /**
+     * Requests to flush the buffered logs. If the flush fails, it will retry according to
+     * [exponentialBackoffBase] and [maxRetryCount]. If the maximum retry count is reached, it will
+     * reset the retry count and wait for [flushInterval] before trying again.
+     *
+     * @see resume
+     */
+    internal suspend fun requestFlush() {
+        runCatching { flush() }
+            .onSuccess {
+                retryCount = 0
+                nextFlush = clock.now() + flushInterval
+            }
+            .onFailure {
+                retryCount++
+
+                if (retryCount > maxRetryCount) {
+                    retryCount = 0
+                    nextFlush = clock.now() + flushInterval
+                } else {
+                    nextFlush = clock.now() + exponentialBackoffBase.absoluteValue.times(
+                        2.0.pow((retryCount - 1).toDouble()),
+                    )
+                }
+            }
+    }
+
+    /**
      * Flushes the buffered logs stored in [logStore]. If [purgeableAge] is set, old logs will be
      * deleted accordingly. The batch will contain at most [logsPerFlush] and if
      * [maxFlushSizeInBytes], the batch will be trimmed accordingly. If emitted successfully, the
@@ -176,7 +186,7 @@ abstract class PureeBufferedOutput(
      *
      * @see resume
      */
-    internal suspend fun flush() {
+    private suspend fun flush() {
         purgeableAge?.let {
             logStore.purgeLogsWithAge(uniqueId, clock.now(), it)
         }
