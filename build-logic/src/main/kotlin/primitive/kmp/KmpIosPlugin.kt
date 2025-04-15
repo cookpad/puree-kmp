@@ -19,7 +19,7 @@ class KmpIosPlugin : Plugin<Project> {
                 ).forEach { iosTarget ->
                     iosTarget.binaries.framework {
                         baseName = "PureeKMP"
-                        isStatic = true
+                        isStatic = false
 
                         xcf.add(this)
                     }
