@@ -34,6 +34,7 @@ object Puree {
             )
             .defaultOutput(LogcatOutput())
             .defaultFilter(AddTimeFilter())
+            .excludeFromDefaults(PeriodicLog::class)
             .build()
     }
 
