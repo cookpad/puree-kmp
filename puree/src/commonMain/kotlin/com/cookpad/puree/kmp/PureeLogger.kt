@@ -38,6 +38,7 @@ class PureeLogger internal constructor(
     private val clock: Clock,
     private val defaultFilters: List<PureeFilter>,
     private val defaultOutputs: List<PureeOutput>,
+    private val excludeFromDefaults: List<String>,
     private val registeredLogs: Map<String, Configuration>,
     private val bufferedOutputs: List<PureeBufferedOutput>,
 ) {
@@ -79,8 +80,10 @@ class PureeLogger internal constructor(
      */
     fun <T : PureeLog> postLog(log: T, platformClass: PlatformClass<T>) {
         val config = registeredLogs[platformClass.simpleName]
-        val filters = config?.filters.orEmpty() + defaultFilters
-        val outputs = config?.outputs.orEmpty() + defaultOutputs
+        val isExcludeFromDefaults = excludeFromDefaults.contains(platformClass.simpleName)
+
+        val filters = config?.filters.orEmpty() + defaultFilters.takeIf { !isExcludeFromDefaults }.orEmpty()
+        val outputs = config?.outputs.orEmpty() + defaultOutputs.takeIf { !isExcludeFromDefaults }.orEmpty()
 
         if (filters.isEmpty() && outputs.isEmpty()) {
             throw LogNotRegisteredException()

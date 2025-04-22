@@ -39,6 +39,7 @@ actual class Puree(
 
     private val defaultFilters: MutableList<PureeFilter> = mutableListOf()
     private val defaultOutputs: MutableList<PureeOutput> = mutableListOf()
+    private val excludeFromDefaults: MutableList<String> = mutableListOf()
     private val configuredLogs: MutableMap<String, Configuration> = mutableMapOf()
     private val outputIds: MutableSet<String> = mutableSetOf()
     private val bufferedOutputs: MutableList<PureeBufferedOutput> = mutableListOf()
@@ -77,6 +78,24 @@ actual class Puree(
         }
 
         defaultOutputs.addAll(outputs)
+        return this
+    }
+
+    /**
+     * Excludes the specified log types from the default filters and outputs.
+     *
+     * This method allows you to specify log types that should not inherit the default
+     * filters and outputs set in the Puree instance. This is useful for customizing
+     * logging behavior for specific log types.
+     *
+     * @param logTypes NSArray of Objective-C classes representing the log types to exclude from defaults
+     * @return This Puree instance for method chaining
+     */
+    @OptIn(BetaInteropApi::class)
+    fun excludeFromDefaults(logTypes: NSArray): Puree {
+        logTypes.toList<ObjCClass>().forEach {
+            excludeFromDefaults.add(NSStringFromClass(it))
+        }
         return this
     }
 
@@ -156,6 +175,7 @@ actual class Puree(
             clock = clock,
             defaultFilters = defaultFilters,
             defaultOutputs = defaultOutputs,
+            excludeFromDefaults = excludeFromDefaults,
             registeredLogs = configuredLogs,
             bufferedOutputs = bufferedOutputs,
         )
