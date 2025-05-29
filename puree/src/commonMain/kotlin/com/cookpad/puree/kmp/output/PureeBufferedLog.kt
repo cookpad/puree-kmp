@@ -25,7 +25,7 @@ data class PureeBufferedLog(
      *
      * This property contains the serialized representation of the original log object
      * that was posted to the logger. The serialization is typically performed by a
-     * [com.cookpad.puree.serializer.PureeLogSerializer] implementation.
+     * [com.cookpad.puree.kmp.serializer.PureeLogSerializer] implementation.
      */
     val log: JsonObject,
 )
