@@ -22,6 +22,7 @@ class KmpIosPlugin : Plugin<Project> {
                         isStatic = false
 
                         xcf.add(this)
+                        freeCompilerArgs += listOf("-Xadd-light-debug=enable")
                     }
                 }
             }

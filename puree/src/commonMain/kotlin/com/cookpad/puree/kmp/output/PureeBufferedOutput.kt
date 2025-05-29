@@ -2,12 +2,13 @@ package com.cookpad.puree.kmp.output
 
 import com.cookpad.puree.kmp.store.PureeLogStore
 import com.cookpad.puree.kmp.type.JsonObject
+import io.github.aakira.napier.Napier
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Job
-import kotlinx.coroutines.NonCancellable.isActive
 import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.cancelChildren
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.isActive
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.suspendCancellableCoroutine
 import kotlinx.datetime.Clock
@@ -113,13 +114,22 @@ abstract class PureeBufferedOutput(
     final override fun emit(log: JsonObject) {
         // Guaranteed to be executed in the appropriate thread
         coroutineScope.launch {
-            logStore.add(
-                outputId = uniqueId,
-                bufferedLog = PureeBufferedLog(
-                    createdAt = clock.now(),
-                    log = log,
-                ),
+            val bufferedLog = PureeBufferedLog(
+                createdAt = clock.now(),
+                log = log,
             )
+
+            runCatching {
+                logStore.add(
+                    outputId = uniqueId,
+                    bufferedLog = bufferedLog,
+                )
+            }.recoverCatching {
+                Napier.e { "Failed to store log: $log" }
+                flush(listOf(bufferedLog))
+            }.onFailure {
+                Napier.e { "Failed to store & flush log: $log, error: ${it.message}" }
+            }
         }
     }
 
@@ -159,7 +169,7 @@ abstract class PureeBufferedOutput(
      * @see resume
      */
     internal suspend fun requestFlush() {
-        runCatching { flush() }
+        runCatching { flush(logStore.get(uniqueId, logsPerFlush)) }
             .onSuccess {
                 retryCount = 0
                 nextFlush = clock.now() + flushInterval
@@ -186,36 +196,34 @@ abstract class PureeBufferedOutput(
      *
      * @see resume
      */
-    private suspend fun flush() {
+    private suspend fun flush(bufferedLogs: List<PureeBufferedLog>) {
         purgeableAge?.let {
             logStore.purgeLogsWithAge(uniqueId, clock.now(), it)
         }
 
-        val bufferedLogs = logStore.get(uniqueId, logsPerFlush).let { bufferedLogs ->
-            when (maxFlushSizeInBytes) {
-                Long.MAX_VALUE -> bufferedLogs
-                else -> {
-                    var size = 0L
-                    bufferedLogs.takeWhile {
-                        size += it.log.toString().encodeToByteArray().size
-                        size <= maxFlushSizeInBytes
-                    }
+        val trimmedBufferedLogs = when (maxFlushSizeInBytes) {
+            Long.MAX_VALUE -> bufferedLogs
+            else -> {
+                var size = 0L
+                bufferedLogs.takeWhile {
+                    size += it.log.toString().encodeToByteArray().size
+                    size <= maxFlushSizeInBytes
                 }
             }
         }
 
-        if (bufferedLogs.isEmpty()) {
+        if (trimmedBufferedLogs.isEmpty()) {
             return
         }
 
         suspendCancellableCoroutine { continuation ->
             emit(
-                logs = bufferedLogs.map { it.log },
+                logs = trimmedBufferedLogs.map { it.log },
                 onSuccess = { continuation.resume(Unit) },
                 onFailed = { throwable -> continuation.resumeWithException(throwable) },
             )
         }
 
-        logStore.remove(uniqueId, bufferedLogs)
+        logStore.remove(uniqueId, trimmedBufferedLogs)
     }
 }
