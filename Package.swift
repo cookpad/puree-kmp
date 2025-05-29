@@ -13,8 +13,8 @@ let package = Package(
     targets: [
         .binaryTarget(
             name: "PureeKMP",
-            url: "https://github.com/cookpad/puree-kmp/releases/download/v1.0.1/PureeKMP.xcframework.zip",
-            checksum: "5e22bf1aee49ef9c237270e17dbdcac149dc75790ddc3992e4044de0fd4008ea"
+            url: "https://github.com/cookpad/puree-kmp/releases/download/v1.0.2/PureeKMP.xcframework.zip",
+            checksum: "3cb207a6fe45399945bad4a1dfb9280fd52513a04750f34d3004229e3cd15741"
         ),
     ]
 )
