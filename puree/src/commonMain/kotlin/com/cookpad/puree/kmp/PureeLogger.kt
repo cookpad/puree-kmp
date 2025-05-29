@@ -106,7 +106,9 @@ class PureeLogger internal constructor(
      */
     fun flush() {
         scope.launch {
-            bufferedOutputs.forEach { it.flush() }
+            bufferedOutputs.forEach {
+                runCatching { it.flush() }
+            }
         }
     }
 
