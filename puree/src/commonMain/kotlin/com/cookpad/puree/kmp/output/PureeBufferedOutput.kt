@@ -4,6 +4,7 @@ import com.cookpad.puree.kmp.store.PureeLogStore
 import com.cookpad.puree.kmp.type.JsonObject
 import io.github.aakira.napier.Napier
 import kotlinx.atomicfu.atomic
+import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.SupervisorJob
@@ -106,7 +107,9 @@ abstract class PureeBufferedOutput(
         this.clock = clock
         nextFlush = clock.now() + flushInterval
         retryCount = 0
-        coroutineScope = CoroutineScope(coroutineContext + SupervisorJob(coroutineContext[Job]))
+        coroutineScope = CoroutineScope(coroutineContext + SupervisorJob(coroutineContext[Job]) + CoroutineExceptionHandler { _, t ->
+            Napier.e("Uncaught exception in Puree", t)
+        })
     }
 
     /**
