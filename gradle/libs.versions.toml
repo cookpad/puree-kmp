@@ -19,6 +19,7 @@ kotlinxCoroutines = "1.10.1"
 kotlinxDatetime = "0.6.1"
 kotlinxSerializationJson = "1.8.1"
 kotlinxImmutable = "0.3.8"
+kotlinxAtomicfu = "0.28.0"
 
 # AndroidX
 androidxCore = "1.16.0"
@@ -63,6 +64,7 @@ android-library = { id = "com.android.library", version.ref = "gradle" }
 # Kotlin
 kotlin-compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
+kotlinx-atomicfu = { id = "org.jetbrains.kotlinx.atomicfu", version.ref = "kotlinxAtomicfu" }
 ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 
 # Publishing
@@ -81,6 +83,7 @@ detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "detekt" }
 ## Dependency of the include build-logic
 android-gradlePlugin = { group = "com.android.tools.build", name = "gradle", version.ref = "gradle" }
 kotlin-gradlePlugin = { group = "org.jetbrains.kotlin", name = "kotlin-gradle-plugin", version.ref = "kotlin" }
+atomic-gradlePlugin = { group = "org.jetbrains.kotlinx", name = "atomicfu-gradle-plugin", version.ref = "kotlinxAtomicfu" }
 room-gradlePlugin = { group = "androidx.room", name = "room-gradle-plugin", version.ref = "androidxRoom" }
 detekt-gradlePlugin = { group = "io.gitlab.arturbosch.detekt", name = "detekt-gradle-plugin", version.ref = "detekt" }
 detekt-formatting = { group = "io.gitlab.arturbosch.detekt", name = "detekt-formatting", version.ref = "detekt" }
@@ -101,6 +104,7 @@ kotlinx-coroutines-test = { group = "org.jetbrains.kotlinx", name = "kotlinx-cor
 kotlinx-datetime = { group = "org.jetbrains.kotlinx", name = "kotlinx-datetime", version.ref = "kotlinxDatetime" }
 kotlinx-serialization-json = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-json", version.ref = "kotlinxSerializationJson" }
 kotlinx-collections-immutable = { group = "org.jetbrains.kotlinx", name = "kotlinx-collections-immutable", version.ref = "kotlinxImmutable" }
+kotlinx-atomicfu = { group = "org.jetbrains.kotlinx", name = "atomicfu", version.ref = "kotlinxAtomicfu" }
 
 # AndroidX
 androidx-core = { module = "androidx.core:core-ktx", version.ref = "androidxCore" }
@@ -144,6 +148,7 @@ infra = [
     "kotlinx-datetime",
     "kotlinx-serialization-json",
     "kotlinx-collections-immutable",
+    "kotlinx-atomicfu",
     "napier",
 ]
 

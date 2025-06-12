@@ -11,6 +11,7 @@ class KmpCommonPlugin : Plugin<Project> {
         with(target) {
             with(pluginManager) {
                 apply("org.jetbrains.kotlin.multiplatform")
+                apply("org.jetbrains.kotlinx.atomicfu")
             }
 
             kotlin {
