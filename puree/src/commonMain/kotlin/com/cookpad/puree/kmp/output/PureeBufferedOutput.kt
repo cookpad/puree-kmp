@@ -222,7 +222,6 @@ abstract class PureeBufferedOutput(
 
             fun tryFinish(block: () -> Unit) {
                 if (finished.compareAndSet(expect = false, update = true)) {
-                    Napier.v { "Finished flushing logs for output: $uniqueId" }
                     block()
                 } else {
                     Napier.w { "Flush already finished for output: $uniqueId" }

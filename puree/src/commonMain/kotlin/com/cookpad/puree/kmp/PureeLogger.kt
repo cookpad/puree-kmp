@@ -10,6 +10,7 @@ import com.cookpad.puree.kmp.store.PureeLogStore
 import com.cookpad.puree.kmp.type.PlatformClass
 import io.github.aakira.napier.Napier
 import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.launch
@@ -42,7 +43,12 @@ class PureeLogger internal constructor(
     private val registeredLogs: Map<String, Configuration>,
     private val bufferedOutputs: List<PureeBufferedOutput>,
 ) {
-    private val scope = CoroutineScope(dispatcher + SupervisorJob())
+    private val scope = CoroutineScope(
+        dispatcher + SupervisorJob() + CoroutineExceptionHandler { _, t ->
+            Napier.e("Uncaught exception in Puree", t)
+        }
+    )
+
     private var isResumed = false
 
     init {
