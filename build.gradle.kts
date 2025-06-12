@@ -10,6 +10,7 @@ plugins {
     // Kotlin
     alias(libs.plugins.kotlin.serialization) apply false
     alias(libs.plugins.kotlin.compose.compiler) apply false
+    alias(libs.plugins.kotlinx.atomicfu) apply false
 
     // Publishing
     id("cookpad.primitive.publish.nexus")

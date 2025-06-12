@@ -3,6 +3,8 @@ package com.cookpad.puree.kmp.output
 import com.cookpad.puree.kmp.store.PureeLogStore
 import com.cookpad.puree.kmp.type.JsonObject
 import io.github.aakira.napier.Napier
+import kotlinx.atomicfu.atomic
+import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.SupervisorJob
@@ -105,7 +107,11 @@ abstract class PureeBufferedOutput(
         this.clock = clock
         nextFlush = clock.now() + flushInterval
         retryCount = 0
-        coroutineScope = CoroutineScope(coroutineContext + SupervisorJob(coroutineContext[Job]))
+        coroutineScope = CoroutineScope(
+            coroutineContext + SupervisorJob(coroutineContext[Job]) + CoroutineExceptionHandler { _, t ->
+                Napier.e("Uncaught exception in Puree", t)
+            },
+        )
     }
 
     /**
@@ -217,10 +223,20 @@ abstract class PureeBufferedOutput(
         }
 
         suspendCancellableCoroutine { continuation ->
+            val finished = atomic(false)
+
+            fun tryFinish(block: () -> Unit) {
+                if (finished.compareAndSet(expect = false, update = true)) {
+                    block()
+                } else {
+                    Napier.w { "Flush already finished for output: $uniqueId" }
+                }
+            }
+
             emit(
                 logs = trimmedBufferedLogs.map { it.log },
-                onSuccess = { continuation.resume(Unit) },
-                onFailed = { throwable -> continuation.resumeWithException(throwable) },
+                onSuccess = { tryFinish { continuation.resume(Unit) } },
+                onFailed = { throwable -> tryFinish { continuation.resumeWithException(throwable) } },
             )
         }
 
