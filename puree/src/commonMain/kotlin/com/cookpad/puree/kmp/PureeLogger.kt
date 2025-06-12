@@ -46,7 +46,7 @@ class PureeLogger internal constructor(
     private val scope = CoroutineScope(
         dispatcher + SupervisorJob() + CoroutineExceptionHandler { _, t ->
             Napier.e("Uncaught exception in Puree", t)
-        }
+        },
     )
 
     private var isResumed = false

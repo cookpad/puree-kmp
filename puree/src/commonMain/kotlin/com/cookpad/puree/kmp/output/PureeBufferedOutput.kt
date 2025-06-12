@@ -107,9 +107,11 @@ abstract class PureeBufferedOutput(
         this.clock = clock
         nextFlush = clock.now() + flushInterval
         retryCount = 0
-        coroutineScope = CoroutineScope(coroutineContext + SupervisorJob(coroutineContext[Job]) + CoroutineExceptionHandler { _, t ->
-            Napier.e("Uncaught exception in Puree", t)
-        })
+        coroutineScope = CoroutineScope(
+            coroutineContext + SupervisorJob(coroutineContext[Job]) + CoroutineExceptionHandler { _, t ->
+                Napier.e("Uncaught exception in Puree", t)
+            },
+        )
     }
 
     /**
