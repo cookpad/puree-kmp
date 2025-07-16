@@ -32,7 +32,7 @@ import kotlinx.datetime.Clock
  * @param bufferedOutputs List of outputs that support buffering
  */
 class PureeLogger internal constructor(
-    lifecycle: Lifecycle,
+    lifecycle: Lifecycle?,
     private val logSerializer: PureeLogSerializer,
     private val logStore: PureeLogStore,
     private val dispatcher: CoroutineDispatcher,
@@ -52,19 +52,20 @@ class PureeLogger internal constructor(
     private var isResumed = false
 
     init {
+        Napier.d { "PureeLogger init" }
+
         bufferedOutputs.forEach { it.initialize(logStore, clock, dispatcher) }
 
-        lifecycle.addObserver(
-            object : DefaultLifecycleObserver {
-                override fun onStart(owner: LifecycleOwner) {
-                    resume()
-                }
-
-                override fun onStop(owner: LifecycleOwner) {
-                    suspend()
-                }
-            },
-        )
+        if (lifecycle != null) {
+            lifecycle.addObserver(
+                object : DefaultLifecycleObserver {
+                    override fun onStart(owner: LifecycleOwner) = resume()
+                    override fun onStop(owner: LifecycleOwner) = suspend()
+                },
+            )
+        } else {
+            resume()
+        }
     }
 
     /**

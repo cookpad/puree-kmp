@@ -17,7 +17,6 @@ final class Log {
 
         return Puree(logStore: logStore, logSerializer: logSerializer)
             .output(output: OSLogBufferedOutput(uniqueId: "buffered"), logTypes: [ClickLog.self, MenuLog.self])
-            .output(output: PurgeableOSLogWarningBufferedOutput(uniqueId: "purgeable"), logTypes: [PeriodicLog.self])
             .defaultOutput(outputs: [OSLogOutput()].toKotlinArray())
             .defaultFilter(filters: [AddTimeFilter()].toKotlinArray())
             .build()
@@ -25,6 +24,10 @@ final class Log {
 
     func send<T: PureeLog & Encodable>(_ log: T) {
         pureeLogger.postLog(log: log, platformClass: PlatformClass(clazz: T.self))
+    }
+    
+    func flush() {
+        pureeLogger.flush()
     }
 }
 

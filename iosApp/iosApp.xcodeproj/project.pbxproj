@@ -10,8 +10,8 @@
 		058557BB273AAA24004C7B11 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 058557BA273AAA24004C7B11 /* Assets.xcassets */; };
 		2152FB042600AC8F00CF470E /* Demo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2152FB032600AC8F00CF470E /* Demo.swift */; };
 		7555FF83242A565900829871 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7555FF82242A565900829871 /* ContentView.swift */; };
-		AD82BBB42DA8100200AB5E97 /* PureeKMP.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD82BB502DA80FE500AB5E97 /* PureeKMP.xcframework */; };
-		AD82BBB52DA8100200AB5E97 /* PureeKMP.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = AD82BB502DA80FE500AB5E97 /* PureeKMP.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		AD11AA452E27E83100AC4CBB /* PureeKMP.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD82BB502DA80FE500AB5E97 /* PureeKMP.xcframework */; };
+		AD11AA462E27E83100AC4CBB /* PureeKMP.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = AD82BB502DA80FE500AB5E97 /* PureeKMP.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		ADD825D02D832D0C00D56EF7 /* ClickLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADD825CF2D832CE700D56EF7 /* ClickLog.swift */; };
 		ADD825D22D8332BE00D56EF7 /* Puree.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADD825D12D8332BC00D56EF7 /* Puree.swift */; };
 		ADD825D52D83356200D56EF7 /* OSLogOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADD825D42D83347E00D56EF7 /* OSLogOutput.swift */; };
@@ -23,13 +23,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		AD82BBB62DA8100200AB5E97 /* Embed Frameworks */ = {
+		AD11AA472E27E83100AC4CBB /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				AD82BBB52DA8100200AB5E97 /* PureeKMP.xcframework in Embed Frameworks */,
+				AD11AA462E27E83100AC4CBB /* PureeKMP.xcframework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -489,7 +489,7 @@
 		AD82B27C2DA80FE500AB5E97 /* base_builder_log.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = base_builder_log.json; sourceTree = "<group>"; };
 		AD82B2802DA80FE500AB5E97 /* compile-file-map.properties */ = {isa = PBXFileReference; lastKnownFileType = text; path = "compile-file-map.properties"; sourceTree = "<group>"; };
 		AD82B2812DA80FE500AB5E97 /* merger.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = merger.xml; sourceTree = "<group>"; };
-		AD82B2852DA80FE500AB5E97 /* merge-state */ = {isa = PBXFileReference; lastKnownFileType = file; path = "merge-state"; sourceTree = "<group>"; };
+		AD82B2852DA80FE500AB5E97 /* merge-state */ = {isa = PBXFileReference; lastKnownFileType = text; path = "merge-state"; sourceTree = "<group>"; };
 		AD82B2872DA80FE500AB5E97 /* debug.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = debug.xml; sourceTree = "<group>"; };
 		AD82B2882DA80FE500AB5E97 /* debug-artifact-dependencies.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "debug-artifact-dependencies.xml"; sourceTree = "<group>"; };
 		AD82B2892DA80FE500AB5E97 /* debug-artifact-libraries.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "debug-artifact-libraries.xml"; sourceTree = "<group>"; };
@@ -603,7 +603,7 @@
 		AD82B3582DA80FE500AB5E97 /* merger.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = merger.xml; sourceTree = "<group>"; };
 		AD82B35C2DA80FE500AB5E97 /* compile-file-map.properties */ = {isa = PBXFileReference; lastKnownFileType = text; path = "compile-file-map.properties"; sourceTree = "<group>"; };
 		AD82B35D2DA80FE500AB5E97 /* merger.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = merger.xml; sourceTree = "<group>"; };
-		AD82B3612DA80FE500AB5E97 /* merge-state */ = {isa = PBXFileReference; lastKnownFileType = file; path = "merge-state"; sourceTree = "<group>"; };
+		AD82B3612DA80FE500AB5E97 /* merge-state */ = {isa = PBXFileReference; lastKnownFileType = text; path = "merge-state"; sourceTree = "<group>"; };
 		AD82B36E2DA80FE500AB5E97 /* puree_debug.kotlin_module */ = {isa = PBXFileReference; lastKnownFileType = file; path = puree_debug.kotlin_module; sourceTree = "<group>"; };
 		AD82B3792DA80FE500AB5E97 /* puree_debugUnitTest.kotlin_module */ = {isa = PBXFileReference; lastKnownFileType = file; path = puree_debugUnitTest.kotlin_module; sourceTree = "<group>"; };
 		AD82B3882DA80FE500AB5E97 /* puree_release.kotlin_module */ = {isa = PBXFileReference; lastKnownFileType = file; path = puree_release.kotlin_module; sourceTree = "<group>"; };
@@ -2005,16 +2005,16 @@
 		AD82BB392DA80FE500AB5E97 /* PureeLoggerTest$postLog_skipped$1.class */ = {isa = PBXFileReference; lastKnownFileType = compiled.javaclass; path = PureeLoggerTest$postLog_skipped$1.class; sourceTree = "<group>"; };
 		AD82BB3A2DA80FE500AB5E97 /* PureeLoggerTest$postLog$1.class */ = {isa = PBXFileReference; lastKnownFileType = compiled.javaclass; path = PureeLoggerTest$postLog$1.class; sourceTree = "<group>"; };
 		AD82BB3F2DA80FE500AB5E97 /* puree_releaseUnitTest.kotlin_module */ = {isa = PBXFileReference; lastKnownFileType = file; path = puree_releaseUnitTest.kotlin_module; sourceTree = "<group>"; };
-		AD82BB442DA80FE500AB5E97 /* jar_extract_606656263522954558_tmp */ = {isa = PBXFileReference; lastKnownFileType = file; path = jar_extract_606656263522954558_tmp; sourceTree = "<group>"; };
-		AD82BB452DA80FE500AB5E97 /* jar_extract_4997209358295072184_tmp */ = {isa = PBXFileReference; lastKnownFileType = file; path = jar_extract_4997209358295072184_tmp; sourceTree = "<group>"; };
-		AD82BB462DA80FE500AB5E97 /* jar_extract_6169738528164922810_tmp */ = {isa = PBXFileReference; lastKnownFileType = file; path = jar_extract_6169738528164922810_tmp; sourceTree = "<group>"; };
-		AD82BB472DA80FE500AB5E97 /* jar_extract_11301222718417849609_tmp */ = {isa = PBXFileReference; lastKnownFileType = file; path = jar_extract_11301222718417849609_tmp; sourceTree = "<group>"; };
-		AD82BB482DA80FE500AB5E97 /* jar_extract_11418939721644097286_tmp */ = {isa = PBXFileReference; lastKnownFileType = file; path = jar_extract_11418939721644097286_tmp; sourceTree = "<group>"; };
-		AD82BB492DA80FE500AB5E97 /* jar_extract_14031580015011475584_tmp */ = {isa = PBXFileReference; lastKnownFileType = file; path = jar_extract_14031580015011475584_tmp; sourceTree = "<group>"; };
-		AD82BB4A2DA80FE500AB5E97 /* jar_extract_15021579056395843599_tmp */ = {isa = PBXFileReference; lastKnownFileType = file; path = jar_extract_15021579056395843599_tmp; sourceTree = "<group>"; };
-		AD82BB4B2DA80FE500AB5E97 /* jar_extract_15226773504787661236_tmp */ = {isa = PBXFileReference; lastKnownFileType = file; path = jar_extract_15226773504787661236_tmp; sourceTree = "<group>"; };
-		AD82BB4C2DA80FE500AB5E97 /* jar_extract_17855729706109213414_tmp */ = {isa = PBXFileReference; lastKnownFileType = file; path = jar_extract_17855729706109213414_tmp; sourceTree = "<group>"; };
-		AD82BB4D2DA80FE500AB5E97 /* jar_extract_18120067235223393685_tmp */ = {isa = PBXFileReference; lastKnownFileType = file; path = jar_extract_18120067235223393685_tmp; sourceTree = "<group>"; };
+		AD82BB442DA80FE500AB5E97 /* jar_extract_606656263522954558_tmp */ = {isa = PBXFileReference; lastKnownFileType = text; path = jar_extract_606656263522954558_tmp; sourceTree = "<group>"; };
+		AD82BB452DA80FE500AB5E97 /* jar_extract_4997209358295072184_tmp */ = {isa = PBXFileReference; lastKnownFileType = text; path = jar_extract_4997209358295072184_tmp; sourceTree = "<group>"; };
+		AD82BB462DA80FE500AB5E97 /* jar_extract_6169738528164922810_tmp */ = {isa = PBXFileReference; lastKnownFileType = text; path = jar_extract_6169738528164922810_tmp; sourceTree = "<group>"; };
+		AD82BB472DA80FE500AB5E97 /* jar_extract_11301222718417849609_tmp */ = {isa = PBXFileReference; lastKnownFileType = text; path = jar_extract_11301222718417849609_tmp; sourceTree = "<group>"; };
+		AD82BB482DA80FE500AB5E97 /* jar_extract_11418939721644097286_tmp */ = {isa = PBXFileReference; lastKnownFileType = text; path = jar_extract_11418939721644097286_tmp; sourceTree = "<group>"; };
+		AD82BB492DA80FE500AB5E97 /* jar_extract_14031580015011475584_tmp */ = {isa = PBXFileReference; lastKnownFileType = text; path = jar_extract_14031580015011475584_tmp; sourceTree = "<group>"; };
+		AD82BB4A2DA80FE500AB5E97 /* jar_extract_15021579056395843599_tmp */ = {isa = PBXFileReference; lastKnownFileType = text; path = jar_extract_15021579056395843599_tmp; sourceTree = "<group>"; };
+		AD82BB4B2DA80FE500AB5E97 /* jar_extract_15226773504787661236_tmp */ = {isa = PBXFileReference; lastKnownFileType = text; path = jar_extract_15226773504787661236_tmp; sourceTree = "<group>"; };
+		AD82BB4C2DA80FE500AB5E97 /* jar_extract_17855729706109213414_tmp */ = {isa = PBXFileReference; lastKnownFileType = text; path = jar_extract_17855729706109213414_tmp; sourceTree = "<group>"; };
+		AD82BB4D2DA80FE500AB5E97 /* jar_extract_18120067235223393685_tmp */ = {isa = PBXFileReference; lastKnownFileType = text; path = jar_extract_18120067235223393685_tmp; sourceTree = "<group>"; };
 		AD82BB4F2DA80FE500AB5E97 /* puree.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = puree.xcframework; sourceTree = "<group>"; };
 		AD82BB502DA80FE500AB5E97 /* PureeKMP.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = PureeKMP.xcframework; sourceTree = "<group>"; };
 		AD82BB522DA80FE500AB5E97 /* puree.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = puree.xcframework; sourceTree = "<group>"; };
@@ -2027,7 +2027,6 @@
 		AD82BB662DA80FE500AB5E97 /* PlatformDefaultPureeLogStore.android.kt */ = {isa = PBXFileReference; lastKnownFileType = text; path = PlatformDefaultPureeLogStore.android.kt; sourceTree = "<group>"; };
 		AD82BB682DA80FE500AB5E97 /* JsonObject.android.kt */ = {isa = PBXFileReference; lastKnownFileType = text; path = JsonObject.android.kt; sourceTree = "<group>"; };
 		AD82BB692DA80FE500AB5E97 /* PlatformClass.android.kt */ = {isa = PBXFileReference; lastKnownFileType = text; path = PlatformClass.android.kt; sourceTree = "<group>"; };
-		AD82BB6B2DA80FE500AB5E97 /* DefaultLifecycleOwner.android.kt */ = {isa = PBXFileReference; lastKnownFileType = text; path = DefaultLifecycleOwner.android.kt; sourceTree = "<group>"; };
 		AD82BB6C2DA80FE500AB5E97 /* Puree.android.kt */ = {isa = PBXFileReference; lastKnownFileType = text; path = Puree.android.kt; sourceTree = "<group>"; };
 		AD82BB722DA80FE500AB5E97 /* AndroidManifest.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = AndroidManifest.xml; sourceTree = "<group>"; };
 		AD82BB742DA80FE500AB5E97 /* ManualClock.kt */ = {isa = PBXFileReference; lastKnownFileType = text; path = ManualClock.kt; sourceTree = "<group>"; };
@@ -2047,7 +2046,6 @@
 		AD82BB8F2DA80FE500AB5E97 /* JsonFormatter.kt */ = {isa = PBXFileReference; lastKnownFileType = text; path = JsonFormatter.kt; sourceTree = "<group>"; };
 		AD82BB902DA80FE500AB5E97 /* JsonObject.kt */ = {isa = PBXFileReference; lastKnownFileType = text; path = JsonObject.kt; sourceTree = "<group>"; };
 		AD82BB912DA80FE500AB5E97 /* PlatformClass.kt */ = {isa = PBXFileReference; lastKnownFileType = text; path = PlatformClass.kt; sourceTree = "<group>"; };
-		AD82BB932DA80FE500AB5E97 /* DefaultLifecycleOwner.kt */ = {isa = PBXFileReference; lastKnownFileType = text; path = DefaultLifecycleOwner.kt; sourceTree = "<group>"; };
 		AD82BB942DA80FE500AB5E97 /* Puree.kt */ = {isa = PBXFileReference; lastKnownFileType = text; path = Puree.kt; sourceTree = "<group>"; };
 		AD82BB952DA80FE500AB5E97 /* PureeException.kt */ = {isa = PBXFileReference; lastKnownFileType = text; path = PureeException.kt; sourceTree = "<group>"; };
 		AD82BB962DA80FE500AB5E97 /* PureeFilter.kt */ = {isa = PBXFileReference; lastKnownFileType = text; path = PureeFilter.kt; sourceTree = "<group>"; };
@@ -2058,7 +2056,6 @@
 		AD82BBA42DA80FE500AB5E97 /* PlatformDefaultPureeLogStore.ios.kt */ = {isa = PBXFileReference; lastKnownFileType = text; path = PlatformDefaultPureeLogStore.ios.kt; sourceTree = "<group>"; };
 		AD82BBA62DA80FE500AB5E97 /* JsonObject.ios.kt */ = {isa = PBXFileReference; lastKnownFileType = text; path = JsonObject.ios.kt; sourceTree = "<group>"; };
 		AD82BBA72DA80FE500AB5E97 /* PlatformClass.ios.kt */ = {isa = PBXFileReference; lastKnownFileType = text; path = PlatformClass.ios.kt; sourceTree = "<group>"; };
-		AD82BBA92DA80FE500AB5E97 /* DefaultLifecycleOwner.ios.kt */ = {isa = PBXFileReference; lastKnownFileType = text; path = DefaultLifecycleOwner.ios.kt; sourceTree = "<group>"; };
 		AD82BBAA2DA80FE500AB5E97 /* Puree.ios.kt */ = {isa = PBXFileReference; lastKnownFileType = text; path = Puree.ios.kt; sourceTree = "<group>"; };
 		AD82BBB22DA80FE500AB5E97 /* build.gradle.kts */ = {isa = PBXFileReference; lastKnownFileType = text; path = build.gradle.kts; sourceTree = "<group>"; };
 		ADD825CF2D832CE700D56EF7 /* ClickLog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClickLog.swift; sourceTree = "<group>"; };
@@ -2076,7 +2073,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AD82BBB42DA8100200AB5E97 /* PureeKMP.xcframework in Frameworks */,
+				AD11AA452E27E83100AC4CBB /* PureeKMP.xcframework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -13188,7 +13185,6 @@
 				AD82BB622DA80FE500AB5E97 /* serializer */,
 				AD82BB672DA80FE500AB5E97 /* store */,
 				AD82BB6A2DA80FE500AB5E97 /* type */,
-				AD82BB6B2DA80FE500AB5E97 /* DefaultLifecycleOwner.android.kt */,
 				AD82BB6C2DA80FE500AB5E97 /* Puree.android.kt */,
 			);
 			path = kmp;
@@ -13366,7 +13362,6 @@
 				AD82BB862DA80FE500AB5E97 /* serializer */,
 				AD82BB8E2DA80FE500AB5E97 /* store */,
 				AD82BB922DA80FE500AB5E97 /* type */,
-				AD82BB932DA80FE500AB5E97 /* DefaultLifecycleOwner.kt */,
 				AD82BB942DA80FE500AB5E97 /* Puree.kt */,
 				AD82BB952DA80FE500AB5E97 /* PureeException.kt */,
 				AD82BB962DA80FE500AB5E97 /* PureeFilter.kt */,
@@ -13464,7 +13459,6 @@
 				AD82BBA02DA80FE500AB5E97 /* output */,
 				AD82BBA52DA80FE500AB5E97 /* store */,
 				AD82BBA82DA80FE500AB5E97 /* type */,
-				AD82BBA92DA80FE500AB5E97 /* DefaultLifecycleOwner.ios.kt */,
 				AD82BBAA2DA80FE500AB5E97 /* Puree.ios.kt */,
 			);
 			path = kmp;
@@ -13573,7 +13567,7 @@
 				7555FF77242A565900829871 /* Sources */,
 				B92378962B6B1156000C7307 /* Frameworks */,
 				7555FF79242A565900829871 /* Resources */,
-				AD82BBB62DA8100200AB5E97 /* Embed Frameworks */,
+				AD11AA472E27E83100AC4CBB /* Embed Frameworks */,
 			);
 			buildRules = (
 			);

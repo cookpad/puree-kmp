@@ -2,6 +2,7 @@ package com.cookpad.puree.kmp
 
 import androidx.annotation.VisibleForTesting
 import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.ProcessLifecycleOwner
 import com.cookpad.puree.kmp.output.PureeBufferedOutput
 import com.cookpad.puree.kmp.output.PureeOutput
 import com.cookpad.puree.kmp.serializer.DefaultPureeLogSerializer
@@ -27,7 +28,7 @@ import kotlin.reflect.KClass
 actual class Puree(
     private val logStore: PureeLogStore,
     private val logSerializer: PureeLogSerializer = DefaultPureeLogSerializer(),
-    private val lifecycle: Lifecycle = DefaultLifecycleOwner.lifecycle,
+    private val lifecycle: Lifecycle = ProcessLifecycleOwner.get().lifecycle,
 ) {
     @VisibleForTesting
     @OptIn(ExperimentalCoroutinesApi::class, DelicateCoroutinesApi::class)

@@ -8,11 +8,14 @@ import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.SupervisorJob
+import kotlinx.coroutines.cancelAndJoin
 import kotlinx.coroutines.cancelChildren
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.isActive
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.suspendCancellableCoroutine
+import kotlinx.coroutines.sync.Mutex
+import kotlinx.coroutines.sync.withLock
 import kotlinx.datetime.Clock
 import kotlinx.datetime.Instant
 import kotlin.coroutines.CoroutineContext
@@ -82,6 +85,8 @@ abstract class PureeBufferedOutput(
     private lateinit var nextFlush: Instant
     private lateinit var coroutineScope: CoroutineScope
 
+    private val flushMutex = Mutex()
+    private var workerJob: Job? = null
     private var retryCount: Int = 0
 
     /**
@@ -146,8 +151,9 @@ abstract class PureeBufferedOutput(
      *
      * @see suspend
      */
-    internal fun resume() {
-        coroutineScope.launch {
+    internal suspend fun resume() {
+        workerJob?.cancelAndJoin()
+        workerJob = coroutineScope.launch {
             while (isActive) {
                 val nextFlushTime = nextFlush.toEpochMilliseconds() - clock.now().toEpochMilliseconds()
                 val delayMillis = max(0, nextFlushTime)
@@ -174,7 +180,7 @@ abstract class PureeBufferedOutput(
      *
      * @see resume
      */
-    internal suspend fun requestFlush() {
+    internal suspend fun requestFlush() = flushMutex.withLock {
         runCatching { flush(logStore.get(uniqueId, logsPerFlush)) }
             .onSuccess {
                 retryCount = 0

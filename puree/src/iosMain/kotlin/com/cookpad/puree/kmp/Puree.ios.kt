@@ -168,7 +168,7 @@ actual class Puree(
      */
     fun build(): PureeLogger {
         return PureeLogger(
-            lifecycle = DefaultLifecycleOwner.lifecycle,
+            lifecycle = null,
             logSerializer = logSerializer,
             logStore = logStore,
             dispatcher = dispatcher,
