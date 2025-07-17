@@ -9,12 +9,10 @@ import com.cookpad.puree.kmp.serializer.PureeLogSerializer
 import com.cookpad.puree.kmp.store.PureeLogStore
 import com.cookpad.puree.kmp.type.PlatformClass
 import io.github.aakira.napier.Napier
-import kotlinx.coroutines.CoroutineDispatcher
-import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.launch
 import kotlinx.datetime.Clock
+import kotlin.coroutines.CoroutineContext
 
 /**
  * Main logger class for the Puree-KMP logging system.
@@ -35,7 +33,7 @@ class PureeLogger internal constructor(
     lifecycle: Lifecycle?,
     private val logSerializer: PureeLogSerializer,
     private val logStore: PureeLogStore,
-    private val dispatcher: CoroutineDispatcher,
+    private val dispatcher: CoroutineContext,
     private val clock: Clock,
     private val defaultFilters: List<PureeFilter>,
     private val defaultOutputs: List<PureeOutput>,
@@ -43,18 +41,14 @@ class PureeLogger internal constructor(
     private val registeredLogs: Map<String, Configuration>,
     private val bufferedOutputs: List<PureeBufferedOutput>,
 ) {
-    private val scope = CoroutineScope(
-        dispatcher + SupervisorJob() + CoroutineExceptionHandler { _, t ->
-            Napier.e("Uncaught exception in Puree", t)
-        },
-    )
+    private val scope = CoroutineScope(dispatcher)
 
     private var isResumed = false
 
     init {
         Napier.d { "PureeLogger init" }
 
-        bufferedOutputs.forEach { it.initialize(logStore, clock, dispatcher) }
+        bufferedOutputs.forEach { it.initialize(logStore, clock, scope) }
 
         if (lifecycle != null) {
             lifecycle.addObserver(

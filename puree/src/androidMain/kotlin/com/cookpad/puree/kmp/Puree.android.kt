@@ -11,9 +11,10 @@ import com.cookpad.puree.kmp.store.PureeLogStore
 import com.cookpad.puree.kmp.type.PlatformClass
 import io.github.aakira.napier.DebugAntilog
 import io.github.aakira.napier.Napier
-import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.newSingleThreadContext
 import kotlinx.datetime.Clock
 import kotlin.reflect.KClass
@@ -32,7 +33,13 @@ actual class Puree(
 ) {
     @VisibleForTesting
     @OptIn(ExperimentalCoroutinesApi::class, DelicateCoroutinesApi::class)
-    internal var dispatcher: CoroutineDispatcher = newSingleThreadContext("PureeLogger")
+    internal val dispatcher = newSingleThreadContext("PureeLogger")
+        .plus(SupervisorJob())
+        .plus(
+            CoroutineExceptionHandler { _, throwable ->
+                Napier.e("Uncaught exception in Puree", throwable)
+            },
+        )
 
     @VisibleForTesting
     internal var clock: Clock = Clock.System

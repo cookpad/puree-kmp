@@ -9,6 +9,7 @@ final class OSLogBufferedOutput: PureeBufferedOutput {
         setLogsPerFlush(logsPerFlush: 5)
     }
 
+    /// ⚠️ emit() を **3 秒ブロック**させて、次の requestFlush が割り込める余地を作る
     override func emit(
         logs: [String],
         onSuccess: @escaping () -> Void,
