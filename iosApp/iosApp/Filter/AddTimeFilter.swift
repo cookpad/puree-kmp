@@ -9,8 +9,9 @@ class AddTimeFilter: PureeFilter {
         }
 
         let dateFormatter = ISO8601DateFormatter()
-        let currentTimeString = dateFormatter.string(from: Date())
+        dateFormatter.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
 
+        let currentTimeString = dateFormatter.string(from: Date())
         jsonObject["time"] = currentTimeString
 
         guard let newData = try? JSONSerialization.data(withJSONObject: jsonObject, options: []),

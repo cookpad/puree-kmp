@@ -26,6 +26,18 @@ final class Log {
     func send<T: PureeLog & Encodable>(_ log: T) {
         pureeLogger.postLog(log: log, platformClass: PlatformClass(clazz: T.self))
     }
+
+    func resume() {
+        pureeLogger.resume()
+    }
+
+    func suspend() {
+        pureeLogger.suspend()
+    }
+
+    func flush() {
+        pureeLogger.flush()
+    }
 }
 
 extension PureeLog where Self: Encodable {

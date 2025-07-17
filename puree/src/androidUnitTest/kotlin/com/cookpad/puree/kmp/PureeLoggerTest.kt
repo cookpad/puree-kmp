@@ -22,6 +22,7 @@ import org.mockito.kotlin.mock
 import org.mockito.kotlin.never
 import org.mockito.kotlin.verify
 import org.mockito.kotlin.whenever
+import kotlin.coroutines.CoroutineContext
 
 class PureeLoggerTest : LifecycleCoroutineRule() {
 
@@ -123,7 +124,7 @@ class PureeLoggerTest : LifecycleCoroutineRule() {
             lifecycle = lifecycleOwner.lifecycle,
         ).apply {
             clock = this@PureeLoggerTest.clock
-            dispatcher = this@PureeLoggerTest.dispatcher
+            dispatcher = (this@PureeLoggerTest.dispatcher as CoroutineContext)
         }
     }
 }

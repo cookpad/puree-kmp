@@ -4,18 +4,18 @@ import com.cookpad.puree.kmp.store.PureeLogStore
 import com.cookpad.puree.kmp.type.JsonObject
 import io.github.aakira.napier.Napier
 import kotlinx.atomicfu.atomic
-import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Job
-import kotlinx.coroutines.SupervisorJob
+import kotlinx.coroutines.cancelAndJoin
 import kotlinx.coroutines.cancelChildren
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.isActive
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.suspendCancellableCoroutine
+import kotlinx.coroutines.sync.Mutex
+import kotlinx.coroutines.sync.withLock
 import kotlinx.datetime.Clock
 import kotlinx.datetime.Instant
-import kotlin.coroutines.CoroutineContext
 import kotlin.coroutines.resume
 import kotlin.coroutines.resumeWithException
 import kotlin.math.max
@@ -82,6 +82,8 @@ abstract class PureeBufferedOutput(
     private lateinit var nextFlush: Instant
     private lateinit var coroutineScope: CoroutineScope
 
+    private val flushMutex = Mutex()
+    private var workerJob: Job? = null
     private var retryCount: Int = 0
 
     /**
@@ -101,17 +103,13 @@ abstract class PureeBufferedOutput(
     internal fun initialize(
         logStore: PureeLogStore,
         clock: Clock,
-        coroutineContext: CoroutineContext,
+        scope: CoroutineScope,
     ) {
         this.logStore = logStore
         this.clock = clock
         nextFlush = clock.now() + flushInterval
         retryCount = 0
-        coroutineScope = CoroutineScope(
-            coroutineContext + SupervisorJob(coroutineContext[Job]) + CoroutineExceptionHandler { _, t ->
-                Napier.e("Uncaught exception in Puree", t)
-            },
-        )
+        coroutineScope = scope
     }
 
     /**
@@ -146,8 +144,9 @@ abstract class PureeBufferedOutput(
      *
      * @see suspend
      */
-    internal fun resume() {
-        coroutineScope.launch {
+    internal suspend fun resume() {
+        workerJob?.cancelAndJoin()
+        workerJob = coroutineScope.launch {
             while (isActive) {
                 val nextFlushTime = nextFlush.toEpochMilliseconds() - clock.now().toEpochMilliseconds()
                 val delayMillis = max(0, nextFlushTime)
@@ -174,7 +173,7 @@ abstract class PureeBufferedOutput(
      *
      * @see resume
      */
-    internal suspend fun requestFlush() {
+    internal suspend fun requestFlush() = flushMutex.withLock {
         runCatching { flush(logStore.get(uniqueId, logsPerFlush)) }
             .onSuccess {
                 retryCount = 0

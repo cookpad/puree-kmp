@@ -24,6 +24,42 @@ struct ContentView: View {
                         .cornerRadius(8)
                 }
                 
+                Button(action: {
+                    log.resume()
+                }) {
+                    Text("Resume!")
+                        .font(.headline)
+                        .padding()
+                        .frame(maxWidth: .infinity)
+                        .background(Color.blue)
+                        .foregroundColor(.white)
+                        .cornerRadius(8)
+                }
+
+                Button(action: {
+                    log.suspend()
+                }) {
+                    Text("Suspend!")
+                        .font(.headline)
+                        .padding()
+                        .frame(maxWidth: .infinity)
+                        .background(Color.blue)
+                        .foregroundColor(.white)
+                        .cornerRadius(8)
+                }
+
+                Button(action: {
+                    log.flush()
+                }) {
+                    Text("Flush!")
+                        .font(.headline)
+                        .padding()
+                        .frame(maxWidth: .infinity)
+                        .background(Color.blue)
+                        .foregroundColor(.white)
+                        .cornerRadius(8)
+                }
+
                 HStack(spacing: 16) {
                     Text("Log every second")
                         .font(.subheadline)

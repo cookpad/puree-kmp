@@ -9,13 +9,17 @@ import com.cookpad.puree.kmp.type.PlatformClass
 import io.github.aakira.napier.DebugAntilog
 import io.github.aakira.napier.Napier
 import kotlinx.cinterop.BetaInteropApi
+import kotlinx.cinterop.ExperimentalForeignApi
 import kotlinx.cinterop.ObjCClass
+import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.newSingleThreadContext
 import kotlinx.datetime.Clock
 import platform.Foundation.NSArray
 import platform.Foundation.NSStringFromClass
+import kotlin.experimental.ExperimentalNativeApi
 
 /**
  * iOS implementation of the Puree builder class for creating and configuring a [PureeLogger] instance.
@@ -26,6 +30,7 @@ import platform.Foundation.NSStringFromClass
  * @param logStore Storage for persisting logs
  * @param logSerializer Serializer to convert log objects to JSON format
  */
+@OptIn(ExperimentalNativeApi::class, ExperimentalForeignApi::class)
 actual class Puree(
     private val logStore: PureeLogStore,
     private val logSerializer: PureeLogSerializer,
@@ -33,6 +38,12 @@ actual class Puree(
     @VisibleForTesting
     @OptIn(ExperimentalCoroutinesApi::class, DelicateCoroutinesApi::class)
     internal val dispatcher = newSingleThreadContext("PureeLogger")
+        .plus(SupervisorJob())
+        .plus(
+            CoroutineExceptionHandler { _, throwable ->
+                Napier.e("Uncaught coroutine exception in Puree", throwable)
+            },
+        )
 
     @VisibleForTesting
     internal var clock: Clock = Clock.System
@@ -168,7 +179,7 @@ actual class Puree(
      */
     fun build(): PureeLogger {
         return PureeLogger(
-            lifecycle = DefaultLifecycleOwner.lifecycle,
+            lifecycle = null,
             logSerializer = logSerializer,
             logStore = logStore,
             dispatcher = dispatcher,

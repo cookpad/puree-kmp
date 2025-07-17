@@ -9,7 +9,7 @@ import kotlin.time.Duration.Companion.milliseconds
  * @param flushIntervalMillis The flush interval in milliseconds
  */
 fun PureeBufferedOutput.setFlushInterval(flushIntervalMillis: Long) {
-    flushInterval = flushIntervalMillis.toLong().milliseconds
+    flushInterval = flushIntervalMillis.milliseconds
 }
 
 /**

@@ -2,6 +2,7 @@ package com.cookpad.puree.kmp
 
 import androidx.annotation.VisibleForTesting
 import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.ProcessLifecycleOwner
 import com.cookpad.puree.kmp.output.PureeBufferedOutput
 import com.cookpad.puree.kmp.output.PureeOutput
 import com.cookpad.puree.kmp.serializer.DefaultPureeLogSerializer
@@ -10,9 +11,10 @@ import com.cookpad.puree.kmp.store.PureeLogStore
 import com.cookpad.puree.kmp.type.PlatformClass
 import io.github.aakira.napier.DebugAntilog
 import io.github.aakira.napier.Napier
-import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.newSingleThreadContext
 import kotlinx.datetime.Clock
 import kotlin.reflect.KClass
@@ -27,11 +29,17 @@ import kotlin.reflect.KClass
 actual class Puree(
     private val logStore: PureeLogStore,
     private val logSerializer: PureeLogSerializer = DefaultPureeLogSerializer(),
-    private val lifecycle: Lifecycle = DefaultLifecycleOwner.lifecycle,
+    private val lifecycle: Lifecycle = ProcessLifecycleOwner.get().lifecycle,
 ) {
     @VisibleForTesting
     @OptIn(ExperimentalCoroutinesApi::class, DelicateCoroutinesApi::class)
-    internal var dispatcher: CoroutineDispatcher = newSingleThreadContext("PureeLogger")
+    internal var dispatcher = newSingleThreadContext("PureeLogger")
+        .plus(SupervisorJob())
+        .plus(
+            CoroutineExceptionHandler { _, throwable ->
+                Napier.e("Uncaught exception in Puree", throwable)
+            },
+        )
 
     @VisibleForTesting
     internal var clock: Clock = Clock.System

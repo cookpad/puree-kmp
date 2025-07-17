@@ -8,6 +8,7 @@ import com.cookpad.puree.kmp.output.PureeBufferedOutput
 import com.cookpad.puree.kmp.rule.LifecycleCoroutineRule
 import com.cookpad.puree.kmp.store.PureeLogStore
 import com.cookpad.puree.kmp.type.JsonObject
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.advanceTimeBy
 import kotlinx.coroutines.test.advanceUntilIdle
@@ -51,7 +52,7 @@ class PureeBufferedOutputTest : LifecycleCoroutineRule() {
         output.initialize(
             logStore = logStore,
             clock = clock,
-            coroutineContext = dispatcher,
+            scope = CoroutineScope(dispatcher),
         )
     }
 

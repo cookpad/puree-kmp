@@ -1,4 +1,5 @@
 package primitive
+
 import com.cookpad.puree.kmp.configureDetekt
 import com.cookpad.puree.kmp.library
 import com.cookpad.puree.kmp.libs
