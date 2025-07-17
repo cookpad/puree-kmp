@@ -17,6 +17,7 @@ final class Log {
 
         return Puree(logStore: logStore, logSerializer: logSerializer)
             .output(output: OSLogBufferedOutput(uniqueId: "buffered"), logTypes: [ClickLog.self, MenuLog.self])
+            .output(output: PurgeableOSLogWarningBufferedOutput(uniqueId: "purgeable"), logTypes: [PeriodicLog.self])
             .defaultOutput(outputs: [OSLogOutput()].toKotlinArray())
             .defaultFilter(filters: [AddTimeFilter()].toKotlinArray())
             .build()
