@@ -46,8 +46,6 @@ class PureeLogger internal constructor(
     private var isResumed = false
 
     init {
-        Napier.d { "PureeLogger init" }
-
         bufferedOutputs.forEach { it.initialize(logStore, clock, scope) }
 
         if (lifecycle != null) {

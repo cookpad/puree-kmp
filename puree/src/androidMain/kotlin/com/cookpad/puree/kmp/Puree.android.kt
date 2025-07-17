@@ -33,7 +33,7 @@ actual class Puree(
 ) {
     @VisibleForTesting
     @OptIn(ExperimentalCoroutinesApi::class, DelicateCoroutinesApi::class)
-    internal val dispatcher = newSingleThreadContext("PureeLogger")
+    internal var dispatcher = newSingleThreadContext("PureeLogger")
         .plus(SupervisorJob())
         .plus(
             CoroutineExceptionHandler { _, throwable ->
