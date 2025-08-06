@@ -1,10 +1,10 @@
 package primitive.android
 
 import com.cookpad.puree.kmp.isMultiplatformProject
-import org.gradle.api.JavaVersion
 import org.gradle.api.Plugin
 import org.gradle.api.Project
-import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+import primitive.kmp.kotlin
 
 class AndroidCommonPlugin : Plugin<Project> {
     override fun apply(target: Project) {
@@ -20,14 +20,16 @@ class AndroidCommonPlugin : Plugin<Project> {
                 apply("com.google.devtools.ksp")
             }
 
-            tasks.withType(KotlinCompile::class.java) {
-                kotlinOptions {
-                    jvmTarget = JavaVersion.VERSION_17.toString()
-                    freeCompilerArgs = freeCompilerArgs + listOf(
-                        "-Xopt-in=kotlinx.coroutines.FlowPreview",                          // required for flow.debounce
-                        "-Xopt-in=kotlinx.coroutines.DelicateCoroutinesApi",                // Global scope
-                        "-Xopt-in=androidx.compose.foundation.ExperimentalFoundationApi"    // Compose
-                    )
+            kotlin {
+                androidTarget {
+                    compilerOptions {
+                        jvmTarget.set(JvmTarget.JVM_17)
+                        freeCompilerArgs.addAll(
+                            "-Xopt-in=kotlinx.coroutines.FlowPreview",                          // required for flow.debounce
+                            "-Xopt-in=kotlinx.coroutines.DelicateCoroutinesApi",                // Global scope
+                            "-Xopt-in=androidx.compose.foundation.ExperimentalFoundationApi"    // Compose
+                        )
+                    }
                 }
             }
         }
