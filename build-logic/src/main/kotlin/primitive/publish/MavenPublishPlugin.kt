@@ -5,7 +5,6 @@ import com.cookpad.puree.kmp.version
 import com.vanniktech.maven.publish.JavadocJar
 import com.vanniktech.maven.publish.KotlinMultiplatform
 import com.vanniktech.maven.publish.MavenPublishBaseExtension
-import com.vanniktech.maven.publish.SonatypeHost
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.kotlin.dsl.assign
@@ -68,7 +67,7 @@ class MavenPublishPlugin : Plugin<Project> {
     private fun Project.configureMavenPublish() {
         extensions.configure<MavenPublishBaseExtension> {
             configure(KotlinMultiplatform(javadocJar = JavadocJar.Dokka("dokkaGeneratePublicationHtml")))
-            publishToMavenCentral(SonatypeHost.CENTRAL_PORTAL, true)
+            publishToMavenCentral(true)
 
             val hasUserNameFromProject = project.hasProperty("mavenCentralUsername")
             val hasUserNameFromEnv = System.getenv("ORG_GRADLE_PROJECT_mavenCentralUsername") != null
