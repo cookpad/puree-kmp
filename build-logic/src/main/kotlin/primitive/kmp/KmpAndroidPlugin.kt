@@ -13,7 +13,7 @@ class KmpAndroidPlugin : Plugin<Project> {
                 androidTarget {
                     publishLibraryVariants("release")
                     compilerOptions {
-                        jvmTarget.set(JvmTarget.JVM_21)
+                        jvmTarget.set(JvmTarget.JVM_17)
                     }
                 }
             }
